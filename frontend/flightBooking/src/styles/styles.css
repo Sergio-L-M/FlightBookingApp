@@ -1,0 +1,11 @@
+.home-container {        
+        height: 100vh;
+        background-image: url('../../public/bg1.jpg');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        box-sizing: border-box; /* Asegura que respete padding y border */
+    }
+    

@@ -1,0 +1,81 @@
+/* Contenedor principal con borde y espaciado */
+.flight-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 700px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilos del Bloque Izquierdo */
+  .flight-info {
+    flex: 2;
+  }
+  
+  .schedule {
+    font-weight: bolder;
+    font-size: 0.7rem;
+  }
+  
+  .route {
+    font-size: 1rem;
+    margin: 8px 0;
+  }
+  
+  .airline {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* Bloque Central */
+  .duration-info {
+    flex: 2;
+    text-align: center;
+    font-size: 0.8rem;
+    
+  }
+  .duration {
+    font-weight: bolder;
+    
+    font-size: 0.6rem;
+  }
+  .stops {
+   
+    font-size: 0.5rem;
+  }
+
+  .vl{
+    flex: 1;
+    text-align: left;
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
+    height: 175px;
+  }
+  
+  /* Bloque Derecho */
+  .pricing {
+    flex: 1;
+    text-align: right;
+  }
+  
+  .price-total {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color:whitesmoke
+  }
+  
+  .price-traveler {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color:whitesmoke
+  }
+  
+  .label {
+    font-size: 0.75rem;
+    color: #666;
+    color:whitesmoke
+  }
+  
