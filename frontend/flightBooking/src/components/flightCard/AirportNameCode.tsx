@@ -1,12 +1,15 @@
+import { Chip } from "@mui/material";
+
 interface Props {
   airportName: string;
   airportCode: string;
 }
 const AirportNameCode = ({ airportName, airportCode }: Props) => {
   return (
-    <div>
-      {airportName} ({airportCode})
-    </div>
+    
+    <> 
+      {airportName} <Chip label={airportCode}></Chip>
+    </>
   );
 };
 export default AirportNameCode;

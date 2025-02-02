@@ -1,6 +1,8 @@
 package flightbooking.com.backend.controllers;
+
 import flightbooking.com.backend.services.AmadeusRawService;
 import flightbooking.com.backend.services.AmadeusFlightService;
+import flightbooking.com.backend.services.AmadeusAirportService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -11,11 +13,12 @@ public class FlightController {
 
     private final AmadeusFlightService flightService;
     private final AmadeusRawService rawService;
+    private final AmadeusAirportService airportService;
 
-
-    public FlightController(AmadeusFlightService flightService, AmadeusRawService rawService) {
+    public FlightController(AmadeusFlightService flightService, AmadeusRawService rawService, AmadeusAirportService airportService) {
         this.flightService = flightService;
         this.rawService = rawService;
+        this.airportService = airportService;
     }
 
     @GetMapping
@@ -27,10 +30,11 @@ public class FlightController {
             @RequestParam(defaultValue = "false") boolean nonStop,
             @RequestParam(defaultValue = "1") int adults,
             @RequestParam(required = false) String sortBy,
-            @RequestParam(required = false) boolean ascending){ // 📌 Nuevo parámetro sortBy
+            @RequestParam(required = false) boolean ascending) {
 
         return flightService.searchFlights(origin, destination, departureDate, currency, adults, nonStop, sortBy, ascending);
     }
+
     @GetMapping("/raw")
     public String getRawFlights(
             @RequestParam String origin,
@@ -40,5 +44,11 @@ public class FlightController {
             @RequestParam(defaultValue = "false") boolean nonStop) {
 
         return rawService.getRawResponse(origin, destination, departureDate, currency, nonStop);
+    }
+
+    @GetMapping("/airports")
+    public List<Map<String, String>> getAirports(
+            @RequestParam String keyword) {
+        return airportService.searchAirports(keyword);
     }
 }

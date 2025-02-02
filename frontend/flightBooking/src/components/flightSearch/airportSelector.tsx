@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
+import axios from "axios";
 
 interface AirportData {
-  airportCode: string;
-  airportName: string;
+  code: string;
+  name: string;
 }
 
 interface Props {
@@ -14,15 +15,27 @@ interface Props {
 }
 
 const AirportSelector = ({ textLabel, onChange }: Props) => {
-  const options: readonly AirportData[] = [
-    { airportCode: "JFK", airportName: "John F. Kennedy International Airport" },
-    { airportCode: "LAX", airportName: "Los Angeles International Airport" },
-    { airportCode: "SYD", airportName: "Sydney Kingsford Smith Airport" },
-    { airportCode: "BKK", airportName: "Suvarnabhumi Airport" },
-  ];
-
+  const [options, setOptions] = useState<AirportData[]>([]);
   const [selectedAirport, setSelectedAirport] = useState<AirportData | null>(null);
-  const [inputValue, setInputValue] = useState(""); // Maneja lo que se muestra en el input
+  const [inputValue, setInputValue] = useState("");
+  const [fetchAllowed, setFetchAllowed] = useState(false);
+
+  useEffect(() => {
+    if (inputValue.length > 0 && fetchAllowed) {
+      const fetchAirports = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:8080/api/flights/airports?keyword=${inputValue}`
+          );
+          setOptions(response.data);
+        } catch (error) {
+          console.error("Error fetching airports:", error);
+        }
+      };
+
+      fetchAirports();
+    }
+  }, [inputValue, fetchAllowed]);
 
   return (
     <Autocomplete
@@ -31,24 +44,27 @@ const AirportSelector = ({ textLabel, onChange }: Props) => {
       autoHighlight
       value={selectedAirport}
       inputValue={inputValue}
-      getOptionLabel={(option) => `${option.airportCode} - ${option.airportName}`}
-      isOptionEqualToValue={(option, value) => option.airportCode === value.airportCode}
+      getOptionLabel={(option) => `${option.code} - ${option.name}`}
+      isOptionEqualToValue={(option, value) => option.code === value.code}
       onChange={(_, newValue) => {
         setSelectedAirport(newValue);
-        setInputValue(newValue ? `${newValue.airportCode}` : "");
-        onChange(newValue ? newValue.airportCode : null);
+        setInputValue(newValue ? `${newValue.code}` : "");
+        onChange(newValue ? newValue.code : null);
       }}
-      onInputChange={(_, newInputValue) => setInputValue(newInputValue)} // Captura la escritura manual
+      onInputChange={(_, newInputValue) => {
+        setInputValue(newInputValue);
+        setFetchAllowed(newInputValue.length > 0);
+      }}
       onClose={() => {
         if (!selectedAirport) {
-          setInputValue(""); // Solo limpia si no hay aeropuerto seleccionado
+          setInputValue("");
         }
       }}
       renderOption={(props, option) => {
-        const { key, ...optionProps } = props; // 📌 Extraemos `key`
+        const { key, ...optionProps } = props;
         return (
           <Box key={key} component="li" {...optionProps}>
-            {option.airportCode} - {option.airportName}
+            {option.code} - {option.name}
           </Box>
         );
       }}
@@ -65,4 +81,3 @@ const AirportSelector = ({ textLabel, onChange }: Props) => {
 };
 
 export default AirportSelector;
-

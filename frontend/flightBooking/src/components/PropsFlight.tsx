@@ -2,9 +2,11 @@ export interface Amenity {
   description: string;
   isChargeable: boolean;
 }
+
 export interface GeneralData {
   costPerTraveler: string;
   departureAirport: { code: string; name?: string };
+  totalDuration: string;
   flightSchedule: string;
   airline: string;
   arrivalAirport: { code: string; name?: string };
@@ -26,7 +28,7 @@ export interface Itinerary {
   arrivalAirport: string;
   class: string;
   operatingAirline: string;
-  amenities:  { [key: string]: Amenity[] }; // 📌 Ahora cada segmento tiene su propia lista de amenities
+  amenities:  { [key: string]: Amenity[] };
 }
 
 export interface FlightData {

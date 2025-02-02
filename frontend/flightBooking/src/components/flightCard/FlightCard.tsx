@@ -48,11 +48,9 @@ const FlightCard = ({ generalData, itineraries, id }: FlightData) => {
         {/* Bloque Central */}
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           {/* Si quieres mostrar la duración, agrégala aquí */}
+      
           <Box>
-            {/* <Typography variant="body2"> {generalData.duration} </Typography> */}
-          </Box>
-          <Box>
-            <StopsList itineraries={itineraries} id={id} />
+            <StopsList itineraries={itineraries} id={id} totalDuration={generalData.totalDuration} />
           </Box>
         </Box>
         {/* Bloque Derecho (Costos) */}

@@ -2,10 +2,7 @@ package flightbooking.com.backend.utils;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.stereotype.Service;
 
@@ -13,11 +10,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 @Service
 public class AmadeusExtractItineraries {
-    public List<Map<String, Object>> get(JsonNode flight) {
+    public Map<String, Object> get(JsonNode flight) {
         List<Map<String, Object>> itineraryDetails = new ArrayList<>();
         JsonNode itineraries = flight.get("itineraries").get(0);
         JsonNode segments = itineraries.get("segments");
-    
+        Duration totalDuration = Duration.ZERO;
         JsonNode travelerPricing = flight.get("travelerPricings").get(0);
         JsonNode fareDetails = travelerPricing.get("fareDetailsBySegment");
     
@@ -40,7 +37,9 @@ public class AmadeusExtractItineraries {
             }
     
             segmentInfo.put("duration", segment.get("duration").asText());
-
+            String durationString = segment.get("duration").asText();
+            totalDuration = totalDuration.plus(parseDuration(durationString));
+    
             for (JsonNode fareSegment : fareDetails) {
                 if (fareSegment.get("segmentId").asText().equals(segmentId)) {
                     segmentInfo.put("cabin", fareSegment.get("cabin").asText());
@@ -48,7 +47,7 @@ public class AmadeusExtractItineraries {
                     segmentInfo.put("fareBasis", fareSegment.get("fareBasis").asText());
                    
                     Map<String, List<Map<String, Object>>> groupedAmenities = new HashMap<>();
-
+    
                     if (fareSegment.has("amenities")) {
                         for (JsonNode amenity : fareSegment.get("amenities")) {
                             String type = amenity.get("amenityType").asText();
@@ -72,13 +71,11 @@ public class AmadeusExtractItineraries {
             itineraryDetails.add(segmentInfo);
         }
     
-        // 📌 Agregar manualmente el último `departureTime` si es necesario
-        if (!itineraryDetails.isEmpty()) {
-            Map<String, Object> lastSegment = itineraryDetails.get(itineraryDetails.size() - 1);
-            lastSegment.put("finalDepartureTime", lastSegment.get("departureTime"));
-        }
-    
-        return itineraryDetails;
+        Map<String, Object> result = new HashMap<>();
+        result.put("itineraries", itineraryDetails);
+        result.put("totalDuration", String.format("%dH %dM", totalDuration.toHours(), totalDuration.toMinutesPart()));
+        
+        return result;
     }
    
     private String calculateLayoverTime(String arrivalTime, String nextDepartureTime) {
@@ -93,5 +90,7 @@ public class AmadeusExtractItineraries {
             return "N/A";
         }
     }
-    
+    private Duration parseDuration(String duration) {
+        return Duration.parse(duration);
+    }
 }

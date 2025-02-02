@@ -10,12 +10,12 @@ import org.springframework.http.HttpMethod;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 import java.util.*;
 
 import flightbooking.com.backend.utils.AmadeusExtractGeneralData;
 import flightbooking.com.backend.utils.AmadeusExtractItineraries;
 import flightbooking.com.backend.utils.SortFligths;
+
 @Service
 public class AmadeusFlightService {
 
@@ -26,15 +26,14 @@ public class AmadeusFlightService {
     private final AmadeusExtractItineraries amadeusExtractItineraries;
     private final SortFligths sortFlights;
 
-
     public AmadeusFlightService(AmadeusAuthService authService, 
-    AmadeusExtractGeneralData amadeusExtractGeneralData, 
-    AmadeusExtractItineraries amadeusExtractItineraries, 
-    SortFligths sortFlights) {
+                                AmadeusExtractGeneralData amadeusExtractGeneralData, 
+                                AmadeusExtractItineraries amadeusExtractItineraries, 
+                                SortFligths sortFlights) {
         this.restTemplate = new RestTemplate();
         this.authService = authService;
         this.amadeusExtractGeneralData = amadeusExtractGeneralData;
-        this.amadeusExtractItineraries =  amadeusExtractItineraries;
+        this.amadeusExtractItineraries = amadeusExtractItineraries;
         this.sortFlights = sortFlights;
     }
 
@@ -65,17 +64,25 @@ public class AmadeusFlightService {
 
     public List<Map<String, Object>> transformResponse(String responseBody) {
         try {
-
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode root = objectMapper.readTree(responseBody);
             JsonNode data = root.path("data");
             List<Map<String, Object>> flights = new ArrayList<>();
     
+    
             for (JsonNode flight : data) {
                 Map<String, Object> flightInfo = new HashMap<>();
                 flightInfo.put("id", UUID.randomUUID().toString());
-                flightInfo.put("generalData", amadeusExtractGeneralData.get(flight));
-                flightInfo.put("itineraries", amadeusExtractItineraries.get(flight));
+                
+                Map<String, Object> generalData = amadeusExtractGeneralData.get(flight);
+                Map<String, Object> itineraryData = amadeusExtractItineraries.get(flight);
+                
+                // Agregar totalDuration dentro de generalData
+                generalData.put("totalDuration", itineraryData.get("totalDuration"));
+                
+                flightInfo.put("generalData", generalData);
+                flightInfo.put("itineraries", itineraryData.get("itineraries"));
+                
                 flights.add(flightInfo);
             }
             return flights;
@@ -85,7 +92,4 @@ public class AmadeusFlightService {
             return Collections.emptyList();
         }
     }
-
-        
 }
-

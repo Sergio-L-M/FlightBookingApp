@@ -34,6 +34,7 @@ const FlightSort = ({returnOrDeparture, stateHandler, oneWay, sortByHandler, upd
           id="demo-simple-select"
           value={sort}
           label="Age"
+          
           onChange={handleChange}
         >
           <MenuItem value="price-true">Cheapest Flight</MenuItem>
