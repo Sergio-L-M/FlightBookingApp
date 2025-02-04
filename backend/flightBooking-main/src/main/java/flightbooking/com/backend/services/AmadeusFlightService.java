@@ -14,6 +14,7 @@ import java.util.*;
 
 import flightbooking.com.backend.utils.AmadeusExtractGeneralData;
 import flightbooking.com.backend.utils.AmadeusExtractItineraries;
+import flightbooking.com.backend.utils.AmadeusExtractPrice;
 import flightbooking.com.backend.utils.SortFligths;
 
 @Service
@@ -24,17 +25,20 @@ public class AmadeusFlightService {
     private final AmadeusAuthService authService;
     private final AmadeusExtractGeneralData amadeusExtractGeneralData;
     private final AmadeusExtractItineraries amadeusExtractItineraries;
+    private final AmadeusExtractPrice amadeusExtractPrice;
     private final SortFligths sortFlights;
+
 
     public AmadeusFlightService(AmadeusAuthService authService, 
                                 AmadeusExtractGeneralData amadeusExtractGeneralData, 
                                 AmadeusExtractItineraries amadeusExtractItineraries, 
-                                SortFligths sortFlights) {
+                                SortFligths sortFlights, AmadeusExtractPrice amadeusExtractPrice) {
         this.restTemplate = new RestTemplate();
         this.authService = authService;
         this.amadeusExtractGeneralData = amadeusExtractGeneralData;
         this.amadeusExtractItineraries = amadeusExtractItineraries;
         this.sortFlights = sortFlights;
+        this.amadeusExtractPrice = amadeusExtractPrice;
     }
 
     public List<Map<String, Object>> searchFlights(
@@ -67,6 +71,7 @@ public class AmadeusFlightService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode root = objectMapper.readTree(responseBody);
             JsonNode data = root.path("data");
+            JsonNode dictionary =  root.path("dictionaries");
             List<Map<String, Object>> flights = new ArrayList<>();
     
     
@@ -74,14 +79,16 @@ public class AmadeusFlightService {
                 Map<String, Object> flightInfo = new HashMap<>();
                 flightInfo.put("id", UUID.randomUUID().toString());
                 
-                Map<String, Object> generalData = amadeusExtractGeneralData.get(flight);
-                Map<String, Object> itineraryData = amadeusExtractItineraries.get(flight);
-                
-                // Agregar totalDuration dentro de generalData
-                generalData.put("totalDuration", itineraryData.get("totalDuration"));
-                
+               
+                Map<String, Object> itineraryData = amadeusExtractItineraries.get(flight, dictionary);
+                String totalDuration = Objects.toString(itineraryData.get("totalDuration"), "");
+
+                Map<String, Object> generalData = amadeusExtractGeneralData.get(flight,totalDuration );
+                Map<String, Object> priceData = amadeusExtractPrice.get(flight);
+  
                 flightInfo.put("generalData", generalData);
                 flightInfo.put("itineraries", itineraryData.get("itineraries"));
+                flightInfo.put("pricing", priceData);
                 
                 flights.add(flightInfo);
             }

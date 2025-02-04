@@ -9,7 +9,7 @@ import java.util.Map;
 @Service
 public class AmadeusExtractGeneralData {
 
-    public Map<String, Object> get(JsonNode flight) {
+    public Map<String, Object> get(JsonNode flight, String totalDuration) {
         Map<String, Object> generalData = new HashMap<>();
 
         // ✅ Verificar existencia antes de acceder
@@ -44,6 +44,7 @@ public class AmadeusExtractGeneralData {
 
         generalData.put("departureAirport", departureAirport);
         generalData.put("arrivalAirport", arrivalAirport);
+        generalData.put("totalDuration", totalDuration);
 
         // ✅ Formatear horario de vuelo
         generalData.put("flightSchedule",

@@ -2,7 +2,7 @@ import { Box, Typography, Divider, Accordion, AccordionSummary, AccordionDetails
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Itinerary } from "../PropsFlight";
 import AmenitiesDetails from "./amenitiesDetails";
-
+import { formatDuration, formatDateTime } from "../../utils/FormatDateeTime";
 interface ItineraryProps {
   itinerary: Itinerary;
 }
@@ -15,11 +15,11 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
       <Paper sx={{ display: "flex", justifyContent: "space-between", padding:4, width:"80%"  }}>
    
         <Box>
-          <Typography variant="body1">{itinerary.departureTime}</Typography>
+          <Typography variant="body1">{formatDateTime(itinerary.departureTime)}</Typography>
           <Typography variant="h6">{itinerary.departureAirport}</Typography>
         </Box>
         <Box>
-          <Typography variant="body1">{itinerary.arrivalTime}</Typography>
+          <Typography variant="body1">{formatDateTime(itinerary.arrivalTime)}</Typography>
           <Typography variant="h6">{itinerary.arrivalAirport}</Typography>
         </Box>
         
@@ -43,7 +43,7 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
           <strong>Operating Airline:</strong> {itinerary.operatingAirline}
         </Typography>
         <Typography variant="body2">
-          <strong>Duration:</strong> {itinerary.duration}
+          <strong>Duration:</strong> {formatDuration(itinerary.duration)}
         </Typography>
         {itinerary.layoverTime && (
           <Typography variant="body2">

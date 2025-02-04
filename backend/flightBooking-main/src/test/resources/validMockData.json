@@ -1,0 +1,15 @@
+{
+  "totalDuration" : "",
+  "costPerTraveler" : "230.17 EUR",
+  "departureAirport" : {
+    "code" : "SYD",
+    "time" : "2025-02-15T20:50:00"
+  },
+  "flightSchedule" : "2025-02-15T20:50:00 → 2025-02-16T17:00:00",
+  "airline" : "3U",
+  "arrivalAirport" : {
+    "code" : "BKK",
+    "time" : "2025-02-16T17:00:00"
+  },
+  "totalCost" : "230.17 EUR"
+}

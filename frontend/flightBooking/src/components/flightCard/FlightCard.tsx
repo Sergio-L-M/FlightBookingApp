@@ -4,7 +4,7 @@ import { Box, Paper, Typography, ThemeProvider } from "@mui/material";
 import StopsList from "./StopsList";
 import { useFlight } from "./flightContext";
 import { FlightData } from "../PropsFlight";
-
+import { formatFlightSchedule } from "../../utils/FormatDateeTime";
 import { appleTheme } from "../themes";
 const FlightCard = ({ generalData, itineraries, id }: FlightData) => {
   const { setSelectedFlight, selectedFlight, openModal } = useFlight();
@@ -36,14 +36,14 @@ const FlightCard = ({ generalData, itineraries, id }: FlightData) => {
       >
         {/* Bloque Izquierdo */}
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Typography variant="h6" color="text.primary">
-            {generalData.flightSchedule}
+          <Typography variant="body1" color="text.primary">
+          <strong>{formatFlightSchedule(generalData.flightSchedule)}</strong>
           </Typography>
           <Typography variant="body1" color="text.secondary">
             <strong>{generalData.departureAirport.name} ({generalData.departureAirport.code})</strong> →{" "}
             <strong>{generalData.arrivalAirport.name} ({generalData.arrivalAirport.code})</strong>
           </Typography>
-          <Typography variant="body2">{generalData.airline}</Typography>
+          <Typography variant="body2"><p>Airline: {itineraries[0].airline}</p> Operating Airline: {itineraries[0].operatingAirline}</Typography>
         </Box>
         {/* Bloque Central */}
         <Box sx={{ display: "flex", flexDirection: "column" }}>

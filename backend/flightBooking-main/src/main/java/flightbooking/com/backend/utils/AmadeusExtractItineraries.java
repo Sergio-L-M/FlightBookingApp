@@ -10,7 +10,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 @Service
 public class AmadeusExtractItineraries {
-    public Map<String, Object> get(JsonNode flight) {
+     public Map<String, Object> get(JsonNode flight, JsonNode dictionary)
+    {
         List<Map<String, Object>> itineraryDetails = new ArrayList<>();
         JsonNode itineraries = flight.get("itineraries").get(0);
         JsonNode segments = itineraries.get("segments");
@@ -28,14 +29,23 @@ public class AmadeusExtractItineraries {
             segmentInfo.put("departureTime", segment.get("departure").get("at").asText());
             segmentInfo.put("arrivalAirport", segment.get("arrival").get("iataCode").asText());
             segmentInfo.put("arrivalTime", segment.get("arrival").get("at").asText());
-            segmentInfo.put("airline", segment.get("carrierCode").asText());
+
+            String airlineCode = segment.get("carrierCode").asText();
+            String airlineName = dictionary.path("carriers").path(airlineCode).asText();
+            segmentInfo.put("airline", airlineName.isEmpty() ? airlineCode : airlineCode + " - " + airlineName);
+        
             segmentInfo.put("flightNumber", segment.get("number").asText());
-            segmentInfo.put("aircraft", segment.get("aircraft").get("code").asText());
+            
+            String aircraftCode = segment.get("aircraft").get("code").asText();
+            String aircraftName = dictionary.path("aircraft").path(aircraftCode).asText();
+            segmentInfo.put("aircraft", aircraftName.isEmpty() ? aircraftCode : aircraftCode + " - " + aircraftName);
+        
     
             if (segment.has("operating") && segment.get("operating").has("carrierCode")) {
-                segmentInfo.put("operatingAirline", segment.get("operating").get("carrierCode").asText());
+                String operatingCode = segment.get("operating").get("carrierCode").asText();
+                String operatingName = dictionary.path("carriers").path(operatingCode).asText();
+                segmentInfo.put("operatingAirline", operatingName.isEmpty() ? operatingCode : operatingCode + " - " + operatingName);
             }
-    
             segmentInfo.put("duration", segment.get("duration").asText());
             String durationString = segment.get("duration").asText();
             totalDuration = totalDuration.plus(parseDuration(durationString));

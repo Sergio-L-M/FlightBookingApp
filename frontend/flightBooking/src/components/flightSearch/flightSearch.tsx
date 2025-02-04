@@ -23,6 +23,8 @@ import SearchIcon from "@mui/icons-material/Search"; // 🔍 Ícono de búsqueda
 import FlightSort from "../flightSort/flightSort";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { appleTheme } from "../themes";
+
+
 interface Props {
   setFlights: (flights: any[]) => void;
   handleSearchingFlights: (state: boolean) => void;
@@ -89,6 +91,7 @@ const FlightSearch = ({ setFlights, handleSearchingFlights }: Props) => {
         handleSearchingFlights(true);
         const response = await axios.get(apiUrl);
         setFlights(response.data);
+        console.log(response.data)
       } catch {
         console.error("Error fetching flights:", error);
       } finally {
