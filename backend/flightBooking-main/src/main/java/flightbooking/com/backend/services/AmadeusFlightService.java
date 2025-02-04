@@ -77,7 +77,7 @@ public class AmadeusFlightService {
     
             for (JsonNode flight : data) {
                 Map<String, Object> flightInfo = new HashMap<>();
-                flightInfo.put("id", UUID.randomUUID().toString());
+                flightInfo.put("id", flight.get("id"));//UUID.randomUUID().toString());
                 
                
                 Map<String, Object> itineraryData = amadeusExtractItineraries.get(flight, dictionary);

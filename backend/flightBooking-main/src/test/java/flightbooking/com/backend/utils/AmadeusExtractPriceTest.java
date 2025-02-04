@@ -11,16 +11,15 @@ import java.util.Iterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AmadeusExtractGeneralDataTest {
-
-    private AmadeusExtractGeneralData amadeusExtractGeneralData;
+public class AmadeusExtractPriceTest {
+    private AmadeusExtractPrice amadeusExtractPrice;
     private JsonNode mockFlightData;
     private JsonNode expectedData;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     void setUp() throws IOException {
-        amadeusExtractGeneralData = new AmadeusExtractGeneralData();
+        amadeusExtractPrice = new AmadeusExtractPrice();
 
         // ✅ Cargar el archivo mockData.json con datos de Amadeus
         File mockFile = new File("src/test/resources/mockData.json");
@@ -31,19 +30,18 @@ class AmadeusExtractGeneralDataTest {
         File expectedFile = new File("src/test/resources/validMockData.json");
         expectedData = objectMapper.readTree(expectedFile)
                 .path(0) // Tomamos el primer vuelo esperado
-                .path("generalData"); // Extraemos solo la sección de generalData
+                .path("price"); // Extraemos solo la sección de priceData
     }
-
     @Test
-    void testExtractGeneralData_ValidOutput() {
+    void testExtractPrice() {
         // ✅ Ejecutar el método bajo prueba
-        Map<String, Object> generalData = amadeusExtractGeneralData.get(mockFlightData, "");
+        Map<String, Object> priceData = amadeusExtractPrice.get(mockFlightData);
 
         // ✅ Asegurar que el resultado no es nulo
-        assertNotNull(generalData, "❌ El mapa generalData es nulo");
+        assertNotNull(priceData, "❌ El mapa priceData es nulo");
 
         // ✅ Convertir el resultado generado a JSON para comparación uniforme
-        JsonNode generatedJson = objectMapper.valueToTree(generalData);
+        JsonNode generatedJson = objectMapper.valueToTree(priceData);
 
         // 🔍 Imprimir JSON antes de comparar (para debugging)
         System.out.println("🔍 Expected JSON: " + expectedData.toPrettyString());
@@ -62,14 +60,14 @@ class AmadeusExtractGeneralDataTest {
             System.out.println("🔍 Comparando clave: " + key);
 
             // ❌ Verificar si la clave está en el resultado generado
-            if (!generalData.containsKey(key)) {
-                System.out.println("❌ Clave faltante en generalData: " + key);
+            if (!priceData.containsKey(key)) {
+                System.out.println("❌ Clave faltante en priceData: " + key);
                 fail("❌ Missing key: " + key);
             }
 
             // ✅ Obtener valores esperados y generados
             JsonNode expectedNode = expectedData.get(key);
-            Object generatedValue = generalData.get(key);
+            Object generatedValue = priceData.get(key);
 
             // 🔍 Imprimir valores antes de comparar
             System.out.println("✅ Expected: " + expectedNode);
