@@ -23,8 +23,8 @@ import SearchIcon from "@mui/icons-material/Search"; // 🔍 Ícono de búsqueda
 import FlightSort from "../flightSort/flightSort";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { appleTheme } from "../themes";
-
-
+import flightsMock from "../../mocks/validMockData.json";
+const development = true;
 interface Props {
   setFlights: (flights: any[]) => void;
   handleSearchingFlights: (state: boolean) => void;
@@ -72,33 +72,40 @@ const FlightSearch = ({ setFlights, handleSearchingFlights }: Props) => {
     try {
       setLoading(true);
       setError(null);
-      let apiUrl = "";
-      apiUrl = `http://localhost:8080/api/flights?origin=${origin}&destination=${destination}&departureDate=${departureDate.format(
+
+      let apiUrl = `http://localhost:8080/api/flights?origin=${origin}&destination=${destination}&departureDate=${departureDate.format(
         "YYYY-MM-DD"
       )}&currency=${currency}&adults=${adults}&nonStop=false`;
+
       if (!oneWay && returnFlight) {
         apiUrl = `http://localhost:8080/api/flights?origin=${destination}&destination=${origin}&departureDate=${arrivalDate?.format(
           "YYYY-MM-DD"
         )}&currency=${currency}&adults=${adults}&nonStop=false`;
       }
+
       if (sortBy !== null) {
         const sort = sortBy.split("-");
         apiUrl += `&sortBy=${sort[0]}&ascending=${sort[1]}`;
       }
-      
-      try {
-        console.log("🔍 Buscando vuelos en:", apiUrl);
-        handleSearchingFlights(true);
-        const response = await axios.get(apiUrl);
-        setFlights(response.data);
-        console.log(response.data)
-      } catch {
-        console.error("Error fetching flights:", error);
-      } finally {
-        handleSearchingFlights(false);
+
+      if (development) {
+        console.log("🛠️ Modo Testing: Usando datos mock.");
+        console.log(flightsMock);
+        setFlights(flightsMock);
+      } else {
+        try {
+          console.log("🔍 Buscando vuelos en:", apiUrl);
+          handleSearchingFlights(true);
+          const response = await axios.get(apiUrl);
+          setFlights(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.error("Error fetching flights:", error);
+          setError("❌ Error al obtener vuelos. Intenta de nuevo.");
+        } finally {
+          handleSearchingFlights(false);
+        }
       }
-    } catch (error) {
-      setError("❌ Error al obtener vuelos. Intenta de nuevo.");
     } finally {
       setLoading(false);
     }
@@ -151,6 +158,12 @@ const FlightSearch = ({ setFlights, handleSearchingFlights }: Props) => {
                 <Checkbox
                   checked={oneWay}
                   onChange={() => setOneWay(!oneWay)}
+                  sx={{
+                    color: "rgba(72, 72, 74, 1)", // Color por defecto
+                    "&.Mui-checked": {
+                      color: "rgba(72, 72, 74, 1)", // Color cuando está seleccionado
+                    },
+                  }}
                 />
               }
               label="One-way"

@@ -1,0 +1,168 @@
+[
+  {
+    "generalData": {
+      "totalDuration": "14H 30M",
+      "costPerTraveler": "230.17 EUR",
+      "departureAirport": { "code": "SYD", "time": "2025-02-15T20:50:00" },
+      "flightSchedule": "2025-02-15T20:50:00 → 2025-02-16T17:00:00",
+      "airline": "3U",
+      "arrivalAirport": { "code": "BKK", "time": "2025-02-16T17:00:00" },
+      "totalCost": "230.17 EUR"
+    },
+    "itineraries": [
+      {
+        "departureTime": "2025-02-15T20:50:00",
+        "amenities": {},
+        "departureAirport": "SYD",
+        "aircraft": "359 - AIRBUS A350-900",
+        "cabin": "ECONOMY",
+        "flightNumber": "3892",
+        "duration": "PT11H10M",
+        "layoverTime": "9H 40M",
+        "fareBasis": "U1ADDA76",
+        "arrivalTime": "2025-02-16T05:00:00",
+        "segmentId": "21",
+        "airline": "3U - SICHUAN AIRLINES",
+        "arrivalAirport": "TFU",
+        "class": "U",
+        "operatingAirline": "3U - SICHUAN AIRLINES"
+      },
+      {
+        "departureTime": "2025-02-16T14:40:00",
+        "amenities": {},
+        "departureAirport": "TFU",
+        "aircraft": "321 - AIRBUS A321",
+        "cabin": "ECONOMY",
+        "flightNumber": "3935",
+        "duration": "PT3H20M",
+        "fareBasis": "U1ADDA76",
+        "arrivalTime": "2025-02-16T17:00:00",
+        "segmentId": "22",
+        "airline": "3U - SICHUAN AIRLINES",
+        "arrivalAirport": "BKK",
+        "class": "B",
+        "operatingAirline": "3U - SICHUAN AIRLINES"
+      }
+    ],
+    "id": "1",
+    "pricing": {
+      "travelerPrices": [
+        {
+          "travelerType": "ADULT",
+          "price": { "total": "230.17", "currency": "EUR", "base": "53.00" },
+          "fareOption": "STANDARD",
+          "travelerId": "1"
+        }
+      ],
+      "price": {
+        "total": "230.17",
+        "fees": [
+          { "amount": "0.00", "type": "SUPPLIER" },
+          { "amount": "0.00", "type": "TICKETING" }
+        ],
+        "grandTotal": "230.17",
+        "currency": "EUR",
+        "base": "53.00"
+      }
+    }
+  },
+  {
+    "generalData": {
+      "totalDuration": "12H 25M",
+      "costPerTraveler": "451.77 EUR",
+      "departureAirport": { "code": "SYD", "time": "2025-02-15T08:50:00" },
+      "flightSchedule": "2025-02-15T08:50:00 → 2025-02-15T18:15:00",
+      "airline": "CX",
+      "arrivalAirport": { "code": "BKK", "time": "2025-02-15T18:15:00" },
+      "totalCost": "451.77 EUR"
+    },
+    "itineraries": [
+      {
+        "departureTime": "2025-02-15T08:50:00",
+        "amenities": {
+          "BRANDED_FARES": [
+            { "description": "REFUNDABLE TICKET", "isChargeable": true },
+            { "description": "MILEAGE ACCRUAL", "isChargeable": false },
+            { "description": "CHANGEABLE TICKET", "isChargeable": true }
+          ],
+          "BAGGAGE": [
+            {
+              "description": "1PC MAX 23KG 158LCM EACH",
+              "isChargeable": false
+            },
+            { "description": "1PC MAX 15LB 7KG 115LCM", "isChargeable": false }
+          ],
+          "PRE_RESERVED_SEAT": [
+            { "description": "SEAT ASSIGNMENT", "isChargeable": true }
+          ]
+        },
+        "departureAirport": "SYD",
+        "aircraft": "359 - AIRBUS A350-900",
+        "cabin": "ECONOMY",
+        "flightNumber": "110",
+        "duration": "PT9H15M",
+        "layoverTime": "1H 0M",
+        "fareBasis": "VR21AUKO",
+        "arrivalTime": "2025-02-15T15:05:00",
+        "segmentId": "45",
+        "airline": "CX - CATHAY PACIFIC",
+        "arrivalAirport": "HKG",
+        "class": "V",
+        "operatingAirline": "CX - CATHAY PACIFIC"
+      },
+      {
+        "departureTime": "2025-02-15T16:05:00",
+        "amenities": {
+          "BRANDED_FARES": [
+            { "description": "REFUNDABLE TICKET", "isChargeable": true },
+            { "description": "MILEAGE ACCRUAL", "isChargeable": false },
+            { "description": "CHANGEABLE TICKET", "isChargeable": true }
+          ],
+          "BAGGAGE": [
+            {
+              "description": "1PC MAX 23KG 158LCM EACH",
+              "isChargeable": false
+            },
+            { "description": "1PC MAX 15LB 7KG 115LCM", "isChargeable": false }
+          ],
+          "PRE_RESERVED_SEAT": [
+            { "description": "SEAT ASSIGNMENT", "isChargeable": true }
+          ]
+        },
+        "departureAirport": "HKG",
+        "aircraft": "333 - AIRBUS A330-300",
+        "cabin": "ECONOMY",
+        "flightNumber": "701",
+        "duration": "PT3H10M",
+        "fareBasis": "VR21AUKO",
+        "arrivalTime": "2025-02-15T18:15:00",
+        "segmentId": "46",
+        "airline": "CX - CATHAY PACIFIC",
+        "arrivalAirport": "BKK",
+        "class": "V",
+        "operatingAirline": "CX - CATHAY PACIFIC"
+      }
+    ],
+    "id": "26",
+    "pricing": {
+      "travelerPrices": [
+        {
+          "travelerType": "ADULT",
+          "price": { "total": "451.77", "currency": "EUR", "base": "257.00" },
+          "fareOption": "STANDARD",
+          "travelerId": "1"
+        }
+      ],
+      "price": {
+        "total": "451.77",
+        "fees": [
+          { "amount": "0.00", "type": "SUPPLIER" },
+          { "amount": "0.00", "type": "TICKETING" }
+        ],
+        "grandTotal": "451.77",
+        "currency": "EUR",
+        "base": "257.00"
+      }
+    }
+  }
+]

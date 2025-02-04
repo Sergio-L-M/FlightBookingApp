@@ -2,7 +2,20 @@ export interface Amenity {
   description: string;
   isChargeable: boolean;
 }
-
+export interface Price{
+  total:string;
+  fees:{ amount: string, type: string }[];
+  grandTotal:string;
+  currency:string;
+  base:string;
+}
+export interface TravelerPrices{
+  travelerType:string; 
+  price:{total:string; 
+  currency:string; base:string}; 
+  fareOption:string; 
+  travelerId:number 
+}
 export interface GeneralData {
   costPerTraveler: string;
   departureAirport: { code: string; name?: string };
@@ -30,9 +43,14 @@ export interface Itinerary {
   operatingAirline: string;
   amenities:  { [key: string]: Amenity[] };
 }
+export interface Pricing {
+  price:Price; 
+  travelerPrices:TravelerPrices[]
+}
 
 export interface FlightData {
   generalData: GeneralData;
   itineraries: Itinerary[];
   id: string;
+  pricing:Pricing
 }

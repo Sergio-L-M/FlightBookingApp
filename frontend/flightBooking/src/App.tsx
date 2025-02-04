@@ -5,9 +5,6 @@ import FlightSearch from "./components/flightSearch/flightSearch";
 import { useState } from "react";
 import { FlightData } from "./components/PropsFlight";
 import { Box, Container } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Scrollbar, FreeMode, Mousewheel } from "swiper/modules";
-import "swiper/swiper-bundle.css"; // 📌 Importamos Swiper Bundle
 
 function App() {
   const [departureFlights, setDepartureFlights] = useState<FlightData[]>([]);
@@ -34,7 +31,10 @@ function App() {
         }}
       >
         <Container>
-          <FlightSearch handleSearchingFlights={handleSearchingFlights} setFlights={setDepartureFlights} />
+          <FlightSearch
+            handleSearchingFlights={handleSearchingFlights}
+            setFlights={setDepartureFlights}
+          />
         </Container>
       </Box>
 
@@ -43,34 +43,31 @@ function App() {
         <Box sx={{ textAlign: "center", padding: 4 }}>Cargando...</Box>
       ) : (
         <FlightProvider>
-          <Container>
-            <Swiper
-              direction="vertical" // 📌 Scroll en eje Y
-              slidesPerView="auto" // 📌 Altura dinámica según el contenido
-              spaceBetween={20} // 📌 Espacio entre tarjetas
-              freeMode={true} // 📌 Permite desplazamiento sin ajuste forzado
-              scrollbar={{ draggable: true }} // 📌 Scrollbar visible y arrastrable
-              mousewheel={{ forceToAxis: true }} // 📌 Permite scroll con trackpad/mousewheel
-              touchReleaseOnEdges={true} // 📌 Permite gestos táctiles naturales
-              grabCursor={true} // 🖱️ Hace que parezca "draggeable"
-              modules={[Scrollbar, FreeMode, Mousewheel]} // 📌 Módulos de Scrollbar, FreeMode y Mousewheel
-              style={{
-                height: "500px",
-                paddingBottom: "20px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center", // 📌 Centrar la primera tarjeta verticalmente
-                alignItems: "center", // 📌 Centrar horizontalmente
-                marginTop: "50px", // 📌 Espacio entre `FlightSearch` y la primera tarjeta
-              }}
-            >
-              {departureFlights.map((flight, index) => (
-                <SwiperSlide key={index} style={{ width: "100%" }}>
-                  <FlightCard key={flight.id} {...flight} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Container>
+          <Box
+            sx={{
+              overflowY: "auto",
+              height: 500, // Ajusta la altura para controlar el scroll
+              pt: 2, // Padding superior
+              pb: 2, // Padding inferior
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center", // Centra horizontalmente los elementos
+              gap: 2, // Espaciado entre tarjetas
+              mt: 4, // Margen superior
+            }}
+          >
+            {departureFlights.map((flight) => (
+              <Box
+                key={flight.id}
+                sx={{
+                  width: "80%", // Controla el ancho de las tarjetas
+                  // Máximo ancho para evitar que sean muy grandes
+                }}
+              >
+                <FlightCard {...flight} />
+              </Box>
+            ))}
+          </Box>
 
           <FlightDetails />
         </FlightProvider>

@@ -6,11 +6,11 @@ import { useFlight } from "./flightContext";
 import { FlightData } from "../PropsFlight";
 import { formatFlightSchedule } from "../../utils/FormatDateeTime";
 import { appleTheme } from "../themes";
-const FlightCard = ({ generalData, itineraries, id }: FlightData) => {
+const FlightCard = ({ generalData, itineraries, id, pricing}: FlightData) => {
   const { setSelectedFlight, selectedFlight, openModal } = useFlight();
 
   const handleFlightClick = () => {
-    setSelectedFlight({ generalData, itineraries, id });
+    setSelectedFlight({ generalData, itineraries, id, pricing });
     openModal();
     console.log("Vuelo seleccionado guardado en el contexto global", selectedFlight);
   };
