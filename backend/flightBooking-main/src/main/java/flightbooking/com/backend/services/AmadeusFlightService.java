@@ -97,9 +97,7 @@ public class AmadeusFlightService {
             for (JsonNode flight : data) {
                 String flightId = flight.get("id").asText(); // Convertir ID a String
                 Map<String, Object> flightInfo = new HashMap<>();            
-                List<Map<String, Object>> itineraryData = itineraryDataFormatter(
-                    amadeusExtractItineraries.get(flight, dictionary)
-                );
+                List<Map<String, Object>> itineraryData = amadeusExtractItineraries.get(flight, dictionary);
                 Map<String, Object> priceData = amadeusExtractPrice.get(flight);
 
 
@@ -119,20 +117,15 @@ public class AmadeusFlightService {
         }
     }
     
-    private  List<Map<String, Object>> itineraryDataFormatter(List<Map<String, Object>> data){
-       
-        for(Map<String, Object> segments: data){
-            segments.put("departureAirport", "Hola");//getAirportName((String) segments.get("departureAirport")));
-        }
-        return data;
-    }
 
     private  Map<String, Object> generalFlightData(List<Map<String, Object>> data, Map<String, Object> priceData){
         Map<String, Object> generalData = new HashMap<>();
         Map<String, Object> departureFlight = data.get(0);
         Map<String, Object> arrivalFlight = data.get(data.size()-1);
-        generalData.put("departureAirport", (String) departureFlight.get("departureAirport"));
-        generalData.put("arrivalAirport", (String) arrivalFlight.get("arrivalAirport"));
+        generalData.put("departureAirportCode", (String) departureFlight.get("departureAirportCode"));
+        generalData.put("departureAirportName", "");
+        generalData.put("arrivalAirportCode", (String) arrivalFlight.get("arrivalAirportCode"));
+        generalData.put("arrivalAirportName", "");
         generalData.put("flightSchedule", 
         (String) departureFlight.get("departureTime") 
         + " → " + (String) arrivalFlight.get("arrivalTime"));

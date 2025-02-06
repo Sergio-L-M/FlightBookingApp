@@ -355,7 +355,258 @@
           ]
         }
       ]
-    }],
+    },
+    {
+      "type": "flight-offer",
+      "id": "19",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-02-15",
+      "lastTicketingDateTime": "2025-02-15",
+      "numberOfBookableSeats": 9,
+      "itineraries": [
+        {
+          "duration": "PT27H30M",
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "SYD",
+                "terminal": "1",
+                "at": "2025-02-15T11:15:00"
+              },
+              "arrival": {
+                "iataCode": "SGN",
+                "terminal": "2",
+                "at": "2025-02-15T15:50:00"
+              },
+              "carrierCode": "A1",
+              "number": "5005",
+              "aircraft": {
+                "code": "330"
+              },
+              "operating": {
+                "carrierCode": "VJ"
+              },
+              "duration": "PT8H35M",
+              "id": "73",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": {
+                "iataCode": "SGN",
+                "terminal": "2",
+                "at": "2025-02-16T09:15:00"
+              },
+              "arrival": {
+                "iataCode": "BKK",
+                "at": "2025-02-16T10:45:00"
+              },
+              "carrierCode": "A1",
+              "number": "2801",
+              "aircraft": {
+                "code": "321"
+              },
+              "operating": {
+                "carrierCode": "VJ"
+              },
+              "duration": "PT1H30M",
+              "id": "74",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "424.38",
+        "base": "218.00",
+        "fees": [
+          {
+            "amount": "0.00",
+            "type": "SUPPLIER"
+          },
+          {
+            "amount": "0.00",
+            "type": "TICKETING"
+          }
+        ],
+        "grandTotal": "424.38"
+      },
+      "pricingOptions": {
+        "fareType": [
+          "PUBLISHED"
+        ],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": [
+        "GP"
+      ],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": {
+            "currency": "EUR",
+            "total": "424.38",
+            "base": "218.00"
+          },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "73",
+              "cabin": "ECONOMY",
+              "fareBasis": "GAPVJ",
+              "class": "G",
+              "includedCheckedBags": {
+                "weight": 40,
+                "weightUnit": "KG"
+              }
+            },
+            {
+              "segmentId": "74",
+              "cabin": "ECONOMY",
+              "fareBasis": "GAPVJ",
+              "class": "G",
+              "includedCheckedBags": {
+                "weight": 40,
+                "weightUnit": "KG"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flight-offer",
+      "id": "15",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-02-15",
+      "lastTicketingDateTime": "2025-02-15",
+      "numberOfBookableSeats": 9,
+      "itineraries": [
+        {
+          "duration": "PT28H35M",
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "SYD",
+                "terminal": "1",
+                "at": "2025-02-15T11:45:00"
+              },
+              "arrival": {
+                "iataCode": "MNL",
+                "terminal": "1",
+                "at": "2025-02-15T17:10:00"
+              },
+              "carrierCode": "PR",
+              "number": "212",
+              "aircraft": {
+                "code": "333"
+              },
+              "operating": {
+                "carrierCode": "PR"
+              },
+              "duration": "PT8H25M",
+              "id": "81",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": {
+                "iataCode": "MNL",
+                "terminal": "1",
+                "at": "2025-02-16T09:45:00"
+              },
+              "arrival": {
+                "iataCode": "BKK",
+                "at": "2025-02-16T12:20:00"
+              },
+              "carrierCode": "PR",
+              "number": "730",
+              "aircraft": {
+                "code": "773"
+              },
+              "operating": {
+                "carrierCode": "PR"
+              },
+              "duration": "PT3H35M",
+              "id": "82",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "381.61",
+        "base": "249.00",
+        "fees": [
+          {
+            "amount": "0.00",
+            "type": "SUPPLIER"
+          },
+          {
+            "amount": "0.00",
+            "type": "TICKETING"
+          }
+        ],
+        "grandTotal": "381.61"
+      },
+      "pricingOptions": {
+        "fareType": [
+          "PUBLISHED"
+        ],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": [
+        "PR"
+      ],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": {
+            "currency": "EUR",
+            "total": "381.61",
+            "base": "249.00"
+          },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "81",
+              "cabin": "ECONOMY",
+              "fareBasis": "EOBAU",
+              "class": "E",
+              "includedCheckedBags": {
+                "weight": 30,
+                "weightUnit": "KG"
+              }
+            },
+            {
+              "segmentId": "82",
+              "cabin": "ECONOMY",
+              "fareBasis": "EOBAU",
+              "class": "E",
+              "includedCheckedBags": {
+                "weight": 30,
+                "weightUnit": "KG"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "dictionaries": {
     "locations": {
       "PVG": {

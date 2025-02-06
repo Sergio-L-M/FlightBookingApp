@@ -25,9 +25,13 @@ public class AmadeusExtractItineraries {
             String segmentId = segment.get("id").asText();
 
             segmentInfo.put("segmentId", segmentId);
-            segmentInfo.put("departureAirport", segment.get("departure").get("iataCode").asText());
+            
+            segmentInfo.put("departureAirportCode", segment.get("departure").get("iataCode").asText());
+            segmentInfo.put("departureAirportName", "");
             segmentInfo.put("departureTime", segment.get("departure").get("at").asText());
-            segmentInfo.put("arrivalAirport", segment.get("arrival").get("iataCode").asText());
+
+            segmentInfo.put("arrivalAirportCode", segment.get("arrival").get("iataCode").asText());
+            segmentInfo.put("arrivalAirportName", "");
             segmentInfo.put("arrivalTime", segment.get("arrival").get("at").asText());
 
             String airlineCode = segment.get("carrierCode").asText();
