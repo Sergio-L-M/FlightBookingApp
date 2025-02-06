@@ -90,8 +90,11 @@ const FlightSearch = ({ setFlights, handleSearchingFlights }: Props) => {
 
       if (development) {
         console.log("🛠️ Modo Testing: Usando datos mock.");
+        handleSearchingFlights(true);
+        console.log("true")
         console.log(flightsMock);
         setFlights(flightsMock);
+        handleSearchingFlights(false);
       } else {
         try {
           console.log("🔍 Buscando vuelos en:", apiUrl);

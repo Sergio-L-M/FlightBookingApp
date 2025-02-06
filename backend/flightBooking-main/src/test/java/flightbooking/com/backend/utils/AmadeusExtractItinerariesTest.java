@@ -43,23 +43,19 @@ class AmadeusExtractItinerariesTest {
         ObjectMapper objectMapper = new ObjectMapper(); // Instancia de Jackson
     
         // ✅ Ejecutar el método bajo prueba
-        Map<String, Object> itineraryResult = amadeusExtractItineraries.get(mockFlightData, dictionary);
-    
-        // ✅ Asegurar que los resultados contienen las claves necesarias
-        assertTrue(itineraryResult.containsKey("itineraries"), "❌ Missing key: itineraries");
-        assertTrue(itineraryResult.containsKey("totalDuration"), "❌ Missing key: totalDuration");
+        List<Map<String, Object>> itineraryResult = amadeusExtractItineraries.get(mockFlightData, dictionary);
     
         // ✅ Extraer los datos generados y esperados
-        List<Map<String, Object>> generatedItineraries = (List<Map<String, Object>>) itineraryResult.get("itineraries");
+       
         JsonNode expectedItineraries = validData; // `validData` ya es un JsonNode con "itineraries"
     
         // ✅ Verificar tamaño de los itinerarios
-        assertEquals(expectedItineraries.size(), generatedItineraries.size(), "❌ Mismatch in the number of itineraries");
+        assertEquals(expectedItineraries.size(), itineraryResult.size(), "❌ Mismatch in the number of itineraries");
     
         // ✅ Iterar sobre los itinerarios esperados
         for (int i = 0; i < expectedItineraries.size(); i++) {
             JsonNode expectedItinerary = expectedItineraries.get(i);
-            Map<String, Object> generatedItinerary = generatedItineraries.get(i);
+            Map<String, Object> generatedItinerary = itineraryResult.get(i);
     
             // ✅ Convertir ambos a JSON para evitar diferencias de formato
             JsonNode generatedJson = objectMapper.valueToTree(generatedItinerary);

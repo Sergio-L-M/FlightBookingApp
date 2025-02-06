@@ -2,14 +2,21 @@ package flightbooking.com.backend.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
+import flightbooking.com.backend.services.AmadeusAirportService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class AmadeusExtractGeneralData {
+    private final AmadeusAirportService amadeusAirportService;
 
-    public Map<String, Object> get(JsonNode flight, String totalDuration) {
+    public AmadeusExtractGeneralData(AmadeusAirportService amadeusAirportService) {
+        this.amadeusAirportService = amadeusAirportService;
+    }
+
+    public Map<String, Object> get(JsonNode flight) {
         Map<String, Object> generalData = new HashMap<>();
 
         // ✅ Verificar existencia antes de acceder
@@ -32,23 +39,17 @@ public class AmadeusExtractGeneralData {
 
         JsonNode firstSegment = segments.get(0);
         JsonNode lastSegment = segments.get(segments.size() - 1);
+        
+        String departureIATACode = firstSegment.path("departure").path("iataCode").asText("N/A");
+        String arrivalIATACode = lastSegment.path("arrival").path("iataCode").asText("N/A");
+        String departureTime = firstSegment.path("departure").path("at").asText("Unknown");
+        String arrivalTime = firstSegment.path("departure").path("at").asText("Unknown");
 
-        // ✅ Extraer aeropuertos de salida y llegada
-        Map<String, String> departureAirport = new HashMap<>();
-        departureAirport.put("code", firstSegment.path("departure").path("iataCode").asText("N/A"));
-        departureAirport.put("time", firstSegment.path("departure").path("at").asText("Unknown"));
+        generalData.put("departureAirportIATACode", departureIATACode);
+        generalData.put("arrivalAirportIATACode", arrivalIATACode);
 
-        Map<String, String> arrivalAirport = new HashMap<>();
-        arrivalAirport.put("code", lastSegment.path("arrival").path("iataCode").asText("N/A"));
-        arrivalAirport.put("time", lastSegment.path("arrival").path("at").asText("Unknown"));
-
-        generalData.put("departureAirport", departureAirport);
-        generalData.put("arrivalAirport", arrivalAirport);
-        generalData.put("totalDuration", totalDuration);
-
-        // ✅ Formatear horario de vuelo
         generalData.put("flightSchedule",
-                departureAirport.get("time") + " → " + arrivalAirport.get("time"));
+        departureTime + " → " + arrivalTime);
 
         // ✅ Extraer precio total y por viajero
         if (flight.has("price")) {
@@ -64,4 +65,10 @@ public class AmadeusExtractGeneralData {
 
         return generalData;
     }
+
+    /**
+     * Obtiene el nombre del aeropuerto y lo concatena con el código IATA.
+     * Si el aeropuerto no se encuentra, solo devuelve el código IATA.
+     */
+
 }

@@ -8,19 +8,28 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Iterator;
 
+import flightbooking.com.backend.services.AmadeusAirportService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 class AmadeusExtractGeneralDataTest {
 
-    private AmadeusExtractGeneralData amadeusExtractGeneralData;
+    @Mock
+    private AmadeusAirportService amadeusAirportService; // Simula la dependencia de AmadeusAirportService
+
+    @InjectMocks
+    private AmadeusExtractGeneralData amadeusExtractGeneralData; // Se inyectan los mocks aquí
+
     private JsonNode mockFlightData;
     private JsonNode expectedData;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     void setUp() throws IOException {
-        amadeusExtractGeneralData = new AmadeusExtractGeneralData();
+        MockitoAnnotations.openMocks(this); // Inicializa los mocks de Mockito
 
         // ✅ Cargar el archivo mockData.json con datos de Amadeus
         File mockFile = new File("src/test/resources/mockData.json");
@@ -37,7 +46,7 @@ class AmadeusExtractGeneralDataTest {
     @Test
     void testExtractGeneralData_ValidOutput() {
         // ✅ Ejecutar el método bajo prueba
-        Map<String, Object> generalData = amadeusExtractGeneralData.get(mockFlightData, "");
+        Map<String, Object> generalData = amadeusExtractGeneralData.get(mockFlightData);
 
         // ✅ Asegurar que el resultado no es nulo
         assertNotNull(generalData, "❌ El mapa generalData es nulo");
@@ -83,6 +92,4 @@ class AmadeusExtractGeneralDataTest {
             assertEquals(expectedJsonValue, generatedJsonValue, "❌ Incorrect value for key: " + key);
         }
     }
-
-
 }

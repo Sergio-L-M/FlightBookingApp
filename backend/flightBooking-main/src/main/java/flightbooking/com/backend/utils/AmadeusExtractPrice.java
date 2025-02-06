@@ -12,11 +12,11 @@ public class AmadeusExtractPrice {
 
         // 🔹 Extraer y formatear la sección "price"
         JsonNode priceNode = flight.get("price");
-        Map<String, Object> price = new HashMap<>();
-        price.put("currency", priceNode.get("currency").asText());
-        price.put("base", priceNode.get("base").asText());
-        price.put("total", priceNode.get("total").asText());
-        price.put("grandTotal", priceNode.get("grandTotal").asText());
+        boolean flag = true;
+        result.put("currency", priceNode.get("currency").asText());
+        result.put("base", priceNode.get("base").asText());
+        result.put("total", priceNode.get("total").asText());
+        result.put("grandTotal", priceNode.get("grandTotal").asText());
 
         // 🔹 Extraer y formatear la sección "fees"
         List<Map<String, Object>> fees = new ArrayList<>();
@@ -26,7 +26,7 @@ public class AmadeusExtractPrice {
             fee.put("type", feeNode.get("type").asText());
             fees.add(fee);
         }
-        price.put("fees", fees);
+        result.put("fees", fees);
         
         // 🔹 Extraer y formatear la sección "travelerPricings"
         List<Map<String, Object>> travelerPrices = new ArrayList<>();
@@ -41,13 +41,16 @@ public class AmadeusExtractPrice {
             travelerPrice.put("currency", travelerPriceNode.get("currency").asText());
             travelerPrice.put("base", travelerPriceNode.get("base").asText());
             travelerPrice.put("total", travelerPriceNode.get("total").asText());
-
+            if(flag){
+                result.put("pricePerTraveler",  travelerPriceNode.get("total").asText());
+                flag =false;
+            }
             travelerInfo.put("price", travelerPrice);
             travelerPrices.add(travelerInfo);
         }
 
         // 🔹 Agregar todo al resultado final
-        result.put("price", price);
+      
         result.put("travelerPrices", travelerPrices);
 
         return result;
