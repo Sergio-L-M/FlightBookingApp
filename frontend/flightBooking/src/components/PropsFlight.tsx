@@ -14,16 +14,21 @@ export interface TravelerPrices{
   price:{total:string; 
   currency:string; base:string}; 
   fareOption:string; 
-  travelerId:number 
+  travelerId:string ;
+}
+export interface Stop {
+  layoverTime:string ; arrivalAirport:string
 }
 export interface GeneralData {
-  costPerTraveler: string;
-  departureAirport: { code: string; name?: string };
+  PricePerTraveler: string;
+  departureAirport: string;
   totalDuration: string;
   flightSchedule: string;
   airline: string;
-  arrivalAirport: { code: string; name?: string };
-  totalCost: string;
+  arrivalAirport: string;
+  operatingAirline: string;
+  totalPrice: string;
+  stops:Stop[]
 }
 
 export interface Itinerary {
@@ -44,8 +49,14 @@ export interface Itinerary {
   amenities:  { [key: string]: Amenity[] };
 }
 export interface Pricing {
-  price:Price; 
-  travelerPrices:TravelerPrices[]
+
+  total:string;
+  fees:{ amount: string, type: string }[];
+  travelerPrices:TravelerPrices[];
+  pricePerTraveler:string;
+  grandTotal:string;
+  currency:string;
+  base:string;
 }
 
 export interface FlightData {
@@ -53,4 +64,10 @@ export interface FlightData {
   itineraries: Itinerary[];
   id: string;
   pricing:Pricing
+}
+
+
+export interface FlightItemCardData {
+  generalData: GeneralData;
+  id: string;
 }

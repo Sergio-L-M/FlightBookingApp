@@ -18,7 +18,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onSearch, isTransitioning, se
         width: '100%',
         height: '100vh',
         overflow: 'hidden',
-        backgroundImage: 'url("/images/background.jpg")',
+        backgroundImage: 'url("../../public/bg2.jpeg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

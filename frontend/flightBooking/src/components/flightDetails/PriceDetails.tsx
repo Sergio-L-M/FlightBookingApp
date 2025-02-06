@@ -11,7 +11,7 @@ export const PriceDetails = () => {
     return null;
   }
 
-  const { price, travelerPrices } = priceDetailsData;
+  const { total, fees, travelerPrices, pricePerTraveler, grandTotal, currency, base } = priceDetailsData;
 
   return (
     <Paper sx={{ p: 2 }}>
@@ -23,13 +23,13 @@ export const PriceDetails = () => {
       {/* Sección de precios generales */}
       <Box sx={{ mb: 2 }}>
         <Typography variant="body1" component="div">
-          <strong>Total:</strong> {price.total} {price.currency}
+          <strong>Total:</strong> {total} {currency}
         </Typography>
         <Typography variant="body1" component="div">
-          <strong>Base:</strong> {price.base} {price.currency}
+          <strong>Base:</strong> {base} {currency}
         </Typography>
         <Typography variant="body1" component="div">
-          <strong>Grand Total:</strong> {price.grandTotal} {price.currency}
+          <strong>Grand Total:</strong> {grandTotal} {currency}
         </Typography>
       </Box>
 
@@ -41,10 +41,10 @@ export const PriceDetails = () => {
         <Typography variant="body1" fontWeight="bold" component="div">
           Fees:
         </Typography>
-        {price.fees.map((fee, index) => (
+        {fees.map((fee, index) => (
           <Box key={index} sx={{ ml: 2 }}>
             <Typography variant="body2" component="div">
-              {fee.type}: {fee.amount} {price.currency}
+              {fee.type}: {fee.amount} {currency}
             </Typography>
           </Box>
         ))}

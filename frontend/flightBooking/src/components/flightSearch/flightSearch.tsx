@@ -24,6 +24,7 @@ import FlightSort from "../flightSort/flightSort";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { appleTheme } from "../themes";
 import flightsMock from "../../mocks/validMockData.json";
+import {useFlight} from "../flightCard/flightContext"
 const development = true;
 interface Props {
   setFlights: (flights: any[]) => void;
@@ -31,6 +32,7 @@ interface Props {
 }
 
 const FlightSearch = ({ setFlights, handleSearchingFlights }: Props) => {
+  const {setSelectedKey} = useFlight();
   const [departureDate, setDepartureDate] = useState<Dayjs | null>(dayjs());
   const [arrivalDate, setArrivalDate] = useState<Dayjs | null>(
     dayjs().add(3, "day")
@@ -87,7 +89,9 @@ const FlightSearch = ({ setFlights, handleSearchingFlights }: Props) => {
         const sort = sortBy.split("-");
         apiUrl += `&sortBy=${sort[0]}&ascending=${sort[1]}`;
       }
-
+      setSelectedKey(`${origin}-${destination}-${arrivalDate?.format(
+        "YYYY-MM-DD"
+      )}-${currency}-false-${adults}`);
       if (development) {
         console.log("🛠️ Modo Testing: Usando datos mock.");
         handleSearchingFlights(true);

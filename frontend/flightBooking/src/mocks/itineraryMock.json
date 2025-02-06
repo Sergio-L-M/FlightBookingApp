@@ -1,0 +1,87 @@
+{
+    "generalData": {
+      "totalDuration": "24H 10M",
+      "departureAirport": "Hola",
+      "totalPrice": "230.17",
+      "PricePerTraveler": "230.17",
+      "flightSchedule": "2025-02-15T20:50:00 → 2025-02-16T17:00:00",
+      "stops": [
+        {
+          "layoverTime": "9H 40M",
+          "arrivalAirport": "TFU"
+        },
+        {
+          "layoverTime": "0H 0M",
+          "arrivalAirport": "BKK"
+        }
+      ],
+      "airline": "3U - SICHUAN AIRLINES",
+      "arrivalAirport": "BKK",
+      "operatingAirline": "3U - SICHUAN AIRLINES"
+    },
+    "itineraries": [
+      {
+        "departureTime": "2025-02-15T20:50:00",
+        "amenities": {},
+        "departureAirport": "Hola",
+        "aircraft": "359 - AIRBUS A350-900",
+        "cabin": "ECONOMY",
+        "flightNumber": "3892",
+        "duration": "11H 10M",
+        "layoverTime": "9H 40M",
+        "fareBasis": "U1ADDA76",
+        "arrivalTime": "2025-02-16T05:00:00",
+        "segmentId": "21",
+        "airline": "3U - SICHUAN AIRLINES",
+        "arrivalAirport": "TFU",
+        "class": "U",
+        "operatingAirline": "3U - SICHUAN AIRLINES"
+      },
+      {
+        "departureTime": "2025-02-16T14:40:00",
+        "amenities": {},
+        "departureAirport": "Hola",
+        "aircraft": "321 - AIRBUS A321",
+        "cabin": "ECONOMY",
+        "flightNumber": "3935",
+        "duration": "3H 20M",
+        "fareBasis": "U1ADDA76",
+        "arrivalTime": "2025-02-16T17:00:00",
+        "segmentId": "22",
+        "airline": "3U - SICHUAN AIRLINES",
+        "arrivalAirport": "BKK",
+        "class": "B",
+        "operatingAirline": "3U - SICHUAN AIRLINES"
+      }
+    ],
+    "id": "1",
+    "pricing": {
+      "total": "230.17",
+      "fees": [
+        {
+          "amount": "0.00",
+          "type": "SUPPLIER"
+        },
+        {
+          "amount": "0.00",
+          "type": "TICKETING"
+        }
+      ],
+      "travelerPrices": [
+        {
+          "travelerType": "ADULT",
+          "price": {
+            "total": "230.17",
+            "currency": "EUR",
+            "base": "53.00"
+          },
+          "fareOption": "STANDARD",
+          "travelerId": "1"
+        }
+      ],
+      "pricePerTraveler": "230.17",
+      "grandTotal": "230.17",
+      "currency": "EUR",
+      "base": "53.00"
+    }
+  }

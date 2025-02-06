@@ -1,11 +1,11 @@
 import AirportNameCode from "./AirportNameCode";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import { Itinerary } from "../PropsFlight";
+import { Stop } from "../PropsFlight";
 import { Typography } from "@mui/material";
 import { formatDuration } from "../../utils/FormatDateeTime";
 interface Props {
-  itineraries: Itinerary[];
+  itineraries: Stop[];
   id: string;
   totalDuration: string;
 }
@@ -26,12 +26,12 @@ const StopsList = ({ itineraries, id, totalDuration }: Props) => {
           <span style={{ marginRight: "10px" }}>
             {" "}
             <Typography variant="body1" color="text.secondary">
-              <strong>{formatDuration(itinerary.duration)}</strong>
+              <strong>{itinerary.layoverTime}</strong>
             </Typography>
           </span>
           <AirportNameCode
-            airportCode={itinerary.departureAirport}
-            airportName={itinerary.departureAirport}
+            airportCode={itinerary.arrivalAirport}
+            airportName={itinerary.arrivalAirport}
           />
         </ListItem>
       ))}

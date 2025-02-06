@@ -6,13 +6,13 @@ import FlightSearch from '../components/flightSearch/flightSearch';
 import FlightDetails from '../components/flightDetails/flightDetails';
 import FlightCard from '../components/flightCard/FlightCard';
 import { FlightProvider } from '../components/flightCard/flightContext';
-import { FlightData } from '../components/PropsFlight';
+import { FlightItemCardData } from '../components/PropsFlight';
 
 interface Props{
-    initialDepartureFlights: FlightData[];
+    initialDepartureFlights: FlightItemCardData[];
 }
 const SearchPage = ({initialDepartureFlights= []}: Props) => {
-  const [departureFlights, setDepartureFlights] = useState<FlightData[]>(initialDepartureFlights);
+  const [departureFlights, setDepartureFlights] = useState<FlightItemCardData[]>(initialDepartureFlights);
   const [searchingFlights, setSearchingFlights] = useState(false);
 
   return (

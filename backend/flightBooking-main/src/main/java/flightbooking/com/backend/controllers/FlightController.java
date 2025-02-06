@@ -4,6 +4,9 @@ package flightbooking.com.backend.controllers;
 import flightbooking.com.backend.services.AmadeusFlightService;
 import flightbooking.com.backend.services.AmadeusRawService;
 import flightbooking.com.backend.services.AmadeusAirportService;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -56,6 +59,32 @@ public class FlightController {
         return convertToList(response);
     }
     
+    @GetMapping("/{key}/{id}")
+    public ResponseEntity<Object> getFlightByKeyAndId(
+            @PathVariable String key,
+            @PathVariable String id) {
+    
+        // Verificar si la clave principal (key) existe en la caché
+        if (!flightCache.containsKey(key)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("error", "No flights found for the given key: " + key));
+        }
+    
+        // Obtener los vuelos almacenados bajo la clave principal
+        Map<String, Map<String, Object>> flights = flightCache.get(key);
+    
+        // Verificar si el vuelo con el ID especificado existe dentro de esta clave
+        if (!flights.containsKey(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("error", "Flight with ID " + id + " not found in key: " + key));
+        }
+    
+        // Si existe, devolver el objeto del vuelo específico
+        return ResponseEntity.ok(flights.get(id));
+    }
+    
+
+
     @GetMapping("/raw")
     public String getRawFlights(
             @RequestParam String origin,

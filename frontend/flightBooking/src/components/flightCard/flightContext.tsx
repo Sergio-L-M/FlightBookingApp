@@ -9,6 +9,12 @@ interface FlightContextType {
   isModalOpen: boolean; // Estado del modal
   openModal: () => void; // Función para abrir el modal
   closeModal: () => void; // Función para cerrar el modal
+  selectedId:string;
+  setSelectedId: (id: string) => void;
+  loading: boolean;
+  setLoading: (state: boolean) => void;
+  selectedKey:string;
+  setSelectedKey:(key: string) => void;
 }
 
 // Crear el contexto
@@ -20,7 +26,9 @@ export const FlightProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [selectedFlight, setSelectedFlight] = useState<FlightData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const [selectedId, setSelectedId] = useState("");
+  const [selectedKey, setSelectedKey] = useState("");
   const openModal = () => {setIsModalOpen(true)};
   const closeModal = () => {setIsModalOpen(false)};
 
@@ -32,6 +40,12 @@ export const FlightProvider: React.FC<{ children: ReactNode }> = ({
         isModalOpen,
         openModal,
         closeModal,
+        selectedId,
+        setSelectedId,
+        setLoading,
+        loading,
+        selectedKey,
+        setSelectedKey
       }}
     >
       {children}

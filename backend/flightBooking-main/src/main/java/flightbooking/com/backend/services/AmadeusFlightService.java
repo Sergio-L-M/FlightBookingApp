@@ -159,6 +159,8 @@ public class AmadeusFlightService {
         generalData.put("totalDuration", totalDurationFormatted);
         generalData.put("stops", stops);
         generalData.put("totalPrice", priceData.get("total"));
+        generalData.put("airline",(String)departureFlight.get("airline"));
+        generalData.put("operatingAirline",(String)departureFlight.get("operatingAirline"));
         generalData.put("PricePerTraveler", priceData.get("pricePerTraveler"));
 
         
