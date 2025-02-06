@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
-import org.springframework.stereotype.Service;
 
-import java.util.*;
 
 @Service
 public class FlightService {
@@ -26,40 +26,78 @@ public class FlightService {
 
     if (flightCache.containsKey(cacheKey)) {
         List<Map<String, Object>> flights = convertToList(flightCache.get(cacheKey));
-        List<Map<String, Object>> sortedFlights = sortFlights(flights, sortBy, ascending);
+        List<Map<String, Object>> sortedFlights = sortFlights(flights, sortBy);
         List<Map<String, Object>> paginatedFlights = paginateList(sortedFlights, page, size);
-        
-        // Agregar nombres de aeropuertos
         addAirportNamesToFlights(cacheKey, paginatedFlights, airportService);
         
-        return paginatedFlights;
+        return filterFlights(paginatedFlights);
     }
 
-    // Obtener datos del servicio y almacenar en caché
     Map<String, Map<String, Object>> response = flightService.searchFlights(origin, destination, departureDate, currency, adults, nonStop);
     flightCache.put(cacheKey, response);
 
     List<Map<String, Object>> flights = convertToList(response);
-    List<Map<String, Object>> sortedFlights = sortFlights(flights, sortBy, ascending);
+    List<Map<String, Object>> sortedFlights = sortFlights(flights, sortBy);
     List<Map<String, Object>> paginatedFlights = paginateList(sortedFlights, page, size);
 
-    // Agregar nombres de aeropuertos
     addAirportNamesToFlights(cacheKey, paginatedFlights, airportService);
 
-    return paginatedFlights;
+    return filterFlights(paginatedFlights);
 
 
 }
 
+    public static List<Map<String, Object>> filterFlights(List<Map<String, Object>> paginatedFlights) {
+        return paginatedFlights.stream()
+            .map(flight -> Map.of(
+                "id", flight.get("id"),
+                "generalData", flight.get("generalData")
+            ))
+            .collect(Collectors.toList());
+    }
+
+
+
+
+    public List<Map<String, Object>> sortFlights(List<Map<String, Object>> flights, String sortBy) {
+        if (flights == null || flights.isEmpty()) {
+            return Collections.emptyList(); // Devolver lista vacía en lugar de null
+        }
+    
+        if (sortBy == null || sortBy.isEmpty()) {
+            return flights;
+        }
+
+        List<Map<String, Object>> sortedFlights = new ArrayList<>(flights);
+        Comparator<Map<String, Object>> comparator = null;
+
+        switch (sortBy.toLowerCase()) {
+            case "cheapest":
+                comparator = Comparator.comparing(flight -> parseDoubleSafe(getSafeMap(flight, "generalData").get("totalPrice")));
+                break;
+            case "most_expensive":
+                comparator = Comparator.comparing(flight -> parseDoubleSafe(getSafeMap(flight, "generalData").get("totalPrice")), Comparator.reverseOrder());
+                break;
+            case "shortest":
+                comparator = Comparator.comparing(flight -> parseDurationSafe(getSafeMap(flight, "generalData").get("totalDuration")));
+                break;
+            case "longest":
+                comparator = Comparator.comparing(flight -> parseDurationSafe(getSafeMap(flight, "generalData").get("totalDuration")), Comparator.reverseOrder());
+                break;
+            default:
+                return flights;
+        }
+
+        sortedFlights.sort(comparator);
+        return sortedFlights;
+    }
     private void addAirportNamesToFlights(String cacheKey, List<Map<String, Object>> flights, AmadeusAirportService airportService) {
         for (Map<String, Object> flight : flights) {
             Map<String, Object> generalData = getSafeMap(flight, "generalData");
 
-            // Obtener nombres de aeropuertos en generalData
             updateAirportName(generalData, "departureAirportCode", "departureAirportName", airportService);
             updateAirportName(generalData, "arrivalAirportCode", "arrivalAirportName", airportService);
 
-            // Actualizar nombres de aeropuertos en itinerarios
             List<Map<String, String>> stops = new ArrayList<>();
             List<Map<String, Object>> itineraries = (List<Map<String, Object>>) flight.get("itineraries");
             if (itineraries != null) {
@@ -78,7 +116,7 @@ public class FlightService {
             }
             generalData.put("stops", stops);
 
-            // **Actualizar la caché después de agregar los nombres**
+          
             Map<String, Map<String, Object>> flightCacheEntry = flightCache.get(cacheKey);
             if (flightCacheEntry != null) {
                 flightCacheEntry.put(flight.get("id").toString(), flight);
@@ -86,20 +124,14 @@ public class FlightService {
         }
     }
 
-    // Método auxiliar para actualizar los nombres de aeropuertos utilizando la caché y la API
     private void updateAirportName(Map<String, Object> data, String codeKey, String nameKey, AmadeusAirportService airportService) {
         if (data == null || !data.containsKey(codeKey)) return;
 
         String airportCode = data.getOrDefault(codeKey, "").toString();
         if (airportCode.isEmpty()) return;
 
-        // Verificar en caché primero
         String airportName = airportService.getCachedOrFetchAirport(airportCode);
-
-        // Imprimir para depuración
         System.out.println("Airport code: " + airportCode + " -> Name: " + airportName);
-
-        // Asignar el nombre del aeropuerto sin modificar "NOT FOUND"
         data.put(nameKey, airportName);
     }
 
@@ -131,41 +163,6 @@ public class FlightService {
             list.add(item);
         }
         return list;
-    }
-
-    private List<Map<String, Object>> sortFlights(List<Map<String, Object>> flights, String sortBy, boolean ascending) {
-        if (sortBy == null || sortBy.isEmpty()) {
-            return flights;
-        }
-
-        List<Map<String, Object>> sortedFlights = new ArrayList<>(flights);
-        Comparator<Map<String, Object>> comparator = null;
-
-        switch (sortBy.toLowerCase()) {
-            case "cheapest":
-                comparator = Comparator.comparing(flight -> parseDoubleSafe(getSafeMap(flight, "generalData").get("totalPrice")));
-                break;
-            case "most_expensive":
-                comparator = Comparator.comparing(flight -> parseDoubleSafe(getSafeMap(flight, "generalData").get("totalPrice")), Comparator.reverseOrder());
-                break;
-            case "shortest":
-                comparator = Comparator.comparing(flight -> parseDurationSafe(getSafeMap(flight, "generalData").get("totalDuration")));
-                break;
-            case "longest":
-                comparator = Comparator.comparing(flight -> parseDurationSafe(getSafeMap(flight, "generalData").get("totalDuration")), Comparator.reverseOrder());
-                break;
-            default:
-                return flights;
-        }
-
-        sortedFlights.sort(comparator);
-        return ascending ? sortedFlights : reverseList(sortedFlights);
-    }
-
-    private List<Map<String, Object>> reverseList(List<Map<String, Object>> list) {
-        List<Map<String, Object>> reversed = new ArrayList<>(list);
-        Collections.reverse(reversed);
-        return reversed;
     }
 
     private List<Map<String, Object>> paginateList(List<Map<String, Object>> flights, int page, int size) {

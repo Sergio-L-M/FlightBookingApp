@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage';
 import SearchPage from './pages/SearchPage';
 import { FlightProvider } from './components/flightCard/flightContext';
 import { FlightItemCardData } from './components/PropsFlight';
+import { SearchProvider } from './components/flightSearch/searchContext';
 function App() {
   const [showSearchPage, setShowSearchPage] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -20,13 +21,15 @@ function App() {
 
   return (
     <>
+  <SearchProvider>
     <FlightProvider>
       {!showSearchPage ? (
-        <LandingPage onSearch={handleSearch} isTransitioning={isTransitioning} setDepartureFlights={setDepartureFlights}/>
+        <LandingPage onSearch={handleSearch} isTransitioning={isTransitioning}/>
       ) : (
-        <SearchPage initialDepartureFlights={departureFlights}/>
+        <SearchPage/>
       )}
       </FlightProvider>
+      </SearchProvider>
     </>
   );
 }

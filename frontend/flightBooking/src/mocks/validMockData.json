@@ -2,49 +2,169 @@
   {
     "generalData": {
       "totalDuration": "24H 10M",
-      "departureAirport": "Hola",
+      "arrivalAirportCode": "BKK",
       "totalPrice": "230.17",
       "PricePerTraveler": "230.17",
       "flightSchedule": "2025-02-15T20:50:00 → 2025-02-16T17:00:00",
       "stops": [
         {
+          "arrivalAirportCode": "TFU",
           "layoverTime": "9H 40M",
-          "arrivalAirport": "TFU"
+          "arrivalAirportName": "TIANFU INTERNATIONAL"
         },
         {
+          "arrivalAirportCode": "BKK",
           "layoverTime": "0H 0M",
-          "arrivalAirport": "BKK"
+          "arrivalAirportName": "SUVARNABHUMI INTL"
         }
       ],
       "airline": "3U - SICHUAN AIRLINES",
-      "arrivalAirport": "BKK",
+      "departureAirportName": "NOT FOUND",
+      "departureAirportCode": "SYD",
+      "arrivalAirportName": "SUVARNABHUMI INTL",
       "operatingAirline": "3U - SICHUAN AIRLINES"
     },
- 
     "id": "1"
+
+  },
+  {
+    "generalData": {
+      "totalDuration": "28H 35M",
+      "arrivalAirportCode": "BKK",
+      "totalPrice": "381.61",
+      "PricePerTraveler": "381.61",
+      "flightSchedule": "2025-02-15T11:45:00 → 2025-02-16T12:20:00",
+      "stops": [
+        {
+          "arrivalAirportCode": "MNL",
+          "layoverTime": "16H 35M",
+          "arrivalAirportName": "NOT FOUND"
+        },
+        {
+          "arrivalAirportCode": "BKK",
+          "layoverTime": "0H 0M",
+          "arrivalAirportName": "SUVARNABHUMI INTL"
+        }
+      ],
+      "airline": "PR - PHILIPPINE AIRLINES",
+      "departureAirportName": "NOT FOUND",
+      "departureAirportCode": "SYD",
+      "arrivalAirportName": "SUVARNABHUMI INTL",
+      "operatingAirline": "PR - PHILIPPINE AIRLINES"
+    },
+    "id": "15"
  
   },
   {
     "generalData": {
-      "totalDuration": "13H 25M",
-      "departureAirport": "Hola",
-      "totalPrice": "451.77",
-      "PricePerTraveler": "451.77",
-      "flightSchedule": "2025-02-15T08:50:00 → 2025-02-15T18:15:00",
+      "totalDuration": "24H 10M",
+      "arrivalAirportCode": "BKK",
+      "totalPrice": "230.17",
+      "PricePerTraveler": "230.17",
+      "flightSchedule": "2025-02-15T20:50:00 → 2025-02-16T17:00:00",
       "stops": [
         {
-          "layoverTime": "1H 0M",
-          "arrivalAirport": "HKG"
+          "arrivalAirportCode": "TFU",
+          "layoverTime": "9H 40M",
+          "arrivalAirportName": "TIANFU INTERNATIONAL"
         },
         {
+          "arrivalAirportCode": "BKK",
           "layoverTime": "0H 0M",
-          "arrivalAirport": "BKK"
+          "arrivalAirportName": "SUVARNABHUMI INTL"
         }
       ],
-      "airline": "CX - CATHAY PACIFIC",
-      "arrivalAirport": "BKK",
-      "operatingAirline": "CX - CATHAY PACIFIC"
+      "airline": "3U - SICHUAN AIRLINES",
+      "departureAirportName": "NOT FOUND",
+      "departureAirportCode": "SYD",
+      "arrivalAirportName": "SUVARNABHUMI INTL",
+      "operatingAirline": "3U - SICHUAN AIRLINES"
     },
-    "id": "26"
+    "id": "2"
+
+  },
+  {
+    "generalData": {
+      "totalDuration": "28H 35M",
+      "arrivalAirportCode": "BKK",
+      "totalPrice": "381.61",
+      "PricePerTraveler": "381.61",
+      "flightSchedule": "2025-02-15T11:45:00 → 2025-02-16T12:20:00",
+      "stops": [
+        {
+          "arrivalAirportCode": "MNL",
+          "layoverTime": "16H 35M",
+          "arrivalAirportName": "NOT FOUND"
+        },
+        {
+          "arrivalAirportCode": "BKK",
+          "layoverTime": "0H 0M",
+          "arrivalAirportName": "SUVARNABHUMI INTL"
+        }
+      ],
+      "airline": "PR - PHILIPPINE AIRLINES",
+      "departureAirportName": "NOT FOUND",
+      "departureAirportCode": "SYD",
+      "arrivalAirportName": "SUVARNABHUMI INTL",
+      "operatingAirline": "PR - PHILIPPINE AIRLINES"
+    },
+    "id": "16"
+ 
+  },
+  {
+    "generalData": {
+      "totalDuration": "24H 10M",
+      "arrivalAirportCode": "BKK",
+      "totalPrice": "230.17",
+      "PricePerTraveler": "230.17",
+      "flightSchedule": "2025-02-15T20:50:00 → 2025-02-16T17:00:00",
+      "stops": [
+        {
+          "arrivalAirportCode": "TFU",
+          "layoverTime": "9H 40M",
+          "arrivalAirportName": "TIANFU INTERNATIONAL"
+        },
+        {
+          "arrivalAirportCode": "BKK",
+          "layoverTime": "0H 0M",
+          "arrivalAirportName": "SUVARNABHUMI INTL"
+        }
+      ],
+      "airline": "3U - SICHUAN AIRLINES",
+      "departureAirportName": "NOT FOUND",
+      "departureAirportCode": "SYD",
+      "arrivalAirportName": "SUVARNABHUMI INTL",
+      "operatingAirline": "3U - SICHUAN AIRLINES"
+    },
+    "id": "3"
+
+  },
+  {
+    "generalData": {
+      "totalDuration": "28H 35M",
+      "arrivalAirportCode": "BKK",
+      "totalPrice": "381.61",
+      "PricePerTraveler": "381.61",
+      "flightSchedule": "2025-02-15T11:45:00 → 2025-02-16T12:20:00",
+      "stops": [
+        {
+          "arrivalAirportCode": "MNL",
+          "layoverTime": "16H 35M",
+          "arrivalAirportName": "NOT FOUND"
+        },
+        {
+          "arrivalAirportCode": "BKK",
+          "layoverTime": "0H 0M",
+          "arrivalAirportName": "SUVARNABHUMI INTL"
+        }
+      ],
+      "airline": "PR - PHILIPPINE AIRLINES",
+      "departureAirportName": "NOT FOUND",
+      "departureAirportCode": "SYD",
+      "arrivalAirportName": "SUVARNABHUMI INTL",
+      "operatingAirline": "PR - PHILIPPINE AIRLINES"
+    },
+    "id": "17"
+ 
   }
 ]

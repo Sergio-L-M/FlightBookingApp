@@ -17,15 +17,17 @@ export interface TravelerPrices{
   travelerId:string ;
 }
 export interface Stop {
-  layoverTime:string ; arrivalAirport:string
+  layoverTime:string ; arrivalAirportName:string;arrivalAirportCode:string
 }
 export interface GeneralData {
   PricePerTraveler: string;
-  departureAirport: string;
+  departureAirportCode: string;
+  departureAirportName: string;
   totalDuration: string;
   flightSchedule: string;
   airline: string;
-  arrivalAirport: string;
+  arrivalAirportCode: string;
+  arrivalAirportName: string;
   operatingAirline: string;
   totalPrice: string;
   stops:Stop[]
@@ -34,7 +36,8 @@ export interface GeneralData {
 export interface Itinerary {
   segmentId: string;
   departureTime: string;
-  departureAirport: string;
+  departureAirportCode: string;
+  departureAirportName: string;
   aircraft: string;
   cabin: string;
   flightNumber: string;
@@ -43,7 +46,8 @@ export interface Itinerary {
   fareBasis: string;
   arrivalTime: string;
   airline: string;
-  arrivalAirport: string;
+  arrivalAirportCode: string;
+  arrivalAirportName: string;
   class: string;
   operatingAirline: string;
   amenities:  { [key: string]: Amenity[] };

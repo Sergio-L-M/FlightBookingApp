@@ -7,16 +7,18 @@ import { FlightItemCardData } from "../PropsFlight";
 import { formatFlightSchedule } from "../../utils/FormatDateeTime";
 import { appleTheme } from "../themes";
 import mockData from "../../mocks/itineraryMock.json";
-const development = false
+import AirportNameCode from "./AirportNameCode";
+import { developmentCard } from "../../globalConstants";
+import { useSearch } from "../flightSearch/searchContext";
 const FlightCard = ({ generalData, id}: FlightItemCardData) => {
-  const { setLoading, openModal, selectedKey, setSelectedKey, setSelectedFlight, selectedFlight } = useFlight();
-
+  const { setLoading, openModal, setSelectedFlight } = useFlight();
+  const {selectedKey} = useSearch();
   const handleFlightClick =async  () => {
     
 
     let apiUrl ;
     setSelectedFlight(mockData);
-    if (development) {
+    if (developmentCard) {
       console.log("🛠️ Modo Testing: Usando datos mock.");
       setLoading(true);
       setSelectedFlight(mockData);
@@ -67,8 +69,8 @@ const FlightCard = ({ generalData, id}: FlightItemCardData) => {
           <strong>{formatFlightSchedule(generalData.flightSchedule)}</strong>
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            <strong>{generalData.departureAirport} </strong> →{" "}
-            <strong>{generalData.arrivalAirport} </strong>
+            <strong>{generalData.departureAirportName}{" "}({generalData.departureAirportCode})</strong> →{" "}
+            <strong>{generalData.arrivalAirportName}{" "}({generalData.arrivalAirportCode}) </strong>
           </Typography>
           <Typography variant="body2"><p>Airline: {generalData.airline}</p> Operating Airline: {generalData.operatingAirline}</Typography>
         </Box>

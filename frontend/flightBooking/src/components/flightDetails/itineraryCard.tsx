@@ -45,14 +45,14 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
           <Typography variant="body1">
             {formatDateTime(itinerary.departureTime)}
           </Typography>
-          <Typography variant="h6">{itinerary.departureAirport}</Typography>
+          <Typography variant="body1">  <strong>{itinerary.departureAirportName} {" "}({itinerary.departureAirportCode})  </strong></Typography>
         </Box>
 
         <Box textAlign="center">
           <Typography variant="body1">
             {formatDateTime(itinerary.arrivalTime)}
           </Typography>
-          <Typography variant="h6">{itinerary.arrivalAirport}</Typography>
+          <Typography variant="body1">  <strong>{itinerary.arrivalAirportName} {" "} ({itinerary.arrivalAirportCode})  </strong></Typography>
         </Box>
       </Box>
 

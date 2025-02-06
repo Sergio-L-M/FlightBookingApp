@@ -4,7 +4,8 @@ import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import axios from "axios";
 import airportsMock from"../../mocks/airportsMock.json";
-const development = true;
+import { developmentSelector } from "../../globalConstants";
+
 interface AirportData {
   code: string;
   name: string;
@@ -25,7 +26,7 @@ const AirportSelector = ({ textLabel, onChange }: Props) => {
     if (inputValue.length > 0 && fetchAllowed) {
       const fetchAirports = async () => {
         try {
-          if (development) {
+          if (developmentSelector) {
             console.log("🛠️ Modo Testing: Usando datos mock de aeropuertos.");
             setOptions(airportsMock); // Usamos el JSON mock directamente
           } else {

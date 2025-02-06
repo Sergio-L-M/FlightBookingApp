@@ -30,8 +30,8 @@ const StopsList = ({ itineraries, id, totalDuration }: Props) => {
             </Typography>
           </span>
           <AirportNameCode
-            airportCode={itinerary.arrivalAirport}
-            airportName={itinerary.arrivalAirport}
+            airportCode={itinerary.arrivalAirportCode}
+            airportName={itinerary.arrivalAirportName}
           />
         </ListItem>
       ))}

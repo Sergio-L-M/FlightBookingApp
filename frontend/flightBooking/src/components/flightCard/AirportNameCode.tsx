@@ -1,4 +1,4 @@
-import { Chip } from "@mui/material";
+import { Chip, Typography } from "@mui/material";
 
 interface Props {
   airportName: string;
@@ -8,7 +8,7 @@ const AirportNameCode = ({ airportName, airportCode }: Props) => {
   return (
     
     <> 
-      {airportName} <Chip label={airportCode}></Chip>
+      <Typography variant="overline" gutterBottom sx={{ display: 'block' }}>{airportName}</Typography> <Chip label={airportCode}></Chip>
     </>
   );
 };

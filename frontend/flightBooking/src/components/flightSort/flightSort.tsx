@@ -37,12 +37,12 @@ const FlightSort = ({returnOrDeparture, stateHandler, oneWay, sortByHandler, upd
           
           onChange={handleChange}
         >
-          <MenuItem value="price-true">Cheapest Flight</MenuItem>
-          <MenuItem value="price-false">Most Expensive Flight</MenuItem>
+          <MenuItem value="cheapest">Cheapest Flight</MenuItem>
+          <MenuItem value="most_expensive">Most Expensive Flight</MenuItem>
 
           {/* 📌 Opciones de ordenamiento por duración */}
-          <MenuItem value="duration-true">Shortest Duration</MenuItem>
-          <MenuItem value="duration-false">Longest Duration</MenuItem>
+          <MenuItem value="shortest">Shortest Duration</MenuItem>
+          <MenuItem value="longest">Longest Duration</MenuItem>
         </Select>
       </FormControl>
       {oneWay ? "":       <Button  startIcon={ returnOrDeparture ?  <ArrowBackIosIcon/>:<ArrowForwardIosIcon />} variant="text" onClick={stateHandler} sx={{color:"white", marginTop:"10px",  float:"right", width:"20%"} }>

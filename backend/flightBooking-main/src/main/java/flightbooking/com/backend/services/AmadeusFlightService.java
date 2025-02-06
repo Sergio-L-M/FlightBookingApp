@@ -1,5 +1,6 @@
 package flightbooking.com.backend.services;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,6 @@ import flightbooking.com.backend.utils.AmadeusExtractGeneralData;
 import flightbooking.com.backend.utils.AmadeusExtractItineraries;
 import flightbooking.com.backend.utils.AmadeusExtractPrice;
 import flightbooking.com.backend.utils.SortFligths;
-import flightbooking.com.backend.services.AmadeusAirportService;
-import java.util.regex.*;
-import java.time.Duration;
 
 @Service
 public class AmadeusFlightService {
@@ -31,8 +29,9 @@ public class AmadeusFlightService {
     private final AmadeusExtractGeneralData amadeusExtractGeneralData;
     private final AmadeusExtractItineraries amadeusExtractItineraries;
     private final AmadeusExtractPrice amadeusExtractPrice;
-    private final SortFligths sortFlights;
-    private final AmadeusAirportService amadeusAirportService;
+    @Value("${flight.useMock}")
+    private boolean useMock;
+    
     private final String mockData;
    
 
@@ -46,17 +45,14 @@ public class AmadeusFlightService {
         this.authService = authService;
         this.amadeusExtractGeneralData = amadeusExtractGeneralData;
         this.amadeusExtractItineraries = amadeusExtractItineraries;
-        this.sortFlights = sortFlights;
         this.amadeusExtractPrice = amadeusExtractPrice;
-        this.amadeusAirportService = amadeusAirportService;
         this.mockData = loadMockFlightData();
     }
+
 
     public  Map<String, Map<String, Object>> searchFlights(
             String origin, String destination, String departureDate, String currency,
             int adults, boolean nonStop) {
-
-            boolean useMock = true; // Cambia esto para alternar entre mock y API real
 
             String responseBody;
             if (useMock) {
@@ -79,9 +75,6 @@ public class AmadeusFlightService {
                 responseBody = response.getBody(); // Llamada real a la API
             }
             Map<String, Map<String, Object>> flights = transformResponse(responseBody);
-        /*if (sortBy != null) {
-            flights = sortFlights.set(flights, sortBy, ascending);
-        }*/
 
         return flights;
     }
@@ -101,67 +94,21 @@ public class AmadeusFlightService {
                 Map<String, Object> priceData = amadeusExtractPrice.get(flight);
 
 
-                Map<String, Object> generalData = generalFlightData(itineraryData, priceData);
+                Map<String, Object> generalData = amadeusExtractGeneralData.extractGeneralData(itineraryData, priceData);
                 flightInfo.put("generalData", generalData);
                 flightInfo.put("itineraries", itineraryData);
                 flightInfo.put("pricing", priceData);
 
                 
-                flights.put(flightId, flightInfo); // Usar el ID como clave en el Map
+                flights.put(flightId, flightInfo); 
             }
             return flights;
     
         } catch (Exception e) {
             e.printStackTrace();
-            return Collections.emptyMap(); // Retornar un Map vacío en caso de error
+            return Collections.emptyMap(); 
         }
-    }
-    
-
-    private  Map<String, Object> generalFlightData(List<Map<String, Object>> data, Map<String, Object> priceData){
-        Map<String, Object> generalData = new HashMap<>();
-        Map<String, Object> departureFlight = data.get(0);
-        Map<String, Object> arrivalFlight = data.get(data.size()-1);
-        generalData.put("departureAirportCode", (String) departureFlight.get("departureAirportCode"));
-        generalData.put("departureAirportName", "");
-        generalData.put("arrivalAirportCode", (String) arrivalFlight.get("arrivalAirportCode"));
-        generalData.put("arrivalAirportName", "");
-        generalData.put("flightSchedule", 
-        (String) departureFlight.get("departureTime") 
-        + " → " + (String) arrivalFlight.get("arrivalTime"));
-
-        int totalMinutes = 0;
-        List<Map<String, String>> stops = new ArrayList<>();
-        for (Map<String, Object> segment : data) {
-            Map<String, String> stop = new HashMap<>();
-        
-            String layoverTimeStr = (String) segment.getOrDefault("layoverTime", "0H 0M");
-            String durationStr = (String) segment.getOrDefault("duration", "0H 0M");
-        
-            int layoverMinutes = parseTimeToMinutes(layoverTimeStr);
-            int durationMinutes = parseTimeToMinutes(durationStr);
-        
-            totalMinutes += layoverMinutes + durationMinutes; // ✅ Sumamos ambas duraciones
-        
-            stop.put("layoverTime", layoverTimeStr);
-            stop.put("arrivalAirport", (String) segment.get("arrivalAirport"));
-        
-            stops.add(stop);
-        }
-        String totalDurationFormatted = formatMinutesToHours(totalMinutes);
-        generalData.put("totalDuration", totalDurationFormatted);
-        generalData.put("stops", stops);
-        generalData.put("totalPrice", priceData.get("total"));
-        generalData.put("airline",(String)departureFlight.get("airline"));
-        generalData.put("operatingAirline",(String)departureFlight.get("operatingAirline"));
-        generalData.put("PricePerTraveler", priceData.get("pricePerTraveler"));
-
-        
-        return generalData;
-
-    }
-
-
+    } 
 
     private String loadMockFlightData() {
         try {
@@ -171,47 +118,8 @@ public class AmadeusFlightService {
             return objectMapper.writeValueAsString(mockRawData);
         } catch (IOException e) {
             e.printStackTrace();
-            return "{}"; // Retornar un JSON vacío en caso de error
+            return "{}";
         }
-    }
-
-    private String getAirportName(String iataCode) {
-        if ("N/A".equals(iataCode)) {
-            return "Unknown";
-        }
-
-        List<Map<String, String>> airportData = amadeusAirportService.searchAirports(iataCode);
-
-        // Busca el aeropuerto con el código IATA exacto
-        for (Map<String, String> airport : airportData) {
-            if (iataCode.equals(airport.get("code"))) {
-                return iataCode + " - " + airport.get("name");
-            }
-        }
-
-        return iataCode; // Si no se encuentra, solo devuelve el código IATA
-    }
-
-    private int parseTimeToMinutes(String timeStr) {
-        if (timeStr == null || timeStr.isEmpty()) return 0;
-    
-        Pattern pattern = Pattern.compile("(\\d+)H\\s*(\\d+)?M?");
-        Matcher matcher = pattern.matcher(timeStr);
-    
-        int hours = 0, minutes = 0;
-        if (matcher.find()) {
-            hours = Integer.parseInt(matcher.group(1));
-            if (matcher.group(2) != null) {
-                minutes = Integer.parseInt(matcher.group(2));
-            }
-        }
-        return (hours * 60) + minutes;
-    }
-    private String formatMinutesToHours(int totalMinutes) {
-        int hours = totalMinutes / 60;
-        int minutes = totalMinutes % 60;
-        return String.format("%dH %dM", hours, minutes);
-    }
-        
+    }    
     
 }

@@ -1,79 +1,68 @@
-// src/pages/SearchPage.tsx
-import React, { useState } from 'react';
-import { Box, Container } from '@mui/material';
+import React from 'react';
+import { Box, Container, Pagination, CircularProgress } from '@mui/material';
 import { motion } from 'framer-motion';
 import FlightSearch from '../components/flightSearch/flightSearch';
 import FlightDetails from '../components/flightDetails/flightDetails';
 import FlightCard from '../components/flightCard/FlightCard';
-import { FlightProvider } from '../components/flightCard/flightContext';
+import { useSearch } from '../components/flightSearch/searchContext';
 import { FlightItemCardData } from '../components/PropsFlight';
 
-interface Props{
-    initialDepartureFlights: FlightItemCardData[];
-}
-const SearchPage = ({initialDepartureFlights= []}: Props) => {
-  const [departureFlights, setDepartureFlights] = useState<FlightItemCardData[]>(initialDepartureFlights);
-  const [searchingFlights, setSearchingFlights] = useState(false);
+const SearchPage = () => {
+  const {
+    departureFlights,
+    setCurrentPage,
+    currentPage,
+    loading,
+    setLoading,
+    handleSearchingFlights,
+    handleSearch
+  } = useSearch();
+
+
+  const SearchFlights= async () => {
+    setLoading(true);
+    handleSearchingFlights(true);
+    // Simulación de búsqueda con timeout
+    await handleSearch();
+    setTimeout(() => {
+      setLoading(false);
+      handleSearchingFlights(false);
+    }, 1000);
+  };
+
+  const handlePageChange = async (_event: React.ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
+    await SearchFlights();
+  };
 
   return (
     <Box sx={{ backgroundColor: 'rgb(242, 242, 247)', minHeight: '100vh' }}>
-      {/* Barra de búsqueda sticky con animación */}
-      <Box
-        component={motion.div}
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1 }}
-        sx={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 10,
-          backgroundColor: 'rgba(242, 242, 247, 0.8)',
-          padding: 2,
-          boxShadow: 'none',
-          borderBottom: 'none',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
-        }}
-      >
+      <Box component={motion.div} initial={{ y: -100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} sx={{ position: 'sticky', top: 0, zIndex: 10, backgroundColor: 'rgba(242, 242, 247, 0.8)', padding: 2, boxShadow: 'none', borderBottom: 'none', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', }}>
         <Container>
-          <FlightSearch
-            handleSearchingFlights={setSearchingFlights}
-            setFlights={setDepartureFlights}
-          />
+          <FlightSearch handleSearch={SearchFlights} />
         </Container>
       </Box>
-
-      {/* Cargando... si searchingFlights está activo */}
-      {searchingFlights ? (
-        <Box sx={{ textAlign: 'center', padding: 4 }}>Cargando...</Box>
+      {loading ? (
+        <Box sx={{ textAlign: 'center', padding: 4 }}><CircularProgress /></Box>
       ) : (
         <div>
-          {/* Animación de las tarjetas de vuelos */}
-          <Box
-            component={motion.div}
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-            sx={{
-              overflowY: 'auto',
-              height: 500,
-              pt: 2,
-              pb: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 2,
-              mt: 4,
-            }}
-          >
-            {departureFlights.map((flight) => (
+          <Box component={motion.div} initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} sx={{ overflowY: 'auto', height: 500, pt: 2, pb: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mt: 4, }}>
+            {departureFlights.map((flight: FlightItemCardData) => (
               <Box key={flight.id} sx={{ width: '80%' }}>
                 <FlightCard {...flight} />
               </Box>
             ))}
             <FlightDetails />
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2, pb: 4 }}>
+            <Pagination 
+              count={10} 
+              page={currentPage} 
+              onChange={handlePageChange} 
+              color="primary" 
+            />
           </Box>
-          
+          </Box>
+
         </div>
       )}
     </Box>
