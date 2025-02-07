@@ -91,15 +91,23 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
               apiUrl = `http://localhost:8080/api/flights?origin=${origin}&destination=${destination}`+
               (formattedArrival ? `&departureDate=${formattedArrival}` : "") +
               `&currency=${currency}&adults=${adults}&nonStop=false&page=${currentPage}`;
+              if (formattedArrival !== ""){
+                setSelectedKey(`${origin}-${destination}-${formattedArrival}-${currency}-false-${adults}`);
+              }
+              
               console.log("ida");
            
             } else {
-              const formattedDepartureDate = departureDate ? departureDate.format("YYYY-MM-DD") : "";
-  
-              apiUrl = `http://localhost:8080/api/flights?origin=${destination}&destination=${origin}` +
-                  (formattedDepartureDate ? `&departureDate=${formattedDepartureDate}` : "") +
-                  `&currency=${currency}&adults=${adults}&nonStop=false&page=${currentPage}`;
-                  console.log("regreso")
+                const formattedDepartureDate = departureDate ? departureDate.format("YYYY-MM-DD") : "";
+    
+                apiUrl = `http://localhost:8080/api/flights?origin=${destination}&destination=${origin}` +
+                    (formattedDepartureDate ? `&departureDate=${formattedDepartureDate}` : "") +
+                    `&currency=${currency}&adults=${adults}&nonStop=false&page=${currentPage}`;
+                    setSelectedKey(`${origin}-${destination}-${departureDate.format("YYYY-MM-DD")}-${currency}-false-${adults}`);
+                if (formattedDepartureDate !== ""){
+                  setSelectedKey(`${origin}-${destination}-${formattedDepartureDate}-${currency}-false-${adults}`);
+                }
+                console.log("regreso")
           }
         
         if (sortBy !== null) {
@@ -116,11 +124,12 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
               setChangeLandingPage(true);
             }
         }
-    } catch (error) {
-        console.error("Error en handleSearch:", error);
+    } catch (e) {
+        console.error("Error en handleSearch:", e);
         setError("❌ Error inesperado en la búsqueda.");
+        console.log(error);
     } finally {
-        setSelectedKey(`${origin}-${destination}-${departureDate.format("YYYY-MM-DD")}-${currency}-false-${adults}`);
+        
         console.log(selectedKey);
         setLoading(false);
     }

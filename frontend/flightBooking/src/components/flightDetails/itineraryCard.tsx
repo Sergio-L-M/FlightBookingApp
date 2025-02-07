@@ -10,7 +10,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Itinerary } from "../PropsFlight";
 import AmenitiesDetails from "./amenitiesDetails";
-import { formatDuration, formatDateTime } from "../../utils/FormatDateeTime";
+import { formatDateTime } from "../../utils/FormatDateeTime";
 
 interface ItineraryProps {
   itinerary: Itinerary;

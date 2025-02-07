@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  backend:
+    build: 
+      context: ./backend/flightBooking-main
+    ports:
+      - "8080:8080"  # Backend sigue corriendo en el puerto 8080
+    container_name: backend-container
+    networks:
+      - flightbooking-network
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # Permite comunicación con el host
+
+  frontend:
+    build: 
+      context: ./frontend/FlightBooking
+    ports:
+      - "5173:80"  # Frontend sigue corriendo en el puerto 5173
+    container_name: frontend-container
+    depends_on:
+      - backend
+    networks:
+      - flightbooking-network
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8080/api/flights # Mantiene la conexión con el backend
+
+networks:
+  flightbooking-network:
+    driver: bridge

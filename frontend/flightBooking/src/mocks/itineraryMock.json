@@ -5,6 +5,7 @@
     "totalPrice": "381.61",
     "PricePerTraveler": "381.61",
     "flightSchedule": "2025-02-15T11:45:00 → 2025-02-16T12:20:00",
+    "currency": "MXN",
     "stops": [
       {
         "arrivalAirportCode": "MNL",

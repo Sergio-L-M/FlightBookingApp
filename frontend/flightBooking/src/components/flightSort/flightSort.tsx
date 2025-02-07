@@ -10,7 +10,7 @@ import {
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useSearch } from "../flightSearch/searchContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface Props {
   oneWay: boolean;

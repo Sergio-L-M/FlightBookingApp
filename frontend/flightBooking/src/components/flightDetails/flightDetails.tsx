@@ -1,7 +1,6 @@
 import { ThemeProvider } from "@mui/material/styles";
 import {
   Dialog,
-  DialogTitle,
   DialogContent,
   Box,
   Typography,

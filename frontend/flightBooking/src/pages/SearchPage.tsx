@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Container, Pagination, CircularProgress } from '@mui/material';
 import { motion } from 'framer-motion';
 import FlightSearch from '../components/flightSearch/flightSearch';
@@ -19,11 +19,10 @@ const SearchPage = () => {
     totalPages
   } = useSearch();
 
-
-  const SearchFlights= async () => {
+  // Función para buscar vuelos
+  const SearchFlights = async () => {
     setLoading(true);
     handleSearchingFlights(true);
-    // Simulación de búsqueda con timeout
     await handleSearch();
     setTimeout(() => {
       setLoading(false);
@@ -31,23 +30,63 @@ const SearchPage = () => {
     }, 1000);
   };
 
-  const handlePageChange = async (_event: React.ChangeEvent<unknown>, value: number) => {
+  // Manejador de cambio de página: solo actualiza el estado
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
-    await SearchFlights();
   };
+
+  // Llama a SearchFlights() cuando currentPage cambia
+  useEffect(() => {
+    SearchFlights();
+  }, [currentPage]);
 
   return (
     <Box sx={{ backgroundColor: 'rgb(242, 242, 247)', minHeight: '100vh' }}>
-      <Box component={motion.div} initial={{ y: -100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} sx={{ position: 'sticky', top: 0, zIndex: 10, backgroundColor: 'rgba(242, 242, 247, 0.8)', padding: 2, boxShadow: 'none', borderBottom: 'none', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', }}>
+      <Box
+        component={motion.div}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1 }}
+        sx={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 10,
+          backgroundColor: 'rgba(242, 242, 247, 0.8)',
+          padding: 2,
+          boxShadow: 'none',
+          borderBottom: 'none',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+        }}
+      >
         <Container>
           <FlightSearch handleSearch={SearchFlights} />
         </Container>
       </Box>
+
       {loading ? (
-        <Box sx={{ textAlign: 'center', padding: 4 }}><CircularProgress /></Box>
+        <Box sx={{ textAlign: 'center', padding: 4 }}>
+          <CircularProgress />
+        </Box>
       ) : (
         <div>
-          <Box component={motion.div} initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} sx={{ overflowY: 'auto', height: 500, pt: 2, pb: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mt: 4, }}>
+          <Box
+            component={motion.div}
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            sx={{
+              overflowY: 'auto',
+              height: 500,
+              pt: 2,
+              pb: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 2,
+              mt: 4,
+            }}
+          >
             {departureFlights.map((flight: FlightItemCardData) => (
               <Box key={flight.id} sx={{ width: '80%' }}>
                 <FlightCard {...flight} />
@@ -55,15 +94,14 @@ const SearchPage = () => {
             ))}
             <FlightDetails />
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2, pb: 4 }}>
-            <Pagination 
-              count={totalPages} 
-              page={currentPage} 
-              onChange={handlePageChange} 
-              color="primary" 
-            />
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+              />
+            </Box>
           </Box>
-          </Box>
-
         </div>
       )}
     </Box>

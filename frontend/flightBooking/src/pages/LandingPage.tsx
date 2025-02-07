@@ -1,13 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import FlightSearch from '../components/flightSearch/flightSearch';
-import React, { useState } from "react";
-import dayjs, { Dayjs } from "dayjs";
-import axios from "axios";
-import { FlightItemCardData } from '../components/PropsFlight';
-import { useFlight } from "../components/flightCard/flightContext";
-import flightsMock from "../mocks/validMockData.json";
-import { developmentSearch } from '../globalConstants';
 import { useSearch} from '../components/flightSearch/searchContext';
 interface LandingPageProps {
   onSearch: (state: boolean) => void;

@@ -1,7 +1,7 @@
-import React from "react";
+
 import { Box, Typography, Paper, Divider } from "@mui/material";
 import { useFlight } from "../flightCard/flightContext";
-
+import { formatNumberWithCommas } from "../FormatCurrency";
 export const PriceDetails = () => {
   const { selectedFlight } = useFlight();
   const priceDetailsData = selectedFlight?.pricing;
@@ -11,7 +11,7 @@ export const PriceDetails = () => {
     return null;
   }
 
-  const { total, fees, travelerPrices, pricePerTraveler, grandTotal, currency, base } = priceDetailsData;
+  const { total, fees, travelerPrices, grandTotal, currency, base } = priceDetailsData;
 
   return (
     <Paper sx={{ p: 2 }}>
@@ -23,13 +23,13 @@ export const PriceDetails = () => {
       {/* Sección de precios generales */}
       <Box sx={{ mb: 2 }}>
         <Typography variant="body1" component="div">
-          <strong>Total:</strong> {total} {currency}
+          <strong>Total:</strong> {formatNumberWithCommas(total)} {currency}
         </Typography>
         <Typography variant="body1" component="div">
-          <strong>Base:</strong> {base} {currency}
+          <strong>Base:</strong> {formatNumberWithCommas(base)} {currency}
         </Typography>
         <Typography variant="body1" component="div">
-          <strong>Grand Total:</strong> {grandTotal} {currency}
+          <strong>Grand Total:</strong> {formatNumberWithCommas(grandTotal)} {currency}
         </Typography>
       </Box>
 
@@ -44,7 +44,7 @@ export const PriceDetails = () => {
         {fees.map((fee, index) => (
           <Box key={index} sx={{ ml: 2 }}>
             <Typography variant="body2" component="div">
-              {fee.type}: {fee.amount} {currency}
+              {fee.type}: {formatNumberWithCommas(fee.amount)} {currency}
             </Typography>
           </Box>
         ))}
@@ -67,10 +67,10 @@ export const PriceDetails = () => {
               <strong>Fare Option:</strong> {traveler.fareOption}
             </Typography>
             <Typography variant="body2" component="div">
-              <strong>Base:</strong> {traveler.price.base} {traveler.price.currency}
+              <strong>Base:</strong> {formatNumberWithCommas(traveler.price.base)} {traveler.price.currency}
             </Typography>
             <Typography variant="body2" component="div">
-              <strong>Total:</strong> {traveler.price.total} {traveler.price.currency}
+              <strong>Total:</strong> {formatNumberWithCommas(traveler.price.total)} {traveler.price.currency}
             </Typography>
           </Box>
         ))}

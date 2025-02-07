@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import dayjs, { Dayjs } from "dayjs";
+import  { useState, useEffect } from "react";
+
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -32,8 +32,6 @@ const FlightSearch = ({ handleSearch }: {  handleSearch: () => Promise<void>; })
     setAdults,
     setOneWay,
     oneWay,
-    origin,
-    destination,
     currency,
     adults,
     loading,

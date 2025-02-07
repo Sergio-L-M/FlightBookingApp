@@ -7,9 +7,10 @@ import { FlightItemCardData } from "../PropsFlight";
 import { formatFlightSchedule } from "../../utils/FormatDateeTime";
 import { appleTheme } from "../themes";
 import mockData from "../../mocks/itineraryMock.json";
-import AirportNameCode from "./AirportNameCode";
+//import AirportNameCode from "./AirportNameCode";
 import { developmentCard } from "../../globalConstants";
 import { useSearch } from "../flightSearch/searchContext";
+import { formatNumberWithCommas } from "../FormatCurrency";
 const FlightCard = ({ generalData, id}: FlightItemCardData) => {
   const { setLoading, openModal, setSelectedFlight } = useFlight();
   const {selectedKey} = useSearch();
@@ -94,11 +95,11 @@ const FlightCard = ({ generalData, id}: FlightItemCardData) => {
           }}
         >
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
-            {generalData.totalPrice}
+            {formatNumberWithCommas(generalData.totalPrice)}{" "}{generalData.currency}
           </Typography>
           <Typography variant="body2">Total</Typography>
           <Typography variant="h6" sx={{ fontWeight: 600, mt: 1 }}>
-            {generalData.PricePerTraveler}
+            {formatNumberWithCommas(generalData.PricePerTraveler)}{" "}{generalData.currency}
           </Typography>
           <Typography variant="body2">Per Traveler</Typography>
         </Box>
