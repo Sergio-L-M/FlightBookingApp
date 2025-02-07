@@ -84,9 +84,9 @@ The application is built with **React (Vite) + TypeScript** on the frontend and 
 ### Flight Search
 - `GET /api/flights` - Retrieve a list of flight options based on query parameters.
 ### Airport Search
-- `GET /api/airports` - Fetch airport details for autocomplete.
+- `GET /api/airports?keyword=` - Fetch airport details for autocomplete.
 ### Flight Details
-- `GET /api/flights/:id` - Retrieve detailed flight itinerary.
+- `GET /api/:key/:id` - Retrieve detailed flight itinerary.
 
 ## Technologies Used
 - **Frontend**: React (Vite), TypeScript, React Context API, Material-UI
