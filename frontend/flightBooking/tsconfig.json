@@ -3,5 +3,19 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",  // 👈 Se agregó para corregir el error
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "types": ["vitest"]  // 👈 Mantiene compatibilidad con Vitest
+  },
+  "include": ["src", "tests", "tests/setup.ts"]
+,
+  "exclude": ["node_modules", "dist"]
 }

@@ -51,8 +51,10 @@ const FlightCard = ({ generalData, id}: FlightItemCardData) => {
       <Paper
       
         onClick={handleFlightClick}
+        data-testid="flight-card" 
         sx={{
           // Ajustamos la disposición a columnas en móvil y a filas en pantallas medianas o más
+          
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: "flex-start",
@@ -66,14 +68,14 @@ const FlightCard = ({ generalData, id}: FlightItemCardData) => {
       >
         {/* Bloque Izquierdo */}
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Typography variant="body1" color="text.primary">
+          <Typography variant="body1" color="text.primary" data-testid="flight-schedule">
           <strong>{formatFlightSchedule(generalData.flightSchedule)}</strong>
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" data-testid="flight-route">
             <strong>{generalData.departureAirportName}{" "}({generalData.departureAirportCode})</strong> →{" "}
             <strong>{generalData.arrivalAirportName}{" "}({generalData.arrivalAirportCode}) </strong>
           </Typography>
-          <Typography variant="body2"><p>Airline: {generalData.airline}</p> Operating Airline: {generalData.operatingAirline}</Typography>
+          <Typography variant="body2" data-testid="flight-airline"><p>Airline: {generalData.airline}</p> Operating Airline: {generalData.operatingAirline}</Typography>
         </Box>
         {/* Bloque Central */}
         <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -94,11 +96,11 @@ const FlightCard = ({ generalData, id}: FlightItemCardData) => {
             alignSelf: { xs: "stretch", md: "center" }, // Para que en móvil ocupe todo el ancho
           }}
         >
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          <Typography variant="h6" sx={{ fontWeight: 600 }}  data-testid="flight-total-price">
             {formatNumberWithCommas(generalData.totalPrice)}{" "}{generalData.currency}
           </Typography>
           <Typography variant="body2">Total</Typography>
-          <Typography variant="h6" sx={{ fontWeight: 600, mt: 1 }}>
+          <Typography variant="h6" sx={{ fontWeight: 600, mt: 1 }} data-testid="flight-price-per-traveler">
             {formatNumberWithCommas(generalData.PricePerTraveler)}{" "}{generalData.currency}
           </Typography>
           <Typography variant="body2">Per Traveler</Typography>
