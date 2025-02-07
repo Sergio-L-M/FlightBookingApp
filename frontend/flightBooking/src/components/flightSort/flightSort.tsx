@@ -29,7 +29,6 @@ const FlightSort = ({ updateHandler }: Props) => {
     setReturnOrDeparture
   } = useSearch();
 
-  // Manejo del cambio en el select
   const handleChange = (event: SelectChangeEvent) => {
     setSortBy(event.target.value as string);
     

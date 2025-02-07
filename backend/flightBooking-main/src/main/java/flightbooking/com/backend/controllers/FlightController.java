@@ -39,8 +39,6 @@ public class FlightController {
             @RequestParam(required = false, defaultValue = "true") boolean ascending,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "5") int size) {
-    
-        // Llamar a FlightService con todos los parámetros requeridos
         return flightService.getFlights(
                 origin, destination, departureDate, currency, nonStop, adults,
                 sortBy, ascending, page, size, amadeusFlightService, airportService

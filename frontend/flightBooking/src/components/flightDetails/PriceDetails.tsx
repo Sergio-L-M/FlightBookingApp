@@ -3,10 +3,9 @@ import { Box, Typography, Paper, Divider } from "@mui/material";
 import { useFlight } from "../flightCard/flightContext";
 import { formatNumberWithCommas } from "../FormatCurrency";
 export const PriceDetails = () => {
+  
   const { selectedFlight } = useFlight();
   const priceDetailsData = selectedFlight?.pricing;
-
-  // Si no hay información de precios, no renderizamos nada
   if (!priceDetailsData) {
     return null;
   }

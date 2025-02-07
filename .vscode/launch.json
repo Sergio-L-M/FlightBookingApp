@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "GenerateValidMockData",
+            "request": "launch",
+            "mainClass": "flightbooking.com.backend.GenerateValidMockData",
+            "projectName": "flightBooking-main"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-BackendApplication<flightBooking-main>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

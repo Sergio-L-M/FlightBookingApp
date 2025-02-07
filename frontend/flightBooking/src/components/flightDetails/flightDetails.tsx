@@ -13,8 +13,6 @@ import { PriceDetails } from "./PriceDetails";
 
 const FlightDetails = () => {
   const { selectedFlight, isModalOpen, closeModal } = useFlight();
-
-  // Validación por si no hay datos
   if (!selectedFlight?.generalData || !selectedFlight?.itineraries) {
     return (
       <Typography sx={{ padding: 2, color: "#555" }}>
@@ -37,23 +35,19 @@ const FlightDetails = () => {
         }}
         PaperProps={{
           style: {
-            backgroundColor: "transparent", // Fondo transparente
+            backgroundColor: "transparent", 
             boxShadow: "none",
           },
         }}
       >
         <DialogContent>
-          {/** 
-           * Contenedor principal en "fila" que 'estira' (stretch) la altura 
-           * de ambas columnas/papers para que tengan la misma altura.
-           */}
           <Box
             sx={{
               display: "flex",
               flexDirection: "row",
               gap: 2,
-              alignItems: "stretch",  // Hace que ambos Paper tengan la misma altura
-              height: "65vh",         // Altura total deseada; cada Paper se ajustará
+              alignItems: "stretch",  
+              height: "65vh",        
             }}
           >
             {/* 1. Carta de Itinerarios con scroll */}
@@ -64,13 +58,9 @@ const FlightDetails = () => {
                 flexDirection: "column",
                 p: 4,
                 backgroundColor: "rgb(242, 242, 247)",
-                overflowY: "auto",      // Activar scroll si sobrepasa la altura
+                overflowY: "auto",      
               }}
             >
-              {/**
-               * Para alinear el título horizontalmente en el centro
-               * dentro de su propia "card":
-               */}
               <Typography
                 variant="h6"
                 sx={{
@@ -98,7 +88,7 @@ const FlightDetails = () => {
                 p: 4,
                 backgroundColor: "rgb(242, 242, 247)",
                 justifyContent: "flex-start",
-                alignItems: "center", // Centra horizontalmente el contenido
+                alignItems: "center",
                 overflowY: "auto", 
               }}
             >

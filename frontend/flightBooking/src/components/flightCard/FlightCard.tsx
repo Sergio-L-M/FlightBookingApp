@@ -53,8 +53,6 @@ const FlightCard = ({ generalData, id}: FlightItemCardData) => {
         onClick={handleFlightClick}
         data-testid="flight-card" 
         sx={{
-          // Ajustamos la disposición a columnas en móvil y a filas en pantallas medianas o más
-          
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: "flex-start",
@@ -79,8 +77,6 @@ const FlightCard = ({ generalData, id}: FlightItemCardData) => {
         </Box>
         {/* Bloque Central */}
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-          {/* Si quieres mostrar la duración, agrégala aquí */}
-      
           <Box>
             <StopsList itineraries={generalData.stops} id={id} totalDuration={generalData.totalDuration} />
           </Box>
@@ -93,7 +89,7 @@ const FlightCard = ({ generalData, id}: FlightItemCardData) => {
             backgroundColor: "rgba(28, 28, 30, 0.05)",
             borderRadius: 2,
             p: 2,
-            alignSelf: { xs: "stretch", md: "center" }, // Para que en móvil ocupe todo el ancho
+            alignSelf: { xs: "stretch", md: "center" }, 
           }}
         >
           <Typography variant="h6" sx={{ fontWeight: 600 }}  data-testid="flight-total-price">

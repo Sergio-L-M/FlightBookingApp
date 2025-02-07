@@ -50,7 +50,6 @@ public class AmadeusExtractItineraries {
                 segmentInfo.put("operatingAirline", operatingName.isEmpty() ? operatingCode : operatingCode + " - " + operatingName);
             }
 
-            // ✅ Convertimos `duration` a "XH YM"
             String durationString = segment.get("duration").asText();
             Duration segmentDuration = parseDuration(durationString);
             String formattedDuration = formatDuration(segmentDuration);
@@ -90,7 +89,6 @@ public class AmadeusExtractItineraries {
             itineraryDetails.add(segmentInfo);
         }
 
-        // ✅ Convertimos `totalDuration` a "XH YM"
         String formattedTotalDuration = formatDuration(totalDuration);
 
         Map<String, Object> result = new HashMap<>();
@@ -100,12 +98,10 @@ public class AmadeusExtractItineraries {
         return itineraryDetails;
     }
 
-    // ✅ Convierte `PT11H10M` a `XH YM`
     private String formatDuration(Duration duration) {
         return String.format("%dH %dM", duration.toHours(), duration.toMinutesPart());
     }
 
-    // ✅ Calcula el tiempo de espera entre vuelos
     private String calculateLayoverTime(String arrivalTime, String nextDepartureTime) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
