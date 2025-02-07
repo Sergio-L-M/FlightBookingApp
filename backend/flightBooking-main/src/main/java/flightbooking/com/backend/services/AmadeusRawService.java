@@ -36,6 +36,6 @@ public class AmadeusRawService {
         HttpEntity<String> request = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class);
 
-        return response.getBody(); // 📌 Devuelve la respuesta original de Amadeus
+        return response.getBody(); 
     }
 }

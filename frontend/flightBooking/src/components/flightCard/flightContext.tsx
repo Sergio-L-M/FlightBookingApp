@@ -17,10 +17,8 @@ interface FlightContextType {
   setSelectedKey:(key: string) => void;
 }
 
-// Crear el contexto
-const FlightContext = createContext<FlightContextType | undefined>(undefined);
 
-// Proveedor del contexto
+const FlightContext = createContext<FlightContextType | undefined>(undefined);
 export const FlightProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
@@ -53,7 +51,6 @@ export const FlightProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-// Hook personalizado para usar el contexto
 export const useFlight = () => {
   const context = useContext(FlightContext);
   if (!context) {

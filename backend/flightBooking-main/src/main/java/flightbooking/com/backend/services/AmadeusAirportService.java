@@ -17,11 +17,7 @@ public class AmadeusAirportService {
     private static final String AIRPORT_SEARCH_URL = "https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT&keyword=%s";
     private final RestTemplate restTemplate;
     private final AmadeusAuthService authService;
-
-    // Caché en memoria sin expiración
     private final Map<String, String> airportCache = new ConcurrentHashMap<>();
-
-    // Cooldown para evitar rechazo de API (500ms entre solicitudes)
     private static final long COOLDOWN_TIME_MS = 500;
     private long lastRequestTime = 0;
 

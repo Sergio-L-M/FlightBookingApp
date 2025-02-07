@@ -1,31 +1,20 @@
 // themeApple.ts
 import { createTheme } from "@mui/material/styles";
 
-// Basado en la guía de colores de Apple (ejemplo simplificado):
-// https://developer.apple.com/design/human-interface-guidelines/foundations/color/
-
 export const appleTheme = createTheme({
   palette: {
     background: {
-      // Color de fondo principal
       default: "#F5F5F7",
-      // Color de "Paper" o contenedores
-      
     },
     text: {
-      // Texto principal
       primary: "#1C1C1E",
-      // Texto secundario
       secondary: "#2C2C2E",
     },
-    // Puedes agregar más colores si lo requieres
   },
   shape: {
-    // Bordes redondeados más pronunciados
     borderRadius: 16,
   },
   typography: {
-    // Uso de tipografías similares a las de Apple
     fontFamily: [
       "-apple-system",
       "BlinkMacSystemFont",
@@ -36,7 +25,6 @@ export const appleTheme = createTheme({
       "Arial",
       "sans-serif",
     ].join(","),
-    // Puedes personalizar distintos niveles tipográficos
     h6: {
       fontWeight: 600,
     },
@@ -71,7 +59,6 @@ export const appleTheme = createTheme({
             borderRadius: 16,
             backgroundColor: "rgba(28, 28, 30, 0.05)", 
             "& fieldset": { border: "none" }, 
-            // Bordes redondeados para TextField
           },
           
         },
@@ -79,7 +66,7 @@ export const appleTheme = createTheme({
       MuiSelect: {
         styleOverrides: {
           root: {
-            borderRadius: 16, // Bordes redondeados para Select
+            borderRadius: 16,
             backgroundColor: "rgba(28, 28, 30, 0.05)",
             "& fieldset": { border: "none" }, 
           },

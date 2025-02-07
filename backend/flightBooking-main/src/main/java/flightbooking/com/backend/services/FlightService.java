@@ -14,9 +14,7 @@ import org.springframework.http.HttpStatus;
 
 @Service
 public class FlightService {
-    // Base de datos en memoria (caché)
     private final Map<String, Map<String, Map<String, Object>>> flightCache = new ConcurrentHashMap<>();
-
     public Map<String, Object> getFlights(
         String origin, String destination, String departureDate, String currency,
         boolean nonStop, int adults, String sortBy, boolean ascending, int page, int size,
@@ -34,20 +32,14 @@ public class FlightService {
             flights = convertToList(response);
         }
     
-        // Ordenar la lista de vuelos
         List<Map<String, Object>> sortedFlights = sortFlights(flights, sortBy);
     
-        // Calcular el total de páginas
         int totalFlights = sortedFlights.size();
         int totalPages = (int) Math.ceil((double) totalFlights / size);
     
-        // Paginar la lista de vuelos
         List<Map<String, Object>> paginatedFlights = paginateList(sortedFlights, page, size);
-    
-        // Agregar nombres de aeropuertos
         addAirportNamesToFlights(cacheKey, paginatedFlights, airportService);
     
-        // Crear el resultado final
         Map<String, Object> result = new HashMap<>();
         result.put("totalPages", totalPages);
         result.put("flights", filterFlights(paginatedFlights));
@@ -113,7 +105,7 @@ public class FlightService {
             if (itineraries != null) {
                 for (Map<String, Object> itinerary : itineraries) {
                     Map<String, String> stop = new HashMap<>();
-                    //System.out.println("Iterando sobre itinerarios: " + flight.get("itineraries"));
+                    
                     updateAirportName(itinerary, "departureAirportCode", "departureAirportName", airportService);
                     updateAirportName(itinerary, "arrivalAirportCode", "arrivalAirportName", airportService);
                     String layoverTimeStr = (String) itinerary.getOrDefault("layoverTime", "0H 0M");

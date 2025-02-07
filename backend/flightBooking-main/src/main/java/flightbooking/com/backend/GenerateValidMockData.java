@@ -22,17 +22,12 @@ public class GenerateValidMockData {
 
     public static void main(String[] args) {
         try {
-            // ✅ Crear instancia del ObjectMapper para manejar JSON
-            ObjectMapper objectMapper = new ObjectMapper();
 
-            // ✅ Cargar el archivo mockData.json
+
+            ObjectMapper objectMapper = new ObjectMapper();
             File mockFile = new File("src/test/resources/mockData.json");
             JsonNode mockRawData = objectMapper.readTree(mockFile);
-
-            // ✅ Convertir el JSON a String para simular una respuesta de la API de Amadeus
             String mockJsonString = objectMapper.writeValueAsString(mockRawData);
-
-            // ✅ Crear instancias de los servicios necesarios
             ApplicationContext context = new AnnotationConfigApplicationContext("flightbooking.com.backend");
             AmadeusExtractGeneralData generalDataService = context.getBean(AmadeusExtractGeneralData.class);
             
@@ -40,20 +35,14 @@ public class GenerateValidMockData {
             AmadeusExtractPrice priceService = new AmadeusExtractPrice();
             AmadeusAirportService amadeusAirportService = context.getBean(AmadeusAirportService.class);
             SortFligths sortFlights = new SortFligths();
-
-            // ✅ Inicializar AmadeusFlightService con los servicios mockeados
             AmadeusFlightService amadeusFlightService = new AmadeusFlightService(
                     null, generalDataService, itinerariesService, sortFlights, priceService,amadeusAirportService
             );
 
-            // ✅ Ejecutar transformResponse() con los datos mockeados
             Map<String, Map<String, Object>>  transformedData = amadeusFlightService.transformResponse(mockJsonString);
 
-            // ✅ Guardar el resultado en validMockData.json
             File outputFile = new File("src/test/resources/validMockData.json");
             objectMapper.writeValue(outputFile, transformedData);
-
-            // ✅ Print en consola para confirmación
             System.out.println("✔ Archivo validMockData.json generado correctamente.");
             System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(transformedData));
 

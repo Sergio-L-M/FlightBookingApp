@@ -3,7 +3,7 @@ export function formatNumberWithCommas(amount: string, locale: string = "en-US")
     
     if (isNaN(numericAmount)) {
       console.error(`Invalid amount: ${amount}`);
-      return amount; // Retorna el valor original si no es un número válido
+      return amount; 
     }
   
     return new Intl.NumberFormat(locale, {

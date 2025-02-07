@@ -20,23 +20,21 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
   return (
     <Paper
       sx={{
-        // Forzamos flex para "estirar" según su contenedor padre
+        
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         p: 2,
-        height: "100%", // Se ajusta a la altura que le asigne el contenedor padre
+        height: "100%", 
       }}
     >
-      {/* 📍 Horario y Aeropuertos */}
+      {/*Horario y Aeropuertos */}
       <Box
         sx={{
           display: "flex",
-          // Centramos horizontalmente
           justifyContent: "center",
-          // Alineamos verticalmente en el mismo eje
           alignItems: "center",
-          gap: 4, // Separación entre la info de salida y la de llegada
+          gap: 4, 
           width: "100%",
           p: 1,
         }}
@@ -58,7 +56,7 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
 
       <Divider sx={{ width: "100%" }} />
 
-      {/* 🛫 Datos del vuelo */}
+      {/* Datos del vuelo */}
       <Box
         sx={{
           display: "flex",
@@ -97,14 +95,14 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
 
       <Divider sx={{ width: "100%" }} />
 
-      {/* 🎛️ Amenidades con Acordeón */}
+      {/* Amenidades con Acordeón */}
       <Accordion
         sx={{
           width: "100%",
-          borderRadius: 2, // Bordes redondeados
+          borderRadius: 2, 
           backgroundColor: "white",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0)",
-          "&:before": { display: "none" }, // Elimina la línea superior por defecto
+          "&:before": { display: "none" }, 
           p: 0.75,
         }}
       >

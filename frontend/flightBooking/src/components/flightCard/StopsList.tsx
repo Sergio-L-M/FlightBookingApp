@@ -3,7 +3,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { Stop } from "../PropsFlight";
 import { Typography } from "@mui/material";
-//import { formatDuration } from "../../utils/FormatDateeTime";
 interface Props {
   itineraries: Stop[];
   id: string;
@@ -13,14 +12,14 @@ interface Props {
 const StopsList = ({ itineraries, id, totalDuration }: Props) => {
   return (
     <List>
-      {/* 📌 Duración total en la parte superior */}
+      {/* Duración total en la parte superior */}
       <ListItem>
         <Typography variant="body1" color="text.secondary">
           <strong>{totalDuration}{itineraries.length - 1 === 0 ? " (No stops)" : ` (${itineraries.length - 1} stops)`}</strong>
         </Typography>
       </ListItem>
 
-      {/* 📌 Lista de escalas */}
+      {/* Lista de escalas */}
       {itineraries.slice(0, -1).map((itinerary, index) => (
       <ListItem key={`${id}-${index}`}>
         <span style={{ marginRight: "10px" }}>
