@@ -5,6 +5,7 @@
         "totalDuration": "13H 25M",
         "arrivalAirportCode": "BKK",
         "totalPrice": "451.77",
+        "currency": "EUR",
         "PricePerTraveler": "451.77",
         "flightSchedule": "2025-02-15T08:50:00 → 2025-02-15T18:15:00",
         "stops": [
@@ -162,6 +163,7 @@
         "totalDuration": "24H 10M",
         "arrivalAirportCode": "BKK",
         "totalPrice": "230.17",
+        "currency": "EUR",
         "PricePerTraveler": "230.17",
         "flightSchedule": "2025-02-15T20:50:00 → 2025-02-16T17:00:00",
         "stops": [
@@ -257,6 +259,7 @@
         "totalDuration": "27H 30M",
         "arrivalAirportCode": "BKK",
         "totalPrice": "424.38",
+        "currency": "EUR",
         "PricePerTraveler": "424.38",
         "flightSchedule": "2025-02-15T11:15:00 → 2025-02-16T10:45:00",
         "stops": [
@@ -352,6 +355,7 @@
         "totalDuration": "28H 35M",
         "arrivalAirportCode": "BKK",
         "totalPrice": "381.61",
+        "currency": "EUR",
         "PricePerTraveler": "381.61",
         "flightSchedule": "2025-02-15T11:45:00 → 2025-02-16T12:20:00",
         "stops": [
