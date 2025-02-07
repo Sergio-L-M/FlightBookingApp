@@ -69,16 +69,17 @@ public class FlightService {
 
 
     public List<Map<String, Object>> sortFlights(List<Map<String, Object>> flights, String sortBy) {
+        Comparator<Map<String, Object>> comparator = null;
         if (flights == null || flights.isEmpty()) {
             return Collections.emptyList(); // Devolver lista vacía en lugar de null
         }
     
         if (sortBy == null || sortBy.isEmpty()) {
-            return flights;
+            comparator = Comparator.comparing(flight -> parseDoubleSafe(getSafeMap(flight, "generalData").get("totalPrice")));
         }
 
         List<Map<String, Object>> sortedFlights = new ArrayList<>(flights);
-        Comparator<Map<String, Object>> comparator = null;
+        
 
         switch (sortBy.toLowerCase()) {
             case "cheapest":
