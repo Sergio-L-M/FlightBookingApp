@@ -1,7 +1,16 @@
-import { Box, Typography, Divider, Accordion, AccordionSummary, AccordionDetails, Paper } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Divider,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Paper,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Itinerary } from "../PropsFlight";
 import AmenitiesDetails from "./amenitiesDetails";
+import { formatDateTime } from "../../utils/FormatDateeTime";
 
 interface ItineraryProps {
   itinerary: Itinerary;
@@ -9,27 +18,58 @@ interface ItineraryProps {
 
 const ItineraryCard = ({ itinerary }: ItineraryProps) => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, alignItems :"center"}}>
-      {/* Horario y Aeropuertos */}
-      
-      <Paper sx={{ display: "flex", justifyContent: "space-between", padding:4, width:"80%"  }}>
-   
-        <Box>
-          <Typography variant="body1">{itinerary.departureTime}</Typography>
-          <Typography variant="h6">{itinerary.departureAirport}</Typography>
+    <Paper
+      sx={{
+        // Forzamos flex para "estirar" según su contenedor padre
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        p: 2,
+        height: "100%", // Se ajusta a la altura que le asigne el contenedor padre
+      }}
+    >
+      {/* 📍 Horario y Aeropuertos */}
+      <Box
+        sx={{
+          display: "flex",
+          // Centramos horizontalmente
+          justifyContent: "center",
+          // Alineamos verticalmente en el mismo eje
+          alignItems: "center",
+          gap: 4, // Separación entre la info de salida y la de llegada
+          width: "100%",
+          p: 1,
+        }}
+      >
+        <Box textAlign="center">
+          <Typography variant="body1">
+            {formatDateTime(itinerary.departureTime)}
+          </Typography>
+          <Typography variant="body1">  <strong>{itinerary.departureAirportName} {" "}({itinerary.departureAirportCode})  </strong></Typography>
         </Box>
-        <Box>
-          <Typography variant="body1">{itinerary.arrivalTime}</Typography>
-          <Typography variant="h6">{itinerary.arrivalAirport}</Typography>
+
+        <Box textAlign="center">
+          <Typography variant="body1">
+            {formatDateTime(itinerary.arrivalTime)}
+          </Typography>
+          <Typography variant="body1">  <strong>{itinerary.arrivalAirportName} {" "} ({itinerary.arrivalAirportCode})  </strong></Typography>
         </Box>
-        
-      </Paper>
-      
+      </Box>
 
-  
+      <Divider sx={{ width: "100%" }} />
 
-      {/* Datos del vuelo */}
-      <Paper sx={{ display: "flex", flexDirection: "column", gap: 1,  padding: 4, width:"80%" }}>
+      {/* 🛫 Datos del vuelo */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 1,
+          width: "100%",
+          p: 2,
+          mt: 1.25,
+          mb: 1.25,
+        }}
+      >
         <Typography variant="body2">
           <strong>Flight Number:</strong> {itinerary.flightNumber}
         </Typography>
@@ -45,40 +85,55 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
         <Typography variant="body2">
           <strong>Duration:</strong> {itinerary.duration}
         </Typography>
+        <Typography variant="body2">
+          <strong>Cabin:</strong> {itinerary.cabin}
+        </Typography>
         {itinerary.layoverTime && (
           <Typography variant="body2">
-            <strong>Lay Over Time:</strong> {itinerary.layoverTime}
+            <strong>Layover Time:</strong> {itinerary.layoverTime}
           </Typography>
         )}
-      </Paper>
+      </Box>
 
+      <Divider sx={{ width: "100%" }} />
 
-
-      {/* Amenidades */}
+      {/* 🎛️ Amenidades con Acordeón */}
       <Accordion
-  sx={{
-    width: "80%",
-    p: 4,
-    borderRadius: 1, // 🔹 Esquinas redondeadas
-    borderTop: "none", // ❌ Elimina la línea superior
-    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // 🔹 Sombra sutil estilo Apple
-    "&:before": { display: "none" }, // ❌ Elimina la línea superior predeterminada de Material UI
-  }}
->
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        sx={{
+          width: "100%",
+          borderRadius: 2, // Bordes redondeados
+          backgroundColor: "white",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0)",
+          "&:before": { display: "none" }, // Elimina la línea superior por defecto
+          p: 0.75,
+        }}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          sx={{
+            backgroundColor: "transparent",
+            minHeight: 25,
+            maxHeight: 25,
+          }}
+        >
           <Typography variant="h6">Amenities</Typography>
         </AccordionSummary>
-        <AccordionDetails>
+
+        <AccordionDetails sx={{ backgroundColor: "transparent" }}>
           {Object.keys(itinerary.amenities).length > 0 ? (
             Object.keys(itinerary.amenities).map((type) => (
-              <AmenitiesDetails key={type} type={type} amenities={itinerary.amenities[type]} />
+              <AmenitiesDetails
+                key={type}
+                type={type}
+                amenities={itinerary.amenities[type]}
+              />
             ))
           ) : (
-            <Typography variant="body2">No amanities available</Typography>
+            <Typography variant="body2">No amenities available</Typography>
           )}
         </AccordionDetails>
       </Accordion>
-    </Box>
+    </Paper>
   );
 };
 

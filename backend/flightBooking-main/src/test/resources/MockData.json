@@ -1,0 +1,759 @@
+{"meta": {
+  "count": 59,
+  "links": {
+    "self": "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2025-02-15&adults=1&currencyCode=EUR&nonStop=false"
+  }
+},
+  
+  "data": [
+    {
+      "type": "flight-offer",
+      "id": "1",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-02-15",
+      "lastTicketingDateTime": "2025-02-15",
+      "numberOfBookableSeats": 1,
+      "itineraries": [
+        {
+          "duration": "PT24H10M",
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "SYD",
+                "terminal": "1",
+                "at": "2025-02-15T20:50:00"
+              },
+              "arrival": {
+                "iataCode": "TFU",
+                "terminal": "1",
+                "at": "2025-02-16T05:00:00"
+              },
+              "carrierCode": "3U",
+              "number": "3892",
+              "aircraft": {
+                "code": "359"
+              },
+              "operating": {
+                "carrierCode": "3U"
+              },
+              "duration": "PT11H10M",
+              "id": "21",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": {
+                "iataCode": "TFU",
+                "terminal": "1",
+                "at": "2025-02-16T14:40:00"
+              },
+              "arrival": {
+                "iataCode": "BKK",
+                "at": "2025-02-16T17:00:00"
+              },
+              "carrierCode": "3U",
+              "number": "3935",
+              "aircraft": {
+                "code": "321"
+              },
+              "operating": {
+                "carrierCode": "3U"
+              },
+              "duration": "PT3H20M",
+              "id": "22",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "230.17",
+        "base": "53.00",
+        "fees": [
+          {
+            "amount": "0.00",
+            "type": "SUPPLIER"
+          },
+          {
+            "amount": "0.00",
+            "type": "TICKETING"
+          }
+        ],
+        "grandTotal": "230.17"
+      },
+      "pricingOptions": {
+        "fareType": [
+          "PUBLISHED"
+        ],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": [
+        "3U"
+      ],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": {
+            "currency": "EUR",
+            "total": "230.17",
+            "base": "53.00"
+          },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "21",
+              "cabin": "ECONOMY",
+              "fareBasis": "U1ADDA76",
+              "class": "U",
+              "includedCheckedBags": {
+                "quantity": 1
+              }
+            },
+            {
+              "segmentId": "22",
+              "cabin": "ECONOMY",
+              "fareBasis": "U1ADDA76",
+              "class": "B",
+              "includedCheckedBags": {
+                "quantity": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flight-offer",
+      "id": "26",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-02-15",
+      "lastTicketingDateTime": "2025-02-15",
+      "numberOfBookableSeats": 9,
+      "itineraries": [
+        {
+          "duration": "PT13H25M",
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "SYD",
+                "terminal": "1",
+                "at": "2025-02-15T08:50:00"
+              },
+              "arrival": {
+                "iataCode": "HKG",
+                "terminal": "1",
+                "at": "2025-02-15T15:05:00"
+              },
+              "carrierCode": "CX",
+              "number": "110",
+              "aircraft": {
+                "code": "359"
+              },
+              "operating": {
+                "carrierCode": "CX"
+              },
+              "duration": "PT9H15M",
+              "id": "45",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": {
+                "iataCode": "HKG",
+                "terminal": "1",
+                "at": "2025-02-15T16:05:00"
+              },
+              "arrival": {
+                "iataCode": "BKK",
+                "at": "2025-02-15T18:15:00"
+              },
+              "carrierCode": "CX",
+              "number": "701",
+              "aircraft": {
+                "code": "333"
+              },
+              "operating": {
+                "carrierCode": "CX"
+              },
+              "duration": "PT3H10M",
+              "id": "46",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "451.77",
+        "base": "257.00",
+        "fees": [
+          {
+            "amount": "0.00",
+            "type": "SUPPLIER"
+          },
+          {
+            "amount": "0.00",
+            "type": "TICKETING"
+          }
+        ],
+        "grandTotal": "451.77"
+      },
+      "pricingOptions": {
+        "fareType": [
+          "PUBLISHED"
+        ],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": [
+        "CX"
+      ],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": {
+            "currency": "EUR",
+            "total": "451.77",
+            "base": "257.00"
+          },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "45",
+              "cabin": "ECONOMY",
+              "fareBasis": "VR21AUKO",
+              "brandedFare": "ECONLIGHT",
+              "brandedFareLabel": "ECONOMY LIGHT",
+              "class": "V",
+              "includedCheckedBags": {
+                "quantity": 1
+              },
+              "amenities": [
+                {
+                  "description": "1PC MAX 23KG 158LCM EACH",
+                  "isChargeable": false,
+                  "amenityType": "BAGGAGE",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                },
+                {
+                  "description": "1PC MAX 15LB 7KG 115LCM",
+                  "isChargeable": false,
+                  "amenityType": "BAGGAGE",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                },
+                {
+                  "description": "SEAT ASSIGNMENT",
+                  "isChargeable": true,
+                  "amenityType": "PRE_RESERVED_SEAT",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                },
+                {
+                  "description": "REFUNDABLE TICKET",
+                  "isChargeable": true,
+                  "amenityType": "BRANDED_FARES",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                },
+                {
+                  "description": "MILEAGE ACCRUAL",
+                  "isChargeable": false,
+                  "amenityType": "BRANDED_FARES",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                },
+                {
+                  "description": "CHANGEABLE TICKET",
+                  "isChargeable": true,
+                  "amenityType": "BRANDED_FARES",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                }
+              ]
+            },
+            {
+              "segmentId": "46",
+              "cabin": "ECONOMY",
+              "fareBasis": "VR21AUKO",
+              "brandedFare": "ECONLIGHT",
+              "brandedFareLabel": "ECONOMY LIGHT",
+              "class": "V",
+              "includedCheckedBags": {
+                "quantity": 1
+              },
+              "amenities": [
+                {
+                  "description": "1PC MAX 23KG 158LCM EACH",
+                  "isChargeable": false,
+                  "amenityType": "BAGGAGE",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                },
+                {
+                  "description": "1PC MAX 15LB 7KG 115LCM",
+                  "isChargeable": false,
+                  "amenityType": "BAGGAGE",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                },
+                {
+                  "description": "SEAT ASSIGNMENT",
+                  "isChargeable": true,
+                  "amenityType": "PRE_RESERVED_SEAT",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                },
+                {
+                  "description": "REFUNDABLE TICKET",
+                  "isChargeable": true,
+                  "amenityType": "BRANDED_FARES",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                },
+                {
+                  "description": "MILEAGE ACCRUAL",
+                  "isChargeable": false,
+                  "amenityType": "BRANDED_FARES",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                },
+                {
+                  "description": "CHANGEABLE TICKET",
+                  "isChargeable": true,
+                  "amenityType": "BRANDED_FARES",
+                  "amenityProvider": {
+                    "name": "BrandedFare"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flight-offer",
+      "id": "19",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-02-15",
+      "lastTicketingDateTime": "2025-02-15",
+      "numberOfBookableSeats": 9,
+      "itineraries": [
+        {
+          "duration": "PT27H30M",
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "SYD",
+                "terminal": "1",
+                "at": "2025-02-15T11:15:00"
+              },
+              "arrival": {
+                "iataCode": "SGN",
+                "terminal": "2",
+                "at": "2025-02-15T15:50:00"
+              },
+              "carrierCode": "A1",
+              "number": "5005",
+              "aircraft": {
+                "code": "330"
+              },
+              "operating": {
+                "carrierCode": "VJ"
+              },
+              "duration": "PT8H35M",
+              "id": "73",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": {
+                "iataCode": "SGN",
+                "terminal": "2",
+                "at": "2025-02-16T09:15:00"
+              },
+              "arrival": {
+                "iataCode": "BKK",
+                "at": "2025-02-16T10:45:00"
+              },
+              "carrierCode": "A1",
+              "number": "2801",
+              "aircraft": {
+                "code": "321"
+              },
+              "operating": {
+                "carrierCode": "VJ"
+              },
+              "duration": "PT1H30M",
+              "id": "74",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "424.38",
+        "base": "218.00",
+        "fees": [
+          {
+            "amount": "0.00",
+            "type": "SUPPLIER"
+          },
+          {
+            "amount": "0.00",
+            "type": "TICKETING"
+          }
+        ],
+        "grandTotal": "424.38"
+      },
+      "pricingOptions": {
+        "fareType": [
+          "PUBLISHED"
+        ],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": [
+        "GP"
+      ],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": {
+            "currency": "EUR",
+            "total": "424.38",
+            "base": "218.00"
+          },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "73",
+              "cabin": "ECONOMY",
+              "fareBasis": "GAPVJ",
+              "class": "G",
+              "includedCheckedBags": {
+                "weight": 40,
+                "weightUnit": "KG"
+              }
+            },
+            {
+              "segmentId": "74",
+              "cabin": "ECONOMY",
+              "fareBasis": "GAPVJ",
+              "class": "G",
+              "includedCheckedBags": {
+                "weight": 40,
+                "weightUnit": "KG"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flight-offer",
+      "id": "15",
+      "source": "GDS",
+      "instantTicketingRequired": false,
+      "nonHomogeneous": false,
+      "oneWay": false,
+      "isUpsellOffer": false,
+      "lastTicketingDate": "2025-02-15",
+      "lastTicketingDateTime": "2025-02-15",
+      "numberOfBookableSeats": 9,
+      "itineraries": [
+        {
+          "duration": "PT28H35M",
+          "segments": [
+            {
+              "departure": {
+                "iataCode": "SYD",
+                "terminal": "1",
+                "at": "2025-02-15T11:45:00"
+              },
+              "arrival": {
+                "iataCode": "MNL",
+                "terminal": "1",
+                "at": "2025-02-15T17:10:00"
+              },
+              "carrierCode": "PR",
+              "number": "212",
+              "aircraft": {
+                "code": "333"
+              },
+              "operating": {
+                "carrierCode": "PR"
+              },
+              "duration": "PT8H25M",
+              "id": "81",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            },
+            {
+              "departure": {
+                "iataCode": "MNL",
+                "terminal": "1",
+                "at": "2025-02-16T09:45:00"
+              },
+              "arrival": {
+                "iataCode": "BKK",
+                "at": "2025-02-16T12:20:00"
+              },
+              "carrierCode": "PR",
+              "number": "730",
+              "aircraft": {
+                "code": "773"
+              },
+              "operating": {
+                "carrierCode": "PR"
+              },
+              "duration": "PT3H35M",
+              "id": "82",
+              "numberOfStops": 0,
+              "blacklistedInEU": false
+            }
+          ]
+        }
+      ],
+      "price": {
+        "currency": "EUR",
+        "total": "381.61",
+        "base": "249.00",
+        "fees": [
+          {
+            "amount": "0.00",
+            "type": "SUPPLIER"
+          },
+          {
+            "amount": "0.00",
+            "type": "TICKETING"
+          }
+        ],
+        "grandTotal": "381.61"
+      },
+      "pricingOptions": {
+        "fareType": [
+          "PUBLISHED"
+        ],
+        "includedCheckedBagsOnly": true
+      },
+      "validatingAirlineCodes": [
+        "PR"
+      ],
+      "travelerPricings": [
+        {
+          "travelerId": "1",
+          "fareOption": "STANDARD",
+          "travelerType": "ADULT",
+          "price": {
+            "currency": "EUR",
+            "total": "381.61",
+            "base": "249.00"
+          },
+          "fareDetailsBySegment": [
+            {
+              "segmentId": "81",
+              "cabin": "ECONOMY",
+              "fareBasis": "EOBAU",
+              "class": "E",
+              "includedCheckedBags": {
+                "weight": 30,
+                "weightUnit": "KG"
+              }
+            },
+            {
+              "segmentId": "82",
+              "cabin": "ECONOMY",
+              "fareBasis": "EOBAU",
+              "class": "E",
+              "includedCheckedBags": {
+                "weight": 30,
+                "weightUnit": "KG"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dictionaries": {
+    "locations": {
+      "PVG": {
+        "cityCode": "SHA",
+        "countryCode": "CN"
+      },
+      "AVV": {
+        "cityCode": "MEL",
+        "countryCode": "AU"
+      },
+      "TFU": {
+        "cityCode": "CTU",
+        "countryCode": "CN"
+      },
+      "BKK": {
+        "cityCode": "BKK",
+        "countryCode": "TH"
+      },
+      "DMK": {
+        "cityCode": "BKK",
+        "countryCode": "TH"
+      },
+      "KUL": {
+        "cityCode": "KUL",
+        "countryCode": "MY"
+      },
+      "HKG": {
+        "cityCode": "HKG",
+        "countryCode": "HK"
+      },
+      "DPS": {
+        "cityCode": "DPS",
+        "countryCode": "ID"
+      },
+      "MNL": {
+        "cityCode": "MNL",
+        "countryCode": "PH"
+      },
+      "DEL": {
+        "cityCode": "DEL",
+        "countryCode": "IN"
+      },
+      "CAN": {
+        "cityCode": "CAN",
+        "countryCode": "CN"
+      },
+      "NRT": {
+        "cityCode": "TYO",
+        "countryCode": "JP"
+      },
+      "HAK": {
+        "cityCode": "HAK",
+        "countryCode": "CN"
+      },
+      "MEL": {
+        "cityCode": "MEL",
+        "countryCode": "AU"
+      },
+      "ICN": {
+        "cityCode": "SEL",
+        "countryCode": "KR"
+      },
+      "NOU": {
+        "cityCode": "NOU",
+        "countryCode": "NC"
+      },
+      "PEK": {
+        "cityCode": "BJS",
+        "countryCode": "CN"
+      },
+      "XMN": {
+        "cityCode": "XMN",
+        "countryCode": "CN"
+      },
+      "SIN": {
+        "cityCode": "SIN",
+        "countryCode": "SG"
+      },
+      "SGN": {
+        "cityCode": "SGN",
+        "countryCode": "VN"
+      },
+      "SYD": {
+        "cityCode": "SYD",
+        "countryCode": "AU"
+      },
+      "HND": {
+        "cityCode": "TYO",
+        "countryCode": "JP"
+      }
+    },
+    "aircraft": {
+      "320": "AIRBUS A320",
+      "321": "AIRBUS A321",
+      "330": "AIRBUS INDUSTRIE A330",
+      "333": "AIRBUS A330-300",
+      "339": "AIRBUS A330-900NEO PASSENGER",
+      "350": "AIRBUS INDUSTRIE A350",
+      "359": "AIRBUS A350-900",
+      "388": "AIRBUS A380-800",
+      "738": "BOEING 737-800",
+      "773": "BOEING 777-300",
+      "781": "BOEING 787-10",
+      "787": "787  ALL SERIES PASSENGER",
+      "788": "BOEING 787-8",
+      "789": "BOEING 787-9",
+      "7M8": "BOEING 737 MAX 8",
+      "32A": "AIRBUS A320 (SHARKLETS)",
+      "73H": "BOEING 737-800 (WINGLETS)",
+      "77L": "BOEING 777-200LR",
+      "32N": "AIRBUS A320NEO",
+      "32Q": "AIRBUS A321NEO",
+      "32S": "AIRBUS INDUSTRIE A318/A319/A320/A321",
+      "77W": "BOEING 777-300ER"
+    },
+    "currencies": {
+      "EUR": "EURO"
+    },
+    "carriers": {
+      "3U": "SICHUAN AIRLINES",
+      "PR": "PHILIPPINE AIRLINES",
+      "NQ": "AIR JAPAN COMPANY LTD",
+      "JQ": "JETSTAR",
+      "HU": "HAINAN AIRLINES",
+      "SB": "AIRCALIN",
+      "A1": "A.P.G. DISTRIBUTION SYSTEM",
+      "OD": "BATIK AIR MALAYSIA",
+      "QF": "QANTAS AIRWAYS",
+      "MF": "XIAMEN AIRLINES",
+      "KE": "KOREAN AIR",
+      "ID": "BATIK AIR INDONESIA",
+      "MH": "MALAYSIA AIRLINES",
+      "CA": "AIR CHINA",
+      "SQ": "SINGAPORE AIRLINES",
+      "EK": "EMIRATES",
+      "AI": "AIR INDIA",
+      "MU": "CHINA EASTERN AIRLINES",
+      "H1": "HAHN AIR SYSTEMS",
+      "OZ": "ASIANA AIRLINES",
+      "TG": "THAI AIRWAYS INTERNATIONAL",
+      "VJ": "VIETJET AVIATION",
+      "CX": "CATHAY PACIFIC",
+      "CZ": "CHINA SOUTHERN AIRLINES",
+      "VN": "VIETNAM AIRLINES",
+      "NH": "ALL NIPPON AIRWAYS",
+      "TR": "SCOOT",
+      "LJ": "JIN AIR"
+    }
+  }
+}

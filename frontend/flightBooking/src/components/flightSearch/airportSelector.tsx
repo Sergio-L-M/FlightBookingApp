@@ -3,6 +3,8 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import axios from "axios";
+import airportsMock from"../../mocks/airportsMock.json";
+import { developmentSelector } from "../../globalConstants";
 
 interface AirportData {
   code: string;
@@ -24,19 +26,23 @@ const AirportSelector = ({ textLabel, onChange }: Props) => {
     if (inputValue.length > 0 && fetchAllowed) {
       const fetchAirports = async () => {
         try {
-          const response = await axios.get(
-            `http://localhost:8080/api/flights/airports?keyword=${inputValue}`
-          );
-          setOptions(response.data);
+          if (developmentSelector) {
+            console.log("🛠️ Modo Testing: Usando datos mock de aeropuertos.");
+            setOptions(airportsMock); // Usamos el JSON mock directamente
+          } else {
+            const response = await axios.get(
+              `http://localhost:8080/api/flights/airports?keyword=${inputValue}`
+            );
+            setOptions(response.data);
+          }
         } catch (error) {
-          console.error("Error fetching airports:", error);
+          console.error("❌ Error fetching airports:", error);
         }
       };
-
+  
       fetchAirports();
     }
   }, [inputValue, fetchAllowed]);
-
   return (
     <Autocomplete
       key="airport-selector"

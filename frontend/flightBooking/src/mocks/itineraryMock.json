@@ -1,0 +1,96 @@
+{
+  "generalData": {
+    "totalDuration": "28H 35M",
+    "arrivalAirportCode": "BKK",
+    "totalPrice": "381.61",
+    "PricePerTraveler": "381.61",
+    "flightSchedule": "2025-02-15T11:45:00 → 2025-02-16T12:20:00",
+    "currency": "MXN",
+    "stops": [
+      {
+        "arrivalAirportCode": "MNL",
+        "layoverTime": "16H 35M",
+        "arrivalAirportName": "NOT FOUND"
+      },
+      {
+        "arrivalAirportCode": "BKK",
+        "layoverTime": "0H 0M",
+        "arrivalAirportName": "SUVARNABHUMI INTL"
+      }
+    ],
+    "airline": "PR - PHILIPPINE AIRLINES",
+    "departureAirportName": "NOT FOUND",
+    "departureAirportCode": "SYD",
+    "arrivalAirportName": "SUVARNABHUMI INTL",
+    "operatingAirline": "PR - PHILIPPINE AIRLINES"
+  },
+  "itineraries": [
+    {
+      "departureTime": "2025-02-15T11:45:00",
+      "amenities": {},
+      "arrivalAirportCode": "MNL",
+      "aircraft": "333 - AIRBUS A330-300",
+      "cabin": "ECONOMY",
+      "flightNumber": "212",
+      "duration": "8H 25M",
+      "layoverTime": "16H 35M",
+      "fareBasis": "EOBAU",
+      "arrivalTime": "2025-02-15T17:10:00",
+      "segmentId": "81",
+      "airline": "PR - PHILIPPINE AIRLINES",
+      "departureAirportName": "NOT FOUND",
+      "class": "E",
+      "departureAirportCode": "SYD",
+      "arrivalAirportName": "NOT FOUND",
+      "operatingAirline": "PR - PHILIPPINE AIRLINES"
+    },
+    {
+      "departureTime": "2025-02-16T09:45:00",
+      "amenities": {},
+      "arrivalAirportCode": "BKK",
+      "aircraft": "773 - BOEING 777-300",
+      "cabin": "ECONOMY",
+      "flightNumber": "730",
+      "duration": "3H 35M",
+      "fareBasis": "EOBAU",
+      "arrivalTime": "2025-02-16T12:20:00",
+      "segmentId": "82",
+      "airline": "PR - PHILIPPINE AIRLINES",
+      "departureAirportName": "NOT FOUND",
+      "class": "E",
+      "departureAirportCode": "MNL",
+      "arrivalAirportName": "SUVARNABHUMI INTL",
+      "operatingAirline": "PR - PHILIPPINE AIRLINES"
+    }
+  ],
+  "id": "15",
+  "pricing": {
+    "total": "381.61",
+    "fees": [
+      {
+        "amount": "0.00",
+        "type": "SUPPLIER"
+      },
+      {
+        "amount": "0.00",
+        "type": "TICKETING"
+      }
+    ],
+    "travelerPrices": [
+      {
+        "travelerType": "ADULT",
+        "price": {
+          "total": "381.61",
+          "currency": "EUR",
+          "base": "249.00"
+        },
+        "fareOption": "STANDARD",
+        "travelerId": "1"
+      }
+    ],
+    "pricePerTraveler": "381.61",
+    "grandTotal": "381.61",
+    "currency": "EUR",
+    "base": "249.00"
+  }
+}

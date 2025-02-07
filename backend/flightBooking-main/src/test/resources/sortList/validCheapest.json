@@ -1,0 +1,444 @@
+[
+    {
+      "generalData": {
+        "totalDuration": "24H 10M",
+        "arrivalAirportCode": "BKK",
+        "totalPrice": "230.17",
+        "PricePerTraveler": "230.17",
+        "flightSchedule": "2025-02-15T20:50:00 → 2025-02-16T17:00:00",
+        "stops": [
+          {
+            "arrivalAirportCode": "TFU",
+            "layoverTime": "9H 40M",
+            "arrivalAirportName": "TIANFU INTERNATIONAL"
+          },
+          {
+            "arrivalAirportCode": "BKK",
+            "layoverTime": "0H 0M",
+            "arrivalAirportName": "SUVARNABHUMI INTL"
+          }
+        ],
+        "airline": "3U - SICHUAN AIRLINES",
+        "departureAirportName": "NOT FOUND",
+        "departureAirportCode": "SYD",
+        "arrivalAirportName": "SUVARNABHUMI INTL",
+        "operatingAirline": "3U - SICHUAN AIRLINES"
+      },
+      "itineraries": [
+        {
+          "departureTime": "2025-02-15T20:50:00",
+          "amenities": {},
+          "arrivalAirportCode": "TFU",
+          "aircraft": "359 - AIRBUS A350-900",
+          "cabin": "ECONOMY",
+          "flightNumber": "3892",
+          "duration": "11H 10M",
+          "layoverTime": "9H 40M",
+          "fareBasis": "U1ADDA76",
+          "arrivalTime": "2025-02-16T05:00:00",
+          "segmentId": "21",
+          "airline": "3U - SICHUAN AIRLINES",
+          "departureAirportName": "NOT FOUND",
+          "class": "U",
+          "departureAirportCode": "SYD",
+          "arrivalAirportName": "TIANFU INTERNATIONAL",
+          "operatingAirline": "3U - SICHUAN AIRLINES"
+        },
+        {
+          "departureTime": "2025-02-16T14:40:00",
+          "amenities": {},
+          "arrivalAirportCode": "BKK",
+          "aircraft": "321 - AIRBUS A321",
+          "cabin": "ECONOMY",
+          "flightNumber": "3935",
+          "duration": "3H 20M",
+          "fareBasis": "U1ADDA76",
+          "arrivalTime": "2025-02-16T17:00:00",
+          "segmentId": "22",
+          "airline": "3U - SICHUAN AIRLINES",
+          "departureAirportName": "TIANFU INTERNATIONAL",
+          "class": "B",
+          "departureAirportCode": "TFU",
+          "arrivalAirportName": "SUVARNABHUMI INTL",
+          "operatingAirline": "3U - SICHUAN AIRLINES"
+        }
+      ],
+      "id": "1",
+      "pricing": {
+        "total": "230.17",
+        "fees": [
+          {
+            "amount": "0.00",
+            "type": "SUPPLIER"
+          },
+          {
+            "amount": "0.00",
+            "type": "TICKETING"
+          }
+        ],
+        "travelerPrices": [
+          {
+            "travelerType": "ADULT",
+            "price": {
+              "total": "230.17",
+              "currency": "EUR",
+              "base": "53.00"
+            },
+            "fareOption": "STANDARD",
+            "travelerId": "1"
+          }
+        ],
+        "pricePerTraveler": "230.17",
+        "grandTotal": "230.17",
+        "currency": "EUR",
+        "base": "53.00"
+      }
+    },
+    {
+      "generalData": {
+        "totalDuration": "28H 35M",
+        "arrivalAirportCode": "BKK",
+        "totalPrice": "381.61",
+        "PricePerTraveler": "381.61",
+        "flightSchedule": "2025-02-15T11:45:00 → 2025-02-16T12:20:00",
+        "stops": [
+          {
+            "arrivalAirportCode": "MNL",
+            "layoverTime": "16H 35M",
+            "arrivalAirportName": "NOT FOUND"
+          },
+          {
+            "arrivalAirportCode": "BKK",
+            "layoverTime": "0H 0M",
+            "arrivalAirportName": "SUVARNABHUMI INTL"
+          }
+        ],
+        "airline": "PR - PHILIPPINE AIRLINES",
+        "departureAirportName": "NOT FOUND",
+        "departureAirportCode": "SYD",
+        "arrivalAirportName": "SUVARNABHUMI INTL",
+        "operatingAirline": "PR - PHILIPPINE AIRLINES"
+      },
+      "itineraries": [
+        {
+          "departureTime": "2025-02-15T11:45:00",
+          "amenities": {},
+          "arrivalAirportCode": "MNL",
+          "aircraft": "333 - AIRBUS A330-300",
+          "cabin": "ECONOMY",
+          "flightNumber": "212",
+          "duration": "8H 25M",
+          "layoverTime": "16H 35M",
+          "fareBasis": "EOBAU",
+          "arrivalTime": "2025-02-15T17:10:00",
+          "segmentId": "81",
+          "airline": "PR - PHILIPPINE AIRLINES",
+          "departureAirportName": "NOT FOUND",
+          "class": "E",
+          "departureAirportCode": "SYD",
+          "arrivalAirportName": "NOT FOUND",
+          "operatingAirline": "PR - PHILIPPINE AIRLINES"
+        },
+        {
+          "departureTime": "2025-02-16T09:45:00",
+          "amenities": {},
+          "arrivalAirportCode": "BKK",
+          "aircraft": "773 - BOEING 777-300",
+          "cabin": "ECONOMY",
+          "flightNumber": "730",
+          "duration": "3H 35M",
+          "fareBasis": "EOBAU",
+          "arrivalTime": "2025-02-16T12:20:00",
+          "segmentId": "82",
+          "airline": "PR - PHILIPPINE AIRLINES",
+          "departureAirportName": "NOT FOUND",
+          "class": "E",
+          "departureAirportCode": "MNL",
+          "arrivalAirportName": "SUVARNABHUMI INTL",
+          "operatingAirline": "PR - PHILIPPINE AIRLINES"
+        }
+      ],
+      "id": "15",
+      "pricing": {
+        "total": "381.61",
+        "fees": [
+          {
+            "amount": "0.00",
+            "type": "SUPPLIER"
+          },
+          {
+            "amount": "0.00",
+            "type": "TICKETING"
+          }
+        ],
+        "travelerPrices": [
+          {
+            "travelerType": "ADULT",
+            "price": {
+              "total": "381.61",
+              "currency": "EUR",
+              "base": "249.00"
+            },
+            "fareOption": "STANDARD",
+            "travelerId": "1"
+          }
+        ],
+        "pricePerTraveler": "381.61",
+        "grandTotal": "381.61",
+        "currency": "EUR",
+        "base": "249.00"
+      }
+    },
+    {
+      "generalData": {
+        "totalDuration": "27H 30M",
+        "arrivalAirportCode": "BKK",
+        "totalPrice": "424.38",
+        "PricePerTraveler": "424.38",
+        "flightSchedule": "2025-02-15T11:15:00 → 2025-02-16T10:45:00",
+        "stops": [
+          {
+            "arrivalAirportCode": "SGN",
+            "layoverTime": "17H 25M",
+            "arrivalAirportName": "NOT FOUND"
+          },
+          {
+            "arrivalAirportCode": "BKK",
+            "layoverTime": "0H 0M",
+            "arrivalAirportName": "SUVARNABHUMI INTL"
+          }
+        ],
+        "airline": "A1 - A.P.G. DISTRIBUTION SYSTEM",
+        "departureAirportName": "NOT FOUND",
+        "departureAirportCode": "SYD",
+        "arrivalAirportName": "SUVARNABHUMI INTL",
+        "operatingAirline": "VJ - VIETJET AVIATION"
+      },
+      "itineraries": [
+        {
+          "departureTime": "2025-02-15T11:15:00",
+          "amenities": {},
+          "arrivalAirportCode": "SGN",
+          "aircraft": "330 - AIRBUS INDUSTRIE A330",
+          "cabin": "ECONOMY",
+          "flightNumber": "5005",
+          "duration": "8H 35M",
+          "layoverTime": "17H 25M",
+          "fareBasis": "GAPVJ",
+          "arrivalTime": "2025-02-15T15:50:00",
+          "segmentId": "73",
+          "airline": "A1 - A.P.G. DISTRIBUTION SYSTEM",
+          "departureAirportName": "NOT FOUND",
+          "class": "G",
+          "departureAirportCode": "SYD",
+          "arrivalAirportName": "NOT FOUND",
+          "operatingAirline": "VJ - VIETJET AVIATION"
+        },
+        {
+          "departureTime": "2025-02-16T09:15:00",
+          "amenities": {},
+          "arrivalAirportCode": "BKK",
+          "aircraft": "321 - AIRBUS A321",
+          "cabin": "ECONOMY",
+          "flightNumber": "2801",
+          "duration": "1H 30M",
+          "fareBasis": "GAPVJ",
+          "arrivalTime": "2025-02-16T10:45:00",
+          "segmentId": "74",
+          "airline": "A1 - A.P.G. DISTRIBUTION SYSTEM",
+          "departureAirportName": "NOT FOUND",
+          "class": "G",
+          "departureAirportCode": "SGN",
+          "arrivalAirportName": "SUVARNABHUMI INTL",
+          "operatingAirline": "VJ - VIETJET AVIATION"
+        }
+      ],
+      "id": "19",
+      "pricing": {
+        "total": "424.38",
+        "fees": [
+          {
+            "amount": "0.00",
+            "type": "SUPPLIER"
+          },
+          {
+            "amount": "0.00",
+            "type": "TICKETING"
+          }
+        ],
+        "travelerPrices": [
+          {
+            "travelerType": "ADULT",
+            "price": {
+              "total": "424.38",
+              "currency": "EUR",
+              "base": "218.00"
+            },
+            "fareOption": "STANDARD",
+            "travelerId": "1"
+          }
+        ],
+        "pricePerTraveler": "424.38",
+        "grandTotal": "424.38",
+        "currency": "EUR",
+        "base": "218.00"
+      }
+    },
+    {
+      "generalData": {
+        "totalDuration": "13H 25M",
+        "arrivalAirportCode": "BKK",
+        "totalPrice": "451.77",
+        "PricePerTraveler": "451.77",
+        "flightSchedule": "2025-02-15T08:50:00 → 2025-02-15T18:15:00",
+        "stops": [
+          {
+            "arrivalAirportCode": "HKG",
+            "layoverTime": "1H 0M",
+            "arrivalAirportName": "NOT FOUND"
+          },
+          {
+            "arrivalAirportCode": "BKK",
+            "layoverTime": "0H 0M",
+            "arrivalAirportName": "SUVARNABHUMI INTL"
+          }
+        ],
+        "airline": "CX - CATHAY PACIFIC",
+        "departureAirportName": "NOT FOUND",
+        "departureAirportCode": "SYD",
+        "arrivalAirportName": "SUVARNABHUMI INTL",
+        "operatingAirline": "CX - CATHAY PACIFIC"
+      },
+      "itineraries": [
+        {
+          "departureTime": "2025-02-15T08:50:00",
+          "amenities": {
+            "BRANDED_FARES": [
+              {
+                "description": "REFUNDABLE TICKET",
+                "isChargeable": true
+              },
+              {
+                "description": "MILEAGE ACCRUAL",
+                "isChargeable": false
+              },
+              {
+                "description": "CHANGEABLE TICKET",
+                "isChargeable": true
+              }
+            ],
+            "BAGGAGE": [
+              {
+                "description": "1PC MAX 23KG 158LCM EACH",
+                "isChargeable": false
+              },
+              {
+                "description": "1PC MAX 15LB 7KG 115LCM",
+                "isChargeable": false
+              }
+            ],
+            "PRE_RESERVED_SEAT": [
+              {
+                "description": "SEAT ASSIGNMENT",
+                "isChargeable": true
+              }
+            ]
+          },
+          "arrivalAirportCode": "HKG",
+          "aircraft": "359 - AIRBUS A350-900",
+          "cabin": "ECONOMY",
+          "flightNumber": "110",
+          "duration": "9H 15M",
+          "layoverTime": "1H 0M",
+          "fareBasis": "VR21AUKO",
+          "arrivalTime": "2025-02-15T15:05:00",
+          "segmentId": "45",
+          "airline": "CX - CATHAY PACIFIC",
+          "departureAirportName": "NOT FOUND",
+          "class": "V",
+          "departureAirportCode": "SYD",
+          "arrivalAirportName": "NOT FOUND",
+          "operatingAirline": "CX - CATHAY PACIFIC"
+        },
+        {
+          "departureTime": "2025-02-15T16:05:00",
+          "amenities": {
+            "BRANDED_FARES": [
+              {
+                "description": "REFUNDABLE TICKET",
+                "isChargeable": true
+              },
+              {
+                "description": "MILEAGE ACCRUAL",
+                "isChargeable": false
+              },
+              {
+                "description": "CHANGEABLE TICKET",
+                "isChargeable": true
+              }
+            ],
+            "BAGGAGE": [
+              {
+                "description": "1PC MAX 23KG 158LCM EACH",
+                "isChargeable": false
+              },
+              {
+                "description": "1PC MAX 15LB 7KG 115LCM",
+                "isChargeable": false
+              }
+            ],
+            "PRE_RESERVED_SEAT": [
+              {
+                "description": "SEAT ASSIGNMENT",
+                "isChargeable": true
+              }
+            ]
+          },
+          "arrivalAirportCode": "BKK",
+          "aircraft": "333 - AIRBUS A330-300",
+          "cabin": "ECONOMY",
+          "flightNumber": "701",
+          "duration": "3H 10M",
+          "fareBasis": "VR21AUKO",
+          "arrivalTime": "2025-02-15T18:15:00",
+          "segmentId": "46",
+          "airline": "CX - CATHAY PACIFIC",
+          "departureAirportName": "NOT FOUND",
+          "class": "V",
+          "departureAirportCode": "HKG",
+          "arrivalAirportName": "SUVARNABHUMI INTL",
+          "operatingAirline": "CX - CATHAY PACIFIC"
+        }
+      ],
+      "id": "26",
+      "pricing": {
+        "total": "451.77",
+        "fees": [
+          {
+            "amount": "0.00",
+            "type": "SUPPLIER"
+          },
+          {
+            "amount": "0.00",
+            "type": "TICKETING"
+          }
+        ],
+        "travelerPrices": [
+          {
+            "travelerType": "ADULT",
+            "price": {
+              "total": "451.77",
+              "currency": "EUR",
+              "base": "257.00"
+            },
+            "fareOption": "STANDARD",
+            "travelerId": "1"
+          }
+        ],
+        "pricePerTraveler": "451.77",
+        "grandTotal": "451.77",
+        "currency": "EUR",
+        "base": "257.00"
+      }
+    }
+  ]

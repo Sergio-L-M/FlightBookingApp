@@ -12,7 +12,12 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+
+    /* Compilación */
+    "composite": true,  // 👈 Agregado para corregir el error
+    "emitDeclarationOnly": true,  // 👈 Reemplazo de "noEmit"
+
+    /* JSX */
     "jsx": "react-jsx",
 
     /* Linting */

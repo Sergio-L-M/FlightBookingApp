@@ -2,21 +2,43 @@ export interface Amenity {
   description: string;
   isChargeable: boolean;
 }
-
+export interface Price{
+  total:string;
+  fees:{ amount: string, type: string }[];
+  grandTotal:string;
+  currency:string;
+  base:string;
+}
+export interface TravelerPrices{
+  travelerType:string; 
+  price:{total:string; 
+  currency:string; base:string}; 
+  fareOption:string; 
+  travelerId:string ;
+}
+export interface Stop {
+  layoverTime:string ; arrivalAirportName:string;arrivalAirportCode:string
+}
 export interface GeneralData {
-  costPerTraveler: string;
-  departureAirport: { code: string; name?: string };
+  PricePerTraveler: string;
+  departureAirportCode: string;
+  departureAirportName: string;
   totalDuration: string;
   flightSchedule: string;
   airline: string;
-  arrivalAirport: { code: string; name?: string };
-  totalCost: string;
+  arrivalAirportCode: string;
+  arrivalAirportName: string;
+  operatingAirline: string;
+  totalPrice: string;
+  currency: string;
+  stops:Stop[]
 }
 
 export interface Itinerary {
   segmentId: string;
   departureTime: string;
-  departureAirport: string;
+  departureAirportCode: string;
+  departureAirportName: string;
   aircraft: string;
   cabin: string;
   flightNumber: string;
@@ -25,14 +47,32 @@ export interface Itinerary {
   fareBasis: string;
   arrivalTime: string;
   airline: string;
-  arrivalAirport: string;
+  arrivalAirportCode: string;
+  arrivalAirportName: string;
   class: string;
   operatingAirline: string;
   amenities:  { [key: string]: Amenity[] };
+}
+export interface Pricing {
+
+  total:string;
+  fees:{ amount: string, type: string }[];
+  travelerPrices:TravelerPrices[];
+  pricePerTraveler:string;
+  grandTotal:string;
+  currency:string;
+  base:string;
 }
 
 export interface FlightData {
   generalData: GeneralData;
   itineraries: Itinerary[];
+  id: string;
+  pricing:Pricing
+}
+
+
+export interface FlightItemCardData {
+  generalData: GeneralData;
   id: string;
 }
