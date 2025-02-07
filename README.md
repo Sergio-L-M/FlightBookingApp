@@ -50,7 +50,10 @@ The application is built with **React (Vite) + TypeScript** on the frontend and 
    - The backend uses `application.properties` in the `backend/flightBooking-main/src/main/resources/` folder.
    - Configure the necessary Amadeus API credentials and database settings in `application.properties`.
      ```sh
-   - flight.useMock=false change to true if you want to test it with mock data
+        spring.application.name=backend
+        amadeus.api.key=#YourApiKey
+        amadeus.api.secret=#YourSecret
+        flight.useMock=false // change to true if you tu use Mocj data
      ```
 
 
