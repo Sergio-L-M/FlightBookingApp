@@ -4,8 +4,8 @@ import axios from "axios";
 import { FlightItemCardData } from "../PropsFlight";
 
 interface SearchContextType {
-  setSortBy: (input: string | null) => void;
-  sortBy: string | null;
+  setSortBy: (input: string ) => void;
+  sortBy: string;
   setCurrentPage: (input: number) => void;
   currentPage: number;
   setOrigin: (input: string | null) => void;
@@ -31,68 +31,101 @@ interface SearchContextType {
   handleSearch: () => Promise<void>;
   setSelectedKey: (input:string) => void;
   selectedKey: string;
+  setReturnOrDeparture: (input: boolean) => void;
+  returnOrDeparture:boolean;
+  setTotalPages: (input: number) => void;
+  totalPages: number;
+  setChangeLandingPage: (input: boolean) => void;
+  changeLandingPage: boolean;
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [sortBy, setSortBy] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [origin, setOrigin] = useState<string | null>(null);
   const [destination, setDestination] = useState<string | null>(null);
-  const [arrivalDate, setArrivalDate] = useState<Dayjs | null>(dayjs().add(3, "day"));
+  const [arrivalDate, setArrivalDate] = useState<Dayjs | null>(dayjs());
   const [departureDate, setDepartureDate] = useState<Dayjs | null>(dayjs());
   const [currency, setCurrency] = useState<string>("MXN");
   const [adults, setAdults] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
   const [oneWay, setOneWay] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedKey, setSelectedKey] = useState('');
   const [departureFlights, setDepartureFlights] = useState<FlightItemCardData[]>([]);
+  const [returnOrDeparture,setReturnOrDeparture] = useState<boolean>(false);
+  const  [changeLandingPage, setChangeLandingPage] = useState<boolean>(false);
   
   const handleSearchingFlights = (isSearching: boolean) => {
     console.log("Searching flights:", isSearching);
   };
 
   const handleSearch = async () => {
-    console.log("hola");
+    
     if (!origin || !destination) {
-      setError("Por favor, selecciona origen y destino.");
-      return;
+        setError("Por favor, selecciona origen y destino.");
+        return;
     }
     if (!departureDate) {
-      setError("Debes seleccionar una fecha de salida.");
-      return;
+        setError("Debes seleccionar una fecha de salida.");
+        return;
     }
     if (!oneWay && (!arrivalDate || arrivalDate.isBefore(departureDate))) {
-      setError("La fecha de regreso debe ser posterior a la de salida.");
-      return;
+        setError("La fecha de regreso debe ser posterior a la de salida.");
+        return;
     }
 
     try {
-      setLoading(true);
-      setError(null);
-      let apiUrl = `http://localhost:8080/api/flights?origin=${origin}&destination=${destination}&departureDate=${departureDate.format("YYYY-MM-DD")}&currency=${currency}&adults=${adults}&nonStop=false&page=${currentPage}`;
-      if (!oneWay) {
-        apiUrl += `&returnDate=${arrivalDate?.format("YYYY-MM-DD")}`;
-      }
-      if (sortBy !== null) {
-        apiUrl += `&sortBy=${sortBy}`;
-      }
-      console.log("🔍 Buscando vuelos:", apiUrl);
-      const response = await axios.get(apiUrl);
-      console.log("respeusta");
-      console.log(response);
-      setDepartureFlights(response.data);
+        setLoading(true);
+        setError(null);
+        let apiUrl = '';
+        console.log(returnOrDeparture);
+        
+
+
+          if (!returnOrDeparture) {
+            const formattedArrival = arrivalDate ? arrivalDate.format("YYYY-MM-DD") : "";
+              apiUrl = `http://localhost:8080/api/flights?origin=${origin}&destination=${destination}`+
+              (formattedArrival ? `&departureDate=${formattedArrival}` : "") +
+              `&currency=${currency}&adults=${adults}&nonStop=false&page=${currentPage}`;
+              console.log("ida");
+           
+            } else {
+              const formattedDepartureDate = departureDate ? departureDate.format("YYYY-MM-DD") : "";
+  
+              apiUrl = `http://localhost:8080/api/flights?origin=${destination}&destination=${origin}` +
+                  (formattedDepartureDate ? `&departureDate=${formattedDepartureDate}` : "") +
+                  `&currency=${currency}&adults=${adults}&nonStop=false&page=${currentPage}`;
+                  console.log("regreso")
+          }
+        
+        if (sortBy !== null) {
+            apiUrl += `&sortBy=${sortBy}`;
+        }
+
+        console.log("🔍 Buscando vuelos:", apiUrl);
+        const response = await axios.get(apiUrl);
+        
+        if (response.data && response.data.flights && response.data.totalPages !== undefined) {
+            setDepartureFlights(response.data.flights);
+            setTotalPages(Number(response.data.totalPages)); // Asegurar que totalPages sea un número
+            if (!changeLandingPage){
+              setChangeLandingPage(true);
+            }
+        }
     } catch (error) {
-      console.error("Error en handleSearch:", error);
-      setError("❌ Error inesperado en la búsqueda.");
+        console.error("Error en handleSearch:", error);
+        setError("❌ Error inesperado en la búsqueda.");
     } finally {
-        setSelectedKey( `${origin}-${destination}-${departureDate.format("YYYY-MM-DD")}-${currency}-false-${adults}`)
+        setSelectedKey(`${origin}-${destination}-${departureDate.format("YYYY-MM-DD")}-${currency}-false-${adults}`);
         console.log(selectedKey);
         setLoading(false);
     }
-  };
+};
+
 
   return (
     <SearchContext.Provider
@@ -114,7 +147,14 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         setError,
         handleSearch,
         selectedKey,
-        setSelectedKey
+        setSelectedKey,
+        returnOrDeparture,
+        setReturnOrDeparture,
+        totalPages,
+        setTotalPages,
+        changeLandingPage,
+        setChangeLandingPage
+
       }}
     >
       {children}

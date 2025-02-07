@@ -1,12 +1,12 @@
 // src/App.tsx
 import React, { useState } from 'react';
-import LandingPage from './pages/LandingPage';
-import SearchPage from './pages/SearchPage';
-import { FlightProvider } from './components/flightCard/flightContext';
-import { FlightItemCardData } from './components/PropsFlight';
-import { SearchProvider, useSearch } from './components/flightSearch/searchContext';
+import LandingPage from './LandingPage';
+import SearchPage from './SearchPage';
+import { FlightProvider } from '../components/flightCard/flightContext';
+import { FlightItemCardData } from '../components/PropsFlight';
+import { SearchProvider, useSearch } from '../components/flightSearch/searchContext';
 
-function App() {
+export function ChangePage() {
   const [showSearchPage, setShowSearchPage] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [departureFlights, setDepartureFlights] = useState<FlightItemCardData[]>([]);
@@ -20,21 +20,16 @@ function App() {
     }, 1000);
 
   };
- 
+  const {changeLandingPage} = useSearch();
 
   return (
     <>
-  <SearchProvider>
-    <FlightProvider>
-      {!showSearchPage ? (
-        <LandingPage onSearch={handleSearch} isTransitioning={isTransitioning}/>
+ 
+      {changeLandingPage ? (
+        <LandingPage onSearch={handleSearch} isTransitioning={changeLandingPage}/>
       ) : (
         <SearchPage/>
       )}
-      </FlightProvider>
-      </SearchProvider>
     </>
   );
 }
-
-export default App;

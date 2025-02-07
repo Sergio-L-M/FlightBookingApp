@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -36,11 +36,14 @@ const FlightSearch = ({ handleSearch }: {  handleSearch: () => Promise<void>; })
     destination,
     currency,
     adults,
-    loading
+    loading,
+    setArrivalDate,
+    arrivalDate,
+    setDepartureDate,
+    departureDate
   } = useSearch();
 
-  const [departureDate, setDepartureDate] = useState<Dayjs | null>(dayjs());
-  const [arrivalDate, setArrivalDate] = useState<Dayjs | null>(dayjs().add(3, "day"));
+
   const [error, setError] = useState<string | null>(null);
 
   const [returnFlight, setReturnFlight] = useState(false);
@@ -49,6 +52,9 @@ const FlightSearch = ({ handleSearch }: {  handleSearch: () => Promise<void>; })
     setReturnFlight(!returnFlight);
     await handleSearch();
   };
+  useEffect(() => {
+    console.log("Contexto actualizado:", { arrivalDate, departureDate });
+}, [arrivalDate, departureDate]);
 
   return (
     <ThemeProvider theme={appleTheme}>
@@ -65,8 +71,8 @@ const FlightSearch = ({ handleSearch }: {  handleSearch: () => Promise<void>; })
             <AirportSelector textLabel="Choose a departure Airport" onChange={setOrigin} />
             <AirportSelector textLabel="Choose an arrival Airport" onChange={setDestination} />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker label="Set a departure date" value={departureDate} onChange={setDepartureDate} />
-              {!oneWay && <DatePicker label="Set a return date" value={arrivalDate} onChange={setArrivalDate} />}
+              <DatePicker label="Arrival date" value={ arrivalDate} onChange={setArrivalDate} />
+              {!oneWay && <DatePicker label="Departure date" value={departureDate} onChange={setDepartureDate} />}
             </LocalizationProvider>
             <FormControl fullWidth>
               <InputLabel>Currency</InputLabel>

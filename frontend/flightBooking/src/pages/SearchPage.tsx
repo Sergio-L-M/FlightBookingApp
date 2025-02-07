@@ -15,7 +15,8 @@ const SearchPage = () => {
     loading,
     setLoading,
     handleSearchingFlights,
-    handleSearch
+    handleSearch,
+    totalPages
   } = useSearch();
 
 
@@ -55,7 +56,7 @@ const SearchPage = () => {
             <FlightDetails />
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2, pb: 4 }}>
             <Pagination 
-              count={10} 
+              count={totalPages} 
               page={currentPage} 
               onChange={handlePageChange} 
               color="primary" 

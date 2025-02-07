@@ -83,7 +83,10 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
           <strong>Operating Airline:</strong> {itinerary.operatingAirline}
         </Typography>
         <Typography variant="body2">
-          <strong>Duration:</strong> {formatDuration(itinerary.duration)}
+          <strong>Duration:</strong> {itinerary.duration}
+        </Typography>
+        <Typography variant="body2">
+          <strong>Cabin:</strong> {itinerary.cabin}
         </Typography>
         {itinerary.layoverTime && (
           <Typography variant="body2">

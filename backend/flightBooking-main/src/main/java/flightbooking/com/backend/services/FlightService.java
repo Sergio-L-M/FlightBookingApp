@@ -17,35 +17,44 @@ public class FlightService {
     // Base de datos en memoria (caché)
     private final Map<String, Map<String, Map<String, Object>>> flightCache = new ConcurrentHashMap<>();
 
-    public List<Map<String, Object>> getFlights(
+    public Map<String, Object> getFlights(
         String origin, String destination, String departureDate, String currency,
         boolean nonStop, int adults, String sortBy, boolean ascending, int page, int size,
         AmadeusFlightService flightService, AmadeusAirportService airportService) {
-
-    String cacheKey = generateCacheKey(origin, destination, departureDate, currency, nonStop, adults);
-
-    if (flightCache.containsKey(cacheKey)) {
-        List<Map<String, Object>> flights = convertToList(flightCache.get(cacheKey));
-        List<Map<String, Object>> sortedFlights = sortFlights(flights, sortBy);
-        List<Map<String, Object>> paginatedFlights = paginateList(sortedFlights, page, size);
-        addAirportNamesToFlights(cacheKey, paginatedFlights, airportService);
+    
+        String cacheKey = generateCacheKey(origin, destination, departureDate, currency, nonStop, adults);
+    
+        List<Map<String, Object>> flights;
         
-        return filterFlights(paginatedFlights);
+        if (flightCache.containsKey(cacheKey)) {
+            flights = convertToList(flightCache.get(cacheKey));
+        } else {
+            Map<String, Map<String, Object>> response = flightService.searchFlights(origin, destination, departureDate, currency, adults, nonStop);
+            flightCache.put(cacheKey, response);
+            flights = convertToList(response);
+        }
+    
+        // Ordenar la lista de vuelos
+        List<Map<String, Object>> sortedFlights = sortFlights(flights, sortBy);
+    
+        // Calcular el total de páginas
+        int totalFlights = sortedFlights.size();
+        int totalPages = (int) Math.ceil((double) totalFlights / size);
+    
+        // Paginar la lista de vuelos
+        List<Map<String, Object>> paginatedFlights = paginateList(sortedFlights, page, size);
+    
+        // Agregar nombres de aeropuertos
+        addAirportNamesToFlights(cacheKey, paginatedFlights, airportService);
+    
+        // Crear el resultado final
+        Map<String, Object> result = new HashMap<>();
+        result.put("totalPages", totalPages);
+        result.put("flights", filterFlights(paginatedFlights));
+    
+        return result;
     }
-
-    Map<String, Map<String, Object>> response = flightService.searchFlights(origin, destination, departureDate, currency, adults, nonStop);
-    flightCache.put(cacheKey, response);
-
-    List<Map<String, Object>> flights = convertToList(response);
-    List<Map<String, Object>> sortedFlights = sortFlights(flights, sortBy);
-    List<Map<String, Object>> paginatedFlights = paginateList(sortedFlights, page, size);
-
-    addAirportNamesToFlights(cacheKey, paginatedFlights, airportService);
-
-    return filterFlights(paginatedFlights);
-
-
-}
+    
 
     public static List<Map<String, Object>> filterFlights(List<Map<String, Object>> paginatedFlights) {
         return paginatedFlights.stream()
@@ -131,7 +140,6 @@ public class FlightService {
         if (airportCode.isEmpty()) return;
 
         String airportName = airportService.getCachedOrFetchAirport(airportCode);
-        System.out.println("Airport code: " + airportCode + " -> Name: " + airportName);
         data.put(nameKey, airportName);
     }
 

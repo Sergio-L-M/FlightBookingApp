@@ -28,7 +28,7 @@ public class FlightController {
     }
 
     @GetMapping
-    public List<Map<String, Object>> getFlights(
+    public Map<String, Object> getFlights(
             @RequestParam String origin,
             @RequestParam String destination,
             @RequestParam String departureDate,

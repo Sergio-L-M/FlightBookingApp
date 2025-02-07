@@ -41,6 +41,7 @@ public class AmadeusExtractGeneralData {
         String totalDurationFormatted = formatMinutesToHours(totalMinutes);
         generalData.put("totalDuration", totalDurationFormatted);
         generalData.put("stops", stops);
+        generalData.put("currency",  priceData.get("currency"));
         generalData.put("totalPrice", priceData.get("total"));
         generalData.put("airline", departureFlight.get("airline"));
         generalData.put("operatingAirline", departureFlight.get("operatingAirline"));

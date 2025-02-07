@@ -30,6 +30,7 @@ export interface GeneralData {
   arrivalAirportName: string;
   operatingAirline: string;
   totalPrice: string;
+  currency: string;
   stops:Stop[]
 }
 
