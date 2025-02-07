@@ -56,23 +56,23 @@ const FlightSearch = ({ handleSearch }: {  handleSearch: () => Promise<void>; })
 
   return (
     <ThemeProvider theme={appleTheme}>
-      <Box sx={{ width: "100%", display: "flex", justifyContent: "center", padding: 1, flexDirection: "column", alignItems: "center" }}>
+      <Box data-testid="flight-search-container"  sx={{ width: "100%", display: "flex", justifyContent: "center", padding: 1, flexDirection: "column", alignItems: "center" }}>
         <Snackbar open={!!error} autoHideDuration={4000} onClose={() => setError(null)}>
           <Alert severity="error">{error}</Alert>
         </Snackbar>
-        <Paper>
+        <Paper data-testid="flight-search-form">
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(8, 1fr)" }, gap: 2, alignItems: "center" }}>
             <FormControlLabel
-              control={<Checkbox checked={oneWay} onChange={() => setOneWay(!oneWay)} />}
+              control={<Checkbox checked={oneWay} onChange={() => setOneWay(!oneWay)} data-testid="one-way-checkbox" />}
               label="One-way"
             />
             <AirportSelector textLabel="Choose a departure Airport" onChange={setOrigin} />
             <AirportSelector textLabel="Choose an arrival Airport" onChange={setDestination} />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker label="Arrival date" value={ arrivalDate} onChange={setArrivalDate} />
-              {!oneWay && <DatePicker label="Departure date" value={departureDate} onChange={setDepartureDate} />}
+              <DatePicker label="Arrival date" value={ arrivalDate} onChange={setArrivalDate} data-testid="arrival-date-picker"  />
+              {!oneWay && <DatePicker label="Departure date" value={departureDate} onChange={setDepartureDate} data-testid="departure-date-picker" />}
             </LocalizationProvider>
-            <FormControl fullWidth>
+            <FormControl fullWidth data-testid="currency-selector">
               <InputLabel>Currency</InputLabel>
               <Select value={currency} onChange={(event) => setCurrency(event.target.value)}>
                 <MenuItem value="MXN">MXN</MenuItem>
@@ -80,8 +80,8 @@ const FlightSearch = ({ handleSearch }: {  handleSearch: () => Promise<void>; })
                 <MenuItem value="USD">USD</MenuItem>
               </Select>
             </FormControl>
-            <TextField label="Adults" variant="outlined" type="number" value={adults} onChange={(event) => setAdults(Math.max(1, parseInt(event.target.value, 10) || 1))} />
-            <Button variant="contained" startIcon={<SearchIcon />} onClick={handleSearch} disabled={loading} sx={{ height: "56px", fontWeight: "bold", borderRadius: "8px" }}>
+            <TextField label="Adults" variant="outlined" type="number" value={adults} onChange={(event) => setAdults(Math.max(1, parseInt(event.target.value, 10) || 1))}  data-testid="adults-input" />
+            <Button variant="contained" startIcon={<SearchIcon />} onClick={handleSearch} disabled={loading} sx={{ height: "56px", fontWeight: "bold", borderRadius: "8px" }} data-testid="search-button">
               {loading ? "Searching..." : "Search"}
             </Button>
           </Box>

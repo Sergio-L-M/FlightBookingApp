@@ -27,6 +27,7 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
         p: 2,
         height: "100%", 
       }}
+      data-testid="itinerary-card"
     >
       {/*Horario y Aeropuertos */}
       <Box
@@ -40,17 +41,17 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
         }}
       >
         <Box textAlign="center">
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="departure-time">
             {formatDateTime(itinerary.departureTime)}
           </Typography>
-          <Typography variant="body1">  <strong>{itinerary.departureAirportName} {" "}({itinerary.departureAirportCode})  </strong></Typography>
+          <Typography variant="body1"  data-testid="departure-airport">  <strong>{itinerary.departureAirportName} {" "}({itinerary.departureAirportCode})  </strong></Typography>
         </Box>
 
         <Box textAlign="center">
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="arrival-time">
             {formatDateTime(itinerary.arrivalTime)}
           </Typography>
-          <Typography variant="body1">  <strong>{itinerary.arrivalAirportName} {" "} ({itinerary.arrivalAirportCode})  </strong></Typography>
+          <Typography variant="body1" data-testid="arrival-airport">  <strong>{itinerary.arrivalAirportName} {" "} ({itinerary.arrivalAirportCode})  </strong></Typography>
         </Box>
       </Box>
 
@@ -68,26 +69,26 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
           mb: 1.25,
         }}
       >
-        <Typography variant="body2">
+        <Typography variant="body2"  data-testid="flight-number">
           <strong>Flight Number:</strong> {itinerary.flightNumber}
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2"  data-testid="airline">
           <strong>Airline:</strong> {itinerary.airline}
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" data-testid="class">
           <strong>Class:</strong> {itinerary.class}
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" data-testid="operating-airline">
           <strong>Operating Airline:</strong> {itinerary.operatingAirline}
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" data-testid="duration">
           <strong>Duration:</strong> {itinerary.duration}
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" data-testid="cabin">
           <strong>Cabin:</strong> {itinerary.cabin}
         </Typography>
         {itinerary.layoverTime && (
-          <Typography variant="body2">
+          <Typography variant="body2" data-testid="layover-time">
             <strong>Layover Time:</strong> {itinerary.layoverTime}
           </Typography>
         )}
@@ -104,7 +105,7 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0)",
           "&:before": { display: "none" }, 
           p: 0.75,
-        }}
+        }} data-testid="amenities-accordion"
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -117,7 +118,7 @@ const ItineraryCard = ({ itinerary }: ItineraryProps) => {
           <Typography variant="h6">Amenities</Typography>
         </AccordionSummary>
 
-        <AccordionDetails sx={{ backgroundColor: "transparent" }}>
+        <AccordionDetails sx={{ backgroundColor: "transparent" }}  data-testid="amenities-details">
           {Object.keys(itinerary.amenities).length > 0 ? (
             Object.keys(itinerary.amenities).map((type) => (
               <AmenitiesDetails
