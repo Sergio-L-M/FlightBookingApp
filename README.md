@@ -49,6 +49,10 @@ The application is built with **React (Vite) + TypeScript** on the frontend and 
 2. **Set up environment variables:**
    - The backend uses `application.properties` in the `backend/flightBooking-main/src/main/resources/` folder.
    - Configure the necessary Amadeus API credentials and database settings in `application.properties`.
+     ```sh
+   - flight.useMock=false change to true if you want to test it with mock data
+     ```
+
 
 3. **Run the application manually (without Docker):**
    - **Frontend:**
