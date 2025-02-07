@@ -53,7 +53,7 @@ The application is built with **React (Vite) + TypeScript** on the frontend and 
         spring.application.name=backend
         amadeus.api.key=#YourApiKey
         amadeus.api.secret=#YourSecret
-        flight.useMock=false // change to true if you tu use Mocj data
+        flight.useMock=false #change to true if you want to use Mock data
      ```
 
 
