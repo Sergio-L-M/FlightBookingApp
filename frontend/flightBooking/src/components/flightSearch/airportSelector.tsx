@@ -6,6 +6,7 @@ import axios from "axios";
 import airportsMock from"../../mocks/airportsMock.json";
 import { developmentSelector } from "../../globalConstants";
 
+
 interface AirportData {
   code: string;
   name: string;
@@ -14,11 +15,14 @@ interface AirportData {
 interface Props {
   textLabel: string;
   onChange: (airportCode: string | null) => void;
+  setAirport: (state: AirportData | null) => void;
+  Airport: AirportData| null;
 }
 
-const AirportSelector = ({ textLabel, onChange }: Props) => {
+const AirportSelector = ({ textLabel, onChange,setAirport, Airport }: Props) => {
+
   const [options, setOptions] = useState<AirportData[]>([]);
-  const [selectedAirport, setSelectedAirport] = useState<AirportData | null>(null);
+  //const [selectedAirport, setSelectedAirport] = useState<AirportData | null>(null);
   const [inputValue, setInputValue] = useState("");
   const [fetchAllowed, setFetchAllowed] = useState(false);
 
@@ -48,12 +52,12 @@ const AirportSelector = ({ textLabel, onChange }: Props) => {
       key="airport-selector"
       options={options}
       autoHighlight
-      value={selectedAirport}
+      value={Airport}
       inputValue={inputValue}
       getOptionLabel={(option) => `${option.code} - ${option.name}`}
       isOptionEqualToValue={(option, value) => option.code === value.code}
       onChange={(_, newValue) => {
-        setSelectedAirport(newValue);
+        setAirport(newValue);
         setInputValue(newValue ? `${newValue.code}` : "");
         onChange(newValue ? newValue.code : null);
       }}
@@ -62,7 +66,7 @@ const AirportSelector = ({ textLabel, onChange }: Props) => {
         setFetchAllowed(newInputValue.length > 0);
       }}
       onClose={() => {
-        if (!selectedAirport) {
+        if (!Airport) {
           setInputValue("");
         }
       }}

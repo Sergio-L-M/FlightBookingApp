@@ -19,7 +19,7 @@ import {
   TextField,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import FlightSort from "../flightSort/flightSort";
+//import FlightSort from "../flightSort/flightSort";
 import { ThemeProvider } from "@mui/material/styles";
 import { appleTheme } from "../themes";
 import { useSearch } from "./searchContext";
@@ -38,18 +38,17 @@ const FlightSearch = ({ handleSearch }: {  handleSearch: () => Promise<void>; })
     setArrivalDate,
     arrivalDate,
     setDepartureDate,
-    departureDate
+    departureDate,
+    setOrignAirport,
+    setDestinationAirport,
+    originAirport,
+    destinationAirport
   } = useSearch();
 
 
   const [error, setError] = useState<string | null>(null);
 
-  const [returnFlight, setReturnFlight] = useState(false);
 
-  const handleReturnState = async () => {
-    setReturnFlight(!returnFlight);
-    await handleSearch();
-  };
   useEffect(() => {
     console.log("Contexto actualizado:", { arrivalDate, departureDate });
 }, [arrivalDate, departureDate]);
@@ -66,8 +65,8 @@ const FlightSearch = ({ handleSearch }: {  handleSearch: () => Promise<void>; })
               control={<Checkbox checked={oneWay} onChange={() => setOneWay(!oneWay)} data-testid="one-way-checkbox" />}
               label="One-way"
             />
-            <AirportSelector textLabel="Choose a departure Airport" onChange={setOrigin} />
-            <AirportSelector textLabel="Choose an arrival Airport" onChange={setDestination} />
+            <AirportSelector textLabel="Choose a departure Airport" onChange={setOrigin} setAirport={setOrignAirport}  Airport={originAirport}/>
+            <AirportSelector textLabel="Choose an arrival Airport" onChange={setDestination} setAirport={setDestinationAirport}  Airport={ destinationAirport}/>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker label="Arrival date" value={ arrivalDate} onChange={setArrivalDate} data-testid="arrival-date-picker"  />
               {!oneWay && <DatePicker label="Departure date" value={departureDate} onChange={setDepartureDate} data-testid="departure-date-picker" />}
@@ -86,7 +85,7 @@ const FlightSearch = ({ handleSearch }: {  handleSearch: () => Promise<void>; })
             </Button>
           </Box>
         </Paper>
-        <FlightSort returnOrDeparture={returnFlight} oneWay={oneWay} stateHandler={handleReturnState} sortByHandler={() => {}} updateHandler={handleSearch} />
+
       </Box>
     </ThemeProvider>
   );
