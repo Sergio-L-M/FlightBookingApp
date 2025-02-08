@@ -34,7 +34,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onSearch, isTransitioning }) 
         width: '100%',
         height: '100vh',
         overflow: 'hidden',
-        backgroundImage: 'url("../../public/bg2.jpeg")',
+        backgroundImage: 'url("https://wallpapersmug.com/download/3840x2400/2e0a0c/clouds-and-sunset-sea-of-clouds.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

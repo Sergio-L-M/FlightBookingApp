@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container, Pagination, CircularProgress } from '@mui/material';
 import { motion } from 'framer-motion';
 import FlightSearch from '../components/flightSearch/flightSearch';
 import FlightDetails from '../components/flightDetails/flightDetails';
 import FlightCard from '../components/flightCard/FlightCard';
 import { useSearch } from '../components/flightSearch/searchContext';
+import { ThemeProvider } from "@mui/material/styles";
 import { FlightItemCardData } from '../components/PropsFlight';
-
+import FlightSort from '../components/flightSort/flightSort';
+import { appleTheme } from '../components/themes';
 const SearchPage = () => {
   const {
     departureFlights,
@@ -16,9 +18,16 @@ const SearchPage = () => {
     setLoading,
     handleSearchingFlights,
     handleSearch,
-    totalPages
+    totalPages,
+   
+    oneWay
   } = useSearch();
+  const [returnFlight, setReturnFlight] = useState(false);
 
+  const handleReturnState = async () => {
+    setReturnFlight(!returnFlight);
+    await handleSearch();
+  };
   // Función para buscar vuelos
   const SearchFlights = async () => {
     setLoading(true);
@@ -59,9 +68,23 @@ const SearchPage = () => {
           WebkitBackdropFilter: 'blur(10px)',
         }}
       >
+
+
         <Container>
-          <FlightSearch handleSearch={SearchFlights} />
+          <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
+            <FlightSearch handleSearch={SearchFlights} />
+            <ThemeProvider theme={appleTheme}>
+              <FlightSort 
+                returnOrDeparture={returnFlight} 
+                oneWay={oneWay} 
+                stateHandler={handleReturnState} 
+                sortByHandler={() => {}} 
+                updateHandler={handleSearch} 
+              />
+            </ThemeProvider>
+          </Box>
         </Container>
+
       </Box>
 
       {loading ? (

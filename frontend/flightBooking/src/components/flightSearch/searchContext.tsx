@@ -2,7 +2,10 @@ import React, { useState, createContext, useContext, ReactNode } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import axios from "axios";
 import { FlightItemCardData } from "../PropsFlight";
-
+interface AirportData {
+  code: string;
+  name: string;
+}
 interface SearchContextType {
   setSortBy: (input: string ) => void;
   sortBy: string;
@@ -37,6 +40,10 @@ interface SearchContextType {
   totalPages: number;
   setChangeLandingPage: (input: boolean) => void;
   changeLandingPage: boolean;
+  setOrignAirport: (state: AirportData | null) => void;
+  originAirport: AirportData| null;
+  setDestinationAirport: (state: AirportData | null) => void;
+  destinationAirport: AirportData| null;
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
@@ -58,7 +65,8 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [departureFlights, setDepartureFlights] = useState<FlightItemCardData[]>([]);
   const [returnOrDeparture,setReturnOrDeparture] = useState<boolean>(false);
   const  [changeLandingPage, setChangeLandingPage] = useState<boolean>(false);
-  
+  const [destinationAirport, setDestinationAirport] = useState<AirportData | null>(null);
+  const [originAirport, setOrignAirport] = useState<AirportData | null>(null);
   const handleSearchingFlights = (isSearching: boolean) => {
     console.log("Searching flights:", isSearching);
   };
@@ -73,7 +81,7 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         setError("Debes seleccionar una fecha de salida.");
         return;
     }
-    if (!oneWay && (!arrivalDate || arrivalDate.isBefore(departureDate))) {
+    if (!oneWay && (!arrivalDate ||departureDate.isBefore(arrivalDate))) {
         setError("La fecha de regreso debe ser posterior a la de salida.");
         return;
     }
@@ -82,11 +90,14 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         setLoading(true);
         setError(null);
         let apiUrl = '';
-        console.log(returnOrDeparture);
-        
-
-
-          if (!returnOrDeparture) {
+        console.log("returnOrDeparture",returnOrDeparture);
+        const formattedArrival = arrivalDate ? arrivalDate.format("YYYY-MM-DD") : "";
+        apiUrl = `http://localhost:8080/api/flights?origin=${origin}&destination=${destination}`+
+        (formattedArrival ? `&departureDate=${formattedArrival}` : "") +
+        `&currency=${currency}&adults=${adults}&nonStop=false&page=${currentPage}`;
+        console.log(apiUrl);
+        console.log("oneway es " ,oneWay)
+          if (!returnOrDeparture && !oneWay) {
             const formattedArrival = arrivalDate ? arrivalDate.format("YYYY-MM-DD") : "";
               apiUrl = `http://localhost:8080/api/flights?origin=${origin}&destination=${destination}`+
               (formattedArrival ? `&departureDate=${formattedArrival}` : "") +
@@ -103,11 +114,22 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
                 apiUrl = `http://localhost:8080/api/flights?origin=${destination}&destination=${origin}` +
                     (formattedDepartureDate ? `&departureDate=${formattedDepartureDate}` : "") +
                     `&currency=${currency}&adults=${adults}&nonStop=false&page=${currentPage}`;
-                    setSelectedKey(`${origin}-${destination}-${departureDate.format("YYYY-MM-DD")}-${currency}-false-${adults}`);
+                   
                 if (formattedDepartureDate !== ""){
                   setSelectedKey(`${origin}-${destination}-${formattedDepartureDate}-${currency}-false-${adults}`);
                 }
                 console.log("regreso")
+          }
+          if(oneWay){
+            const formattedArrival = arrivalDate ? arrivalDate.format("YYYY-MM-DD") : "";
+            apiUrl = `http://localhost:8080/api/flights?origin=${origin}&destination=${destination}`+
+            (formattedArrival ? `&departureDate=${formattedArrival}` : "") +
+            `&currency=${currency}&adults=${adults}&nonStop=false&page=${currentPage}`;
+            if (formattedArrival !== ""){
+              setSelectedKey(`${origin}-${destination}-${formattedArrival}-${currency}-false-${adults}`);
+            }
+            
+
           }
         
         if (sortBy !== null) {
@@ -162,7 +184,11 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         totalPages,
         setTotalPages,
         changeLandingPage,
-        setChangeLandingPage
+        setChangeLandingPage,
+        setDestinationAirport,
+        destinationAirport,
+        setOrignAirport,
+        originAirport
 
       }}
     >
